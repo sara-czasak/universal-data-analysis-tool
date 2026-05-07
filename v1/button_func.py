@@ -95,9 +95,7 @@ def get_selected_cols(context):
         cols_selected.append(listbox.get(i))
         get_cols_button.grid_remove()
     operations = analysis_brain.get_available_operations(cols_selected)
-    for operation in operations:
-
-        buttons = [create_button(operation, root, lang_center) for operation in operations]
-        for index, button in enumerate(buttons):
-            button.grid(column=index, row=2, padx=10, pady=10)
+    buttons = [create_button(operation, root, lang_center, analysis_brain, cols_selected) for operation in operations]
+    for index, button in enumerate(buttons):
+        button.grid(column=index, row=2, padx=10, pady=10)
 

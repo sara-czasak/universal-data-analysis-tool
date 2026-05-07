@@ -82,7 +82,9 @@ class AnalysisBrain:
 
     def get_highest_value(self, column):
         highest_value = self.df[column].max()
+        return highest_value
 
 
     def get_lowest_value(self, column):
-        highest_value = self.df[column].min()
+        lowest_value = self.df[column].min()
+        return lowest_value
