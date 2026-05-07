@@ -58,29 +58,31 @@ class AnalysisBrain:
         print(self.data_types_in_cols)
         for column in columns:
             if self.data_types_in_cols[column] == int:
-                print(f'INT: {column}')
+                allowed_operations = ['get_highest_value', 'get_lowest_value', 'unique_values']
+                print(f'INT: {column} : {allowed_operations}')
+                return allowed_operations
             elif self.data_types_in_cols[column] == float:
-                print(f'FLOAT: {column}')
+                allowed_operations = ['get_highest_value', 'get_lowest_value', 'unique_values']
+                print(f'FLOAT: {column} : {allowed_operations}')
+                return allowed_operations
             elif self.data_types_in_cols[column] == 'str':
-                print(f'STRING: {column}')
+                allowed_operations = ['unique_values']
+                print(f'STRING: {column} : {allowed_operations}')
+                return allowed_operations
 
 
-    def unique_values(self, columns):
+    def unique_values(self, column):
         unique_values = {}
-        if len(columns) > 0:
-            for column in columns:
-                unique = self.df[column].unique()
-                unique_values[column] = unique
-            return unique_values
-        else:
-            return None
+        if len(column) == 1:
+            unique = self.df[column].unique()
+            for i in unique:
+                unique_values[i] = len(self.df[i])
+        return unique_values
 
 
-    def get_highest_value(self, columns):
-        for i in columns:
-            highest_value = self.df[i].max()
+    def get_highest_value(self, column):
+        highest_value = self.df[column].max()
 
 
-    def get_lowest_value(self, columns):
-        for i in columns:
-            highest_value = self.df[i].min()
+    def get_lowest_value(self, column):
+        highest_value = self.df[column].min()
