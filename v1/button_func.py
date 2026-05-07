@@ -29,7 +29,7 @@ def load_file_show_filename(context):
             listbox.insert(END, i)
 
 
-def show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button):
+def show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button):
     if analysis_brain.tree is not None:
         analysis_brain.tree.destroy()
         analysis_brain.tree = None
@@ -37,9 +37,11 @@ def show_col_names(listbox, analysis_brain, head_button, lang_center, select_col
     if not listbox.winfo_viewable():
         listbox.grid(column=1, row=2, columnspan=3, padx=10, pady=10)
         select_cols_button.config(text=lang_center.translate('HIDE COLUMNS'))
+        get_cols_button.grid(column=0, row=2, padx=10, pady=10)
     else:
         listbox.grid_remove()
         select_cols_button.config(text=lang_center.translate('SELECT COLUMNS'))
+        get_cols_button.grid_remove()
 
 
 def show_df_head(context):
@@ -72,3 +74,14 @@ def show_df_head(context):
                 analysis_brain.tree.column(col, width=100)
             analysis_brain.tree.grid(column=1, row=2, columnspan=3, padx=10, pady=10)
             head_button.config(text=lang_center.translate('HIDE ROWS'))
+
+
+def get_selected_cols(context):
+    listbox = context['listbox']
+    analysis_brain = context['analysis_brain']
+
+    cols_selected = []
+    for i in listbox.curselection():
+        cols_selected.append(listbox.get(i))
+
+    print(analysis_brain.unique_values(cols_selected))

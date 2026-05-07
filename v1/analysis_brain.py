@@ -50,3 +50,13 @@ class AnalysisBrain:
         for i in self.columns:
             self.data_types_in_cols[i] = self.df[i].dtype
 
+
+    def unique_values(self, columns):
+        unique_values = {}
+        if len(columns) > 0:
+            for column in columns:
+                unique = self.df[column].unique()
+                unique_values[column] = unique
+            return unique_values
+        else:
+            return None

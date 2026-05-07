@@ -11,6 +11,7 @@ languages = {
         'SELECT COLUMNS': 'SELECT COLUMNS',
         'HIDE ROWS': 'HIDE ROWS',
         'HIDE COLUMNS': 'HIDE COLUMNS',
+        'OK': 'OK',
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -20,6 +21,7 @@ languages = {
         'SELECT COLUMNS': '___PL___',
         'HIDE ROWS': '___PL___',
         'HIDE COLUMNS': '___PL___',
+        'OK': 'OK',
     },
     'es': {
         'LOAD FILE': '___ES___',
@@ -29,6 +31,7 @@ languages = {
         'SELECT COLUMNS': '___ES___',
         'HIDE ROWS': '___ES___',
         'HIDE COLUMNS': '___ES___',
+        'OK': 'OK',
     }
 }
 
