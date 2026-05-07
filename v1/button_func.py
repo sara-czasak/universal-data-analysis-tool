@@ -39,6 +39,7 @@ def show_col_names(listbox, analysis_brain, head_button, lang_center, select_col
         select_cols_button.config(text=lang_center.translate('HIDE COLUMNS'))
     else:
         listbox.grid_remove()
+        select_cols_button.config(text=lang_center.translate('SELECT COLUMNS'))
 
 
 def show_df_head(context):
@@ -46,6 +47,12 @@ def show_df_head(context):
     analysis_brain = context['analysis_brain']
     head_button = context['head_button']
     lang_center = context['lang_center']
+    listbox = context['listbox']
+    select_cols_button = context['select_cols_button']
+
+    if listbox.winfo_viewable():
+        listbox.grid_remove()
+        select_cols_button.config(text=lang_center.translate('SELECT COLUMNS'))
 
     if analysis_brain.tree and analysis_brain.tree.winfo_exists():
         analysis_brain.tree.destroy()

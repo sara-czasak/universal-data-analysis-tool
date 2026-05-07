@@ -35,6 +35,7 @@ head_button = ttk.Button(root, text=lang_center.translate('SHOW FIRST 5 ROWS'), 
     'listbox': listbox,
     'head_button': head_button,
     'lang_center': lang_center,
+    'select_cols_button': select_cols_button,
 }))
 
 
