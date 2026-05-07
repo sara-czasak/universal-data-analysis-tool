@@ -12,6 +12,8 @@ class AnalysisBrain:
         self.filepath = None
         self.filename = None
         self.columns = None
+        self.df = None
+        self.data_types_in_cols = {}
         self.good_extensions = [{
             'excel': ['xls', 'xlsx', 'xlsm', 'xlsb', 'odf', 'ods', 'odt'],
             'csv': ['csv'],
@@ -21,7 +23,6 @@ class AnalysisBrain:
     def get_file(self):
         self.filepath = filedialog.askopenfilename()
         self.filename = self.filepath.split('/')[-1]
-        print(self.filename)
         self.create_dataframe()
         return self.filename
 
@@ -29,13 +30,21 @@ class AnalysisBrain:
     def create_dataframe(self):
         file_extension = self.filename.split('.')[-1]
         for extension in self.good_extensions:
+            if len(self.data_types_in_cols) > 0:
+                self.data_types_in_cols = {}
             if file_extension in extension['excel']:
-                df = pd.read_excel(self.filepath)
-                self.columns = df.columns.values
+                self.df = pd.read_excel(self.filepath)
+                self.columns = self.df.columns.values
+                self.get_cols_datatypes()
             elif file_extension in extension['csv']:
-                df = pd.read_csv(self.filepath)
-                self.columns = df.columns.values
+                self.df = pd.read_csv(self.filepath)
+                self.columns = self.df.columns.values
+                self.get_cols_datatypes()
             else:
                 print('wrong file extension')
         return self.columns
 
+
+    def get_cols_datatypes(self):
+        for i in self.columns:
+            self.data_types_in_cols[i] = self.df[i].dtype

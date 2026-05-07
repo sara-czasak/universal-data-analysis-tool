@@ -13,7 +13,6 @@ def load_file_show_filename(context):
     filename = analysis_brain.filename
     if filename_label.cget('text') == '':
         filename_label.config(text=f'{lang_center.translate("File name:")} {filename}')
-
     else:
         filename_label.config(text=f'{lang_center.translate("File name:")} {filename}')
     get_file_button.config(text=f'{lang_center.translate("CHANGE FILE")}')
