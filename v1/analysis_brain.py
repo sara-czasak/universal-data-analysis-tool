@@ -37,5 +37,5 @@ class AnalysisBrain:
                 self.columns = df.columns.values
             else:
                 print('wrong file extension')
-        print(self.columns)
+        return self.columns
 
