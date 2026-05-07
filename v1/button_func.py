@@ -1,5 +1,6 @@
 from tkinter import ttk
 from tkinter import *
+import pandastable as pt
 
 
 def load_file_show_filename(context):
@@ -8,6 +9,8 @@ def load_file_show_filename(context):
     filename_label = context['filename_label']
     get_file_button = context['get_file_button']
     listbox = context['listbox']
+    head_button = context['head_button']
+    select_cols_button = context['select_cols_button']
 
     analysis_brain.get_file()
     filename = analysis_brain.filename
@@ -15,6 +18,8 @@ def load_file_show_filename(context):
         filename_label.config(text=f'{lang_center.translate("File name:")} {filename}')
     else:
         filename_label.config(text=f'{lang_center.translate("File name:")} {filename}')
+    head_button.grid(column=0, row=1, padx=10, pady=10)
+    select_cols_button.grid(column=1, row=1, padx=10, pady=10)
     get_file_button.config(text=f'{lang_center.translate("CHANGE FILE")}')
     col_names = analysis_brain.columns
     if listbox.size() > 0:
@@ -22,4 +27,41 @@ def load_file_show_filename(context):
     if len(col_names) > 0:
         for i in col_names:
             listbox.insert(END, i)
-            listbox.grid(column=0, row=1, columnspan=3, padx=10, pady=10)
+
+
+def show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button):
+    if analysis_brain.tree is not None:
+        analysis_brain.tree.destroy()
+        analysis_brain.tree = None
+        head_button.config(text=lang_center.translate('SHOW FIRST 5 ROWS'))
+    if not listbox.winfo_viewable():
+        listbox.grid(column=1, row=2, columnspan=3, padx=10, pady=10)
+        select_cols_button.config(text=lang_center.translate('HIDE COLUMNS'))
+    else:
+        listbox.grid_remove()
+
+
+def show_df_head(context):
+    root = context['root']
+    analysis_brain = context['analysis_brain']
+    head_button = context['head_button']
+    lang_center = context['lang_center']
+
+    if analysis_brain.tree and analysis_brain.tree.winfo_exists():
+        analysis_brain.tree.destroy()
+        analysis_brain.tree = None
+        head_button.config(text=lang_center.translate('SHOW FIRST 5 ROWS'))
+
+    else:
+        col_names = analysis_brain.columns.tolist()
+        # view head
+        analysis_brain.tree = ttk.Treeview(root, show='headings', columns=col_names)
+        for col in col_names:
+            if len(col_names) >= 10:
+                analysis_brain.tree.heading(col, text=col)
+                analysis_brain.tree.column(col, width=60)
+            else:
+                analysis_brain.tree.heading(col, text=col)
+                analysis_brain.tree.column(col, width=100)
+            analysis_brain.tree.grid(column=1, row=2, columnspan=3, padx=10, pady=10)
+            head_button.config(text=lang_center.translate('HIDE ROWS'))

@@ -13,6 +13,7 @@ class AnalysisBrain:
         self.filename = None
         self.columns = None
         self.df = None
+        self.tree = None
         self.data_types_in_cols = {}
         self.good_extensions = [{
             'excel': ['xls', 'xlsx', 'xlsm', 'xlsb', 'odf', 'ods', 'odt'],
@@ -48,3 +49,4 @@ class AnalysisBrain:
     def get_cols_datatypes(self):
         for i in self.columns:
             self.data_types_in_cols[i] = self.df[i].dtype
+
