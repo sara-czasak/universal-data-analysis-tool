@@ -4,18 +4,21 @@
 
 languages = {
     'eng': {
-        'Load File': 'Load File',
+        'LOAD FILE': 'Load File',
         "File name:": "File name:",
-
+        'CHANGE FILE': 'CHANGE FILE',
     },
     'pl': {
-        'Load File': '',
-        "File name:": "",
+        'LOAD FILE': '___PL___',
+        "File name:": '___PL___',
+        'CHANGE FILE': '___PL___',
 
     },
     'es': {
-        'Load File': '',
-        "File name:": "",
+        'LOAD FILE': '___ES___',
+        "File name:": '___ES___',
+        'CHANGE FILE': '___ES___',
+
     }
 }
 
@@ -24,22 +27,6 @@ class LanguageCenter:
     def __init__(self):
         # HARD CODED FOR TESTING
         self.language = languages['eng']
-        self.languages = {
-    'eng': {
-        'Load File': 'Load File',
-        "File name:": "File name:",
-
-    },
-    'pl': {
-        'Load File': '',
-        "File name:": "",
-
-    },
-    'es': {
-        'Load File': '',
-        "File name:": "",
-    }
-}
 
 
     def translate(self, word):

@@ -11,6 +11,7 @@ class AnalysisBrain:
     def __init__(self):
         self.filepath = None
         self.filename = None
+        self.columns = None
         self.good_extensions = [{
             'excel': ['xls', 'xlsx', 'xlsm', 'xlsb', 'odf', 'ods', 'odt'],
             'csv': ['csv'],
@@ -30,10 +31,11 @@ class AnalysisBrain:
         for extension in self.good_extensions:
             if file_extension in extension['excel']:
                 df = pd.read_excel(self.filepath)
-                print(df.columns.values)
+                self.columns = df.columns.values
             elif file_extension in extension['csv']:
                 df = pd.read_csv(self.filepath)
-                print(df.columns.values)
+                self.columns = df.columns.values
             else:
                 print('wrong file extension')
+        print(self.columns)
 
