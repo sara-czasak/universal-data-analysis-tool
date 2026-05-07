@@ -19,6 +19,7 @@ class AnalysisBrain:
             'excel': ['xls', 'xlsx', 'xlsm', 'xlsb', 'odf', 'ods', 'odt'],
             'csv': ['csv'],
         }]
+        self.operation_buttons = []
 
 
     def get_file(self):

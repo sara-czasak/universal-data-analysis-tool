@@ -33,6 +33,10 @@ def load_file_show_filename(context):
 
 
 def show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button):
+    for btn in analysis_brain.operation_buttons:
+        btn.destroy()
+    analysis_brain.operation_buttons = []
+
     if analysis_brain.tree is not None:
         analysis_brain.tree.destroy()
         analysis_brain.tree = None
@@ -90,13 +94,21 @@ def get_selected_cols(context):
     if listbox.winfo_viewable():
         listbox.grid_remove()
         select_cols_button.config(text=lang_center.translate('SELECT COLUMNS'))
+
+    for btn in analysis_brain.operation_buttons:
+        btn.destroy()
+    analysis_brain.operation_buttons = []
+
     cols_selected = []
     for i in listbox.curselection():
         cols_selected.append(listbox.get(i))
-        get_cols_button.grid_remove()
+    get_cols_button.grid_remove()
+
     operations = analysis_brain.get_available_operations(cols_selected)
     if operations is not None:
         buttons = [create_button(operation, root, lang_center, analysis_brain, cols_selected) for operation in operations]
+        analysis_brain.operation_buttons = buttons
+
         for index, button in enumerate(buttons):
             button.grid(column=index, row=2, padx=10, pady=10)
 

@@ -22,7 +22,7 @@ def show_stat(button_id, context):
     root = context['root']
     button = context['button']
 
-    stats_canvas = Canvas(width=400, height=400)
+    stats_canvas = Canvas()
     stats_canvas.grid(column=0, row=3, padx=10, pady=10)
 
     if button_id == 'get_highest_value':

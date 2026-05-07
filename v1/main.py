@@ -7,7 +7,7 @@ from button_func import *
 
 root = Tk()
 root.title('Universal Data Analyser')
-
+root.minsize(400, 400)
 
 lang_center = LanguageCenter()
 analysis_brain = AnalysisBrain()
