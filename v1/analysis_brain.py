@@ -55,29 +55,30 @@ class AnalysisBrain:
 
 
     def get_available_operations(self, columns):
-        print(self.data_types_in_cols)
         for column in columns:
             if self.data_types_in_cols[column] == int:
-                allowed_operations = ['get_highest_value', 'get_lowest_value', 'unique_values']
-                print(f'INT: {column} : {allowed_operations}')
+                allowed_operations = ['get_highest_value', 'get_lowest_value']
                 return allowed_operations
             elif self.data_types_in_cols[column] == float:
-                allowed_operations = ['get_highest_value', 'get_lowest_value', 'unique_values']
-                print(f'FLOAT: {column} : {allowed_operations}')
+                allowed_operations = ['get_highest_value', 'get_lowest_value']
                 return allowed_operations
             elif self.data_types_in_cols[column] == 'str':
                 allowed_operations = ['unique_values']
-                print(f'STRING: {column} : {allowed_operations}')
                 return allowed_operations
+        else:
+            return None
 
 
     def unique_values(self, column):
         unique_values = {}
-        if len(column) == 1:
-            unique = self.df[column].unique()
-            for i in unique:
-                unique_values[i] = len(self.df[i])
-        return unique_values
+        if len(column) > 0 and isinstance(column, str):
+            counts = self.df[column].value_counts()
+            unique_values = counts.to_dict()
+            print(unique_values)
+            return unique_values
+        else:
+            print('wrong column')
+            return None
 
 
     def get_highest_value(self, column):
