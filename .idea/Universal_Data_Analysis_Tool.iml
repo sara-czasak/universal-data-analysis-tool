@@ -4,7 +4,7 @@
     <content url="file://$MODULE_DIR$/../Universal_Data_Analysis_Tool">
       <excludeFolder url="file://$MODULE_DIR$/../Universal_Data_Analysis_Tool/.venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.12 (Universal_Data_Analisys_Tool)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.13 (Universal_Data_Analysis_Tool)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
