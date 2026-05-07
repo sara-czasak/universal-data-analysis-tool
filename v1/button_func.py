@@ -1,6 +1,7 @@
 from tkinter import ttk
 from tkinter import *
 import pandastable as pt
+from helpers import *
 
 
 def load_file_show_filename(context):
@@ -79,9 +80,16 @@ def show_df_head(context):
 def get_selected_cols(context):
     listbox = context['listbox']
     analysis_brain = context['analysis_brain']
+    select_cols_button = context['select_cols_button']
+    lang_center = context['lang_center']
+    get_cols_button = context['get_cols_button']
 
+    if listbox.winfo_viewable():
+        listbox.grid_remove()
+        select_cols_button.config(text=lang_center.translate('SELECT COLUMNS'))
     cols_selected = []
     for i in listbox.curselection():
         cols_selected.append(listbox.get(i))
+        get_cols_button.grid_remove()
+    analysis_brain.get_available_operations(cols_selected)
 
-    print(analysis_brain.unique_values(cols_selected))

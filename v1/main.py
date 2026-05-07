@@ -48,6 +48,9 @@ listbox = Listbox(root, height=10, selectmode=MULTIPLE)
 get_cols_button = ttk.Button(root, text=lang_center.translate('OK'), command=lambda: get_selected_cols({
     'listbox': listbox,
     'analysis_brain': analysis_brain,
+    'lang_center': lang_center,
+    'select_cols_button': select_cols_button,
+    'get_cols_button': get_cols_button,
 }))
 
 root.mainloop()

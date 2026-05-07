@@ -48,7 +48,21 @@ class AnalysisBrain:
 
     def get_cols_datatypes(self):
         for i in self.columns:
-            self.data_types_in_cols[i] = self.df[i].dtype
+            if self.df[i].dtype == object:
+                self.data_types_in_cols[i] = 'str'
+            else:
+                self.data_types_in_cols[i] = self.df[i].dtype
+
+
+    def get_available_operations(self, columns):
+        print(self.data_types_in_cols)
+        for column in columns:
+            if self.data_types_in_cols[column] == int:
+                print(f'INT: {column}')
+            elif self.data_types_in_cols[column] == float:
+                print(f'FLOAT: {column}')
+            elif self.data_types_in_cols[column] == 'str':
+                print(f'STRING: {column}')
 
 
     def unique_values(self, columns):
@@ -60,3 +74,13 @@ class AnalysisBrain:
             return unique_values
         else:
             return None
+
+
+    def get_highest_value(self, columns):
+        for i in columns:
+            highest_value = self.df[i].max()
+
+
+    def get_lowest_value(self, columns):
+        for i in columns:
+            highest_value = self.df[i].min()
