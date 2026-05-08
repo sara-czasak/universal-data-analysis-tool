@@ -96,11 +96,11 @@ def show_df_head(context):
                 analysis_brain.tree.heading(col, text=col)
                 analysis_brain.tree.column(col, width=100)
 
-            for _, row in analysis_brain.df.head().iterrows():
-                analysis_brain.tree.insert('', END, values=list(row))
+        for _, row in analysis_brain.df.head().iterrows():
+            analysis_brain.tree.insert('', 'end', values=list(row))
 
-            analysis_brain.tree.grid(column=1, row=2, columnspan=3, padx=10, pady=10)
-            head_button.config(text=lang_center.translate('HIDE TABLE'))
+        analysis_brain.tree.grid(column=1, row=2, columnspan=3, padx=10, pady=10)
+        head_button.config(text=lang_center.translate('HIDE TABLE'))
 
 
 def get_selected_cols(context):
@@ -131,4 +131,4 @@ def get_selected_cols(context):
 
         for index, button in enumerate(buttons):
             button.grid(column=index, row=2, padx=10, pady=10)
-
+    print(f"creating {len(operations)} buttons: {operations}")
