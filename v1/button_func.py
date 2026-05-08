@@ -14,9 +14,9 @@ def load_file_show_filename(context):
     listbox = context['listbox']
     head_button = context['head_button']
     select_cols_button = context['select_cols_button']
-    root = context.get('root')
+    home_frame = context['home_frame']
 
-    analysis_brain.get_file(root)
+    analysis_brain.get_file(home_frame)
     filename = analysis_brain.filename
     filename_label.config(text=f'{lang_center.translate("File name:")} {filename}')
     head_button.grid(column=0, row=1, padx=10, pady=10)
@@ -30,8 +30,8 @@ def load_file_show_filename(context):
             listbox.insert(END, i)
 
 
-def show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, root):
-    children = root.winfo_children()
+def show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, home_frame):
+    children = home_frame.winfo_children()
     for child in children:
         if isinstance(child, Canvas):
             child.destroy()
@@ -56,7 +56,7 @@ def show_col_names(listbox, analysis_brain, head_button, lang_center, select_col
 
 
 def show_df_head(context):
-    root = context['root']
+    home_frame = context['home_frame']
     analysis_brain = context['analysis_brain']
     head_button = context['head_button']
     lang_center = context['lang_center']
@@ -68,7 +68,7 @@ def show_df_head(context):
     get_cols_button.grid_remove()
 
 
-    children = root.winfo_children()
+    children = home_frame.winfo_children()
     for child in children:
         if isinstance(child, Canvas):
             child.destroy()
@@ -83,9 +83,9 @@ def show_df_head(context):
         head_button.config(text=lang_center.translate('SHOW TABLE'))
 
     else:
-        col_names = analysis_brain.columns.tolist()
+        col_names = analysis_brain.columns
         # view head
-        analysis_brain.tree = ttk.Treeview(root, show='headings', columns=col_names)
+        analysis_brain.tree = ttk.Treeview(show='headings', columns=col_names)
         for col in col_names:
             if len(col_names) >= 10:
                 analysis_brain.tree.heading(col, text=col)
@@ -97,7 +97,7 @@ def show_df_head(context):
         for _, row in analysis_brain.df.head().iterrows():
             analysis_brain.tree.insert('', 'end', values=list(row))
 
-        analysis_brain.tree.grid(column=1, row=2, columnspan=3, padx=10, pady=10)
+        analysis_brain.tree.grid(column=0, row=2, padx=10, pady=10)
         head_button.config(text=lang_center.translate('HIDE TABLE'))
 
 
@@ -107,7 +107,7 @@ def get_selected_cols(context):
     select_cols_button = context['select_cols_button']
     lang_center = context['lang_center']
     get_cols_button = context['get_cols_button']
-    root = context['root']
+    home_frame = context['home_frame']
 
     if listbox.winfo_viewable():
         listbox.grid_remove()
@@ -124,7 +124,7 @@ def get_selected_cols(context):
 
     operations = analysis_brain.get_available_operations(cols_selected)
     if operations is not None:
-        buttons = [create_button(operation, root, lang_center, analysis_brain, cols_selected) for operation in operations]
+        buttons = [create_button(operation, home_frame, lang_center, analysis_brain, cols_selected) for operation in operations]
         analysis_brain.operation_buttons = buttons
 
         for index, button in enumerate(buttons):

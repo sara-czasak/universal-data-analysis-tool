@@ -4,12 +4,12 @@ from helpers import *
 from stats_trees import *
 
 
-def create_button(operation, root, lang_center, analysis_brain, cols_selected):
-    button = ttk.Button(root, text=lang_center.translate(operation), command=lambda: show_stat(button_id=operation, context={
+def create_button(operation, home_frame, lang_center, analysis_brain, cols_selected):
+    button = ttk.Button(home_frame, text=lang_center.translate(operation), command=lambda: show_stat(button_id=operation, context={
         'analysis_brain': analysis_brain,
         'cols_selected': cols_selected,
         'lang_center': lang_center,
-        'root': root,
+        'home_frame': home_frame,
         'button': button,
         }))
     return button
@@ -30,7 +30,7 @@ def show_stat(button_id, context):
     analysis_brain = context['analysis_brain']
     cols_selected = context['cols_selected'][0]
     lang_center = context['lang_center']
-    root = context['root']
+    home_frame = context['home_frame']
     button = context['button']
 
 
@@ -40,10 +40,9 @@ def show_stat(button_id, context):
                 analysis_brain.stats_canvas.destroy()
                 analysis_brain.stats_canvas = None
         else:
-            stats_canvas = Canvas(root)
-            stats_canvas.grid(column=0, row=3, padx=10, pady=10)
+            stats_canvas = Canvas(home_frame)
+            stats_canvas.grid(column=0, row=3, padx=10, pady=10, columnspan=3)
             analysis_brain.stats_canvas = stats_canvas
-
 
 
             highest = analysis_brain.get_highest_value(cols_selected)
@@ -58,7 +57,7 @@ def show_stat(button_id, context):
                 analysis_brain.stats_canvas = None
         else:
 
-            stats_canvas = Canvas(root)
+            stats_canvas = Canvas(home_frame)
             stats_canvas.grid(column=0, row=3, padx=10, pady=10)
             analysis_brain.stats_canvas = stats_canvas
             print(analysis_brain.stats_canvas)
@@ -76,7 +75,7 @@ def show_stat(button_id, context):
                 analysis_brain.stats_canvas = None
         else:
 
-            stats_canvas = Canvas(root)
+            stats_canvas = Canvas(home_frame)
             stats_canvas.grid(column=0, row=3, padx=10, pady=10)
             analysis_brain.stats_canvas = stats_canvas
 
