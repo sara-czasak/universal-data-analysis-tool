@@ -46,7 +46,8 @@ class AnalysisBrain:
                 self.data_types_in_cols = {}
             if file_extension in extension['excel']:
                 self.df = pd.read_excel(self.filepath)
-                self.columns = self.df.columns.values
+                self.columns = list(self.df.columns)
+                # self.columns = self.df.columns.values
                 self.get_cols_datatypes()
             elif file_extension in extension['csv']:
                 self.df = pd.read_csv(self.filepath)
@@ -114,3 +115,8 @@ class AnalysisBrain:
         self.stats_canvas = None
         self.data_types_in_cols = {}
         self.operation_buttons = []
+
+
+    def get_rows(self, col_name, value):
+        rows = self.df[self.df[col_name] == value]
+        return rows

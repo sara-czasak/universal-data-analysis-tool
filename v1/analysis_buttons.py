@@ -1,6 +1,7 @@
 from tkinter import ttk
 from tkinter import *
 from helpers import *
+from stats_trees import *
 
 
 def create_button(operation, root, lang_center, analysis_brain, cols_selected):
@@ -80,23 +81,19 @@ def show_stat(button_id, context):
             analysis_brain.stats_canvas = stats_canvas
 
             unique = analysis_brain.unique_values(cols_selected)
+
             if unique:
-                len_unique = len(unique)
-                if len_unique <= 100:
-                    cols = 4
-                else:
-                    cols = 8
-                col_count = 0
-                row_count = 0
-                for index, (value, count) in enumerate(unique.items()):
-                    label = ttk.Label(stats_canvas, text=f'{value}: {count}')
-                    if index % cols == 0 and index != 0:
-                        label.grid(column=col_count, row=row_count)
-                        col_count = 0
-                        row_count += 1
-                    else:
-                        label.grid(column=col_count, row=row_count)
-                        col_count += 1
+                values = [i for i in unique.keys()]
+                all_rows = []
+                for value in values:
+                    rows = analysis_brain.get_rows(cols_selected, value)
+                    all_rows.append(rows)
 
-
-
+                print('cols selected: ', cols_selected)
+                tree = grow_tree(canvas=stats_canvas, context={
+                    'categories': unique,
+                    'column_names': analysis_brain.columns,
+                    'cols_selected': cols_selected,
+                    'rows': all_rows,
+                })
+                tree.grid(column=0, row=0, columnspan=4, padx=10, pady=10)
