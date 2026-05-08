@@ -17,6 +17,7 @@ languages = {
         'unique_values': 'unique_values',
         "The highest value in column ": "The highest value in column",
         'The lowest value in column ': 'The lowest value in column ',
+        "HIDE": "HIDE",
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -32,6 +33,7 @@ languages = {
         'unique_values': '___PL___',
         "The highest value in column ": '___PL___',
         'The lowest value in column ': '___PL___',
+        "HIDE": '___PL___',
     },
     'es': {
         'LOAD FILE': '___ES___',
@@ -47,6 +49,7 @@ languages = {
         'unique_values': '___ES___',
         "The highest value in column ": '___ES___',
         'The lowest value in column ': '___ES___',
+        "HIDE": '___ES___',
     }
 }
 

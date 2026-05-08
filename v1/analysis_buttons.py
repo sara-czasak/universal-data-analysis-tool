@@ -31,16 +31,33 @@ def show_stat(button_id, context):
 
 
     if button_id == 'get_highest_value':
+        children = analysis_brain.stats_canvas.winfo_children()
+        for child in children:
+            if isinstance(child, ttk.Label):
+                child.destroy()
+
         highest = analysis_brain.get_highest_value(cols_selected)
         label = ttk.Label(stats_canvas, text=f'{lang_center.translate("The highest value in column ")} {cols_selected}: {highest}')
         label.grid(column=0, row=0)
+        button.config(text="HIDE")
 
     elif button_id == 'get_lowest_value':
+        children = analysis_brain.stats_canvas.winfo_children()
+        for child in children:
+            if isinstance(child, ttk.Label):
+                child.destroy()
         lowest = analysis_brain.get_lowest_value(cols_selected)
         label = ttk.Label(stats_canvas, text=f"{lang_center.translate('The lowest value in column ')} {cols_selected}: {lowest}")
         label.grid(column=0, row=0)
+        button.config(text="HIDE")
+
 
     elif button_id == 'unique_values':
+        children = analysis_brain.stats_canvas.winfo_children()
+        for child in children:
+            if isinstance(child, ttk.Label):
+                child.destroy()
+
         unique = analysis_brain.unique_values(cols_selected)
         if unique:
             len_unique = len(unique)
@@ -59,6 +76,7 @@ def show_stat(button_id, context):
                 else:
                     label.grid(column=col_count, row=row_count)
                     col_count += 1
+        button.config(text="HIDE")
 
 
 
