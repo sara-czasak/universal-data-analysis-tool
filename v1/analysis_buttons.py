@@ -22,7 +22,16 @@ def show_stat(button_id, context):
     root = context['root']
     button = context['button']
 
-    stats_canvas = Canvas()
+    children =  root.winfo_children()
+    for child in children:
+        if isinstance(child, Canvas):
+            child.destroy()
+    for child in children:
+        if isinstance(child, ttk.Label):
+            child.destroy()
+
+
+    stats_canvas = Canvas(root)
     stats_canvas.grid(column=0, row=3, padx=10, pady=10)
 
     if button_id == 'get_highest_value':

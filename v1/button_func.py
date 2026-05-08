@@ -32,7 +32,13 @@ def load_file_show_filename(context):
             listbox.insert(END, i)
 
 
-def show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button):
+def show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, root):
+    children = root.winfo_children()
+    for child in children:
+        if isinstance(child, Canvas):
+            child.destroy()
+
+
     for btn in analysis_brain.operation_buttons:
         btn.destroy()
     analysis_brain.operation_buttons = []

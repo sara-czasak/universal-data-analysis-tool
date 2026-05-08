@@ -40,7 +40,7 @@ head_button = ttk.Button(root, text=lang_center.translate('SHOW FIRST 5 ROWS'), 
 
 
 # Show col names
-select_cols_button = ttk.Button(root, text=lang_center.translate('SELECT COLUMNS'), command=lambda: show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button))
+select_cols_button = ttk.Button(root, text=lang_center.translate('SELECT COLUMNS'), command=lambda: show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, root))
 
 # Column list
 listbox = Listbox(root, height=10, selectmode=SINGLE)
