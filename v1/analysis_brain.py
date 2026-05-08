@@ -14,6 +14,7 @@ class AnalysisBrain:
         self.columns = None
         self.df = None
         self.tree = None
+        self.stats_canvas = None
         self.data_types_in_cols = {}
         self.good_extensions = [{
             'excel': ['xls', 'xlsx', 'xlsm', 'xlsb', 'odf', 'ods', 'odt'],
