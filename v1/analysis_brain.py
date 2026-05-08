@@ -57,17 +57,14 @@ class AnalysisBrain:
 
     def get_available_operations(self, columns):
         for column in columns:
-            if self.data_types_in_cols[column] == int:
-                allowed_operations = ['get_highest_value', 'get_lowest_value']
-                return allowed_operations
-            elif self.data_types_in_cols[column] == float:
-                allowed_operations = ['get_highest_value', 'get_lowest_value']
-                return allowed_operations
-            elif self.data_types_in_cols[column] == 'str':
-                allowed_operations = ['unique_values']
-                return allowed_operations
-        else:
-            return None
+            dtype = str(self.data_types_in_cols[column])
+            if 'int' in dtype:
+                return ['get_highest_value', 'get_lowest_value']
+            elif 'float' in dtype:
+                return ['get_highest_value', 'get_lowest_value']
+            elif 'str' in dtype.lower() or 'object' in dtype.lower() or 'string' in dtype.lower():
+                return ['unique_values']
+        return None
 
 
     def unique_values(self, column):

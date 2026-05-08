@@ -46,7 +46,7 @@ def show_col_names(listbox, analysis_brain, head_button, lang_center, select_col
     if analysis_brain.tree is not None:
         analysis_brain.tree.destroy()
         analysis_brain.tree = None
-        head_button.config(text=lang_center.translate('SHOW FIRST 5 ROWS'))
+        head_button.config(text=lang_center.translate('SHOW TABLE'))
     if not listbox.winfo_viewable():
         listbox.grid(column=1, row=2, columnspan=3, padx=10, pady=10)
         select_cols_button.config(text=lang_center.translate('HIDE COLUMNS'))
@@ -64,6 +64,16 @@ def show_df_head(context):
     lang_center = context['lang_center']
     listbox = context['listbox']
     select_cols_button = context['select_cols_button']
+    get_cols_button = context['get_cols_button']
+
+
+    get_cols_button.grid_remove()
+
+
+    children = root.winfo_children()
+    for child in children:
+        if isinstance(child, Canvas):
+            child.destroy()
 
     if listbox.winfo_viewable():
         listbox.grid_remove()
@@ -72,7 +82,7 @@ def show_df_head(context):
     if analysis_brain.tree and analysis_brain.tree.winfo_exists():
         analysis_brain.tree.destroy()
         analysis_brain.tree = None
-        head_button.config(text=lang_center.translate('SHOW FIRST 5 ROWS'))
+        head_button.config(text=lang_center.translate('SHOW TABLE'))
 
     else:
         col_names = analysis_brain.columns.tolist()
@@ -85,8 +95,12 @@ def show_df_head(context):
             else:
                 analysis_brain.tree.heading(col, text=col)
                 analysis_brain.tree.column(col, width=100)
+
+            for _, row in analysis_brain.df.head().iterrows():
+                analysis_brain.tree.insert('', END, values=list(row))
+
             analysis_brain.tree.grid(column=1, row=2, columnspan=3, padx=10, pady=10)
-            head_button.config(text=lang_center.translate('HIDE ROWS'))
+            head_button.config(text=lang_center.translate('HIDE TABLE'))
 
 
 def get_selected_cols(context):

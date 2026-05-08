@@ -29,13 +29,14 @@ filename_label.grid(column=0, row=0, columnspan=3, padx=10, pady=10)
 
 
 # Show df head
-head_button = ttk.Button(root, text=lang_center.translate('SHOW FIRST 5 ROWS'), command=lambda: show_df_head({
+head_button = ttk.Button(root, text=lang_center.translate('SHOW TABLE'), command=lambda: show_df_head({
     'analysis_brain': analysis_brain,
     'root': root,
     'listbox': listbox,
     'head_button': head_button,
     'lang_center': lang_center,
     'select_cols_button': select_cols_button,
+    'get_cols_button': get_cols_button,
 }))
 
 
