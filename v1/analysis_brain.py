@@ -16,18 +16,27 @@ class AnalysisBrain:
         self.tree = None
         self.stats_canvas = None
         self.data_types_in_cols = {}
+        self.operation_buttons = []
         self.good_extensions = [{
             'excel': ['xls', 'xlsx', 'xlsm', 'xlsb', 'odf', 'ods', 'odt'],
             'csv': ['csv'],
         }]
-        self.operation_buttons = []
+        self.root = None
 
 
-    def get_file(self):
-        self.filepath = filedialog.askopenfilename()
-        self.filename = self.filepath.split('/')[-1]
-        self.create_dataframe()
-        return self.filename
+    def get_file(self, root):
+        if self.filepath is None:
+            self.root = root
+            self.filepath = filedialog.askopenfilename()
+            self.filename = self.filepath.split('/')[-1]
+            self.create_dataframe()
+            return self.filename
+        else:
+            self.file_reset()
+            self.filepath = filedialog.askopenfilename()
+            self.filename = self.filepath.split('/')[-1]
+            self.create_dataframe()
+            return self.filename
 
 
     def create_dataframe(self):
@@ -88,3 +97,20 @@ class AnalysisBrain:
     def get_lowest_value(self, column):
         lowest_value = self.df[column].min()
         return lowest_value
+
+
+    def file_reset(self):
+        for button in self.operation_buttons:
+            button.destroy()
+        if self.stats_canvas is not None:
+            self.stats_canvas.destroy()
+
+
+        self.filepath = None
+        self.filename = None
+        self.columns = None
+        self.df = None
+        self.tree = None
+        self.stats_canvas = None
+        self.data_types_in_cols = {}
+        self.operation_buttons = []

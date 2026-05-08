@@ -14,13 +14,15 @@ def load_file_show_filename(context):
     listbox = context['listbox']
     head_button = context['head_button']
     select_cols_button = context['select_cols_button']
+    root = context.get('root')
 
-    analysis_brain.get_file()
+    analysis_brain.get_file(root)
     filename = analysis_brain.filename
-    if filename_label.cget('text') == '':
-        filename_label.config(text=f'{lang_center.translate("File name:")} {filename}')
-    else:
-        filename_label.config(text=f'{lang_center.translate("File name:")} {filename}')
+    filename_label.config(text=f'{lang_center.translate("File name:")} {filename}')
+    # if filename_label.cget('text') == '':
+    #     filename_label.config(text=f'{lang_center.translate("File name:")} {filename}')
+    # else:
+    #     filename_label.config(text=f'{lang_center.translate("File name:")} {filename}')
     head_button.grid(column=0, row=1, padx=10, pady=10)
     select_cols_button.grid(column=1, row=1, padx=10, pady=10)
     get_file_button.config(text=f'{lang_center.translate("CHANGE FILE")}')

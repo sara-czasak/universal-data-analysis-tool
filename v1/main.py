@@ -21,6 +21,7 @@ get_file_button = ttk.Button(root, text=lang_center.translate('LOAD FILE'), comm
     'listbox': listbox,
     'head_button': head_button,
     'select_cols_button': select_cols_button,
+    'root': root,
 }))
 get_file_button.grid(column=3, row=0, padx=10, pady=10)
 
