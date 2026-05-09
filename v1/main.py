@@ -1,13 +1,21 @@
 from tkinter import ttk
 from tkinter import *
+from tkinter import PhotoImage
 from language_center import *
 from analysis_brain import *
 from button_func import *
+from PIL import Image, ImageTk
 
 
 root = Tk()
 root.title('Universal Data Analyser')
-root.minsize(400, 400)
+root.minsize(1000, 400)
+
+bg = tk.PhotoImage(file = "./img/plastic-texture-holographic-background.png")
+
+label1 = Label( root, image = bg)
+label1.place(x = 0, y = 0)
+
 
 home_frame = ttk.Frame(root, padding=10)
 home_frame.grid(column=0, row=0)
@@ -18,6 +26,7 @@ stats_buttons_frame.grid(column=0, row=1)
 stats_frame = ttk.Frame(root, padding=10)
 stats_frame.grid(column=0, row=2)
 stats_frame.grid_remove()
+
 
 
 lang_center = LanguageCenter()

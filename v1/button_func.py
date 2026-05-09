@@ -139,4 +139,3 @@ def get_selected_cols(context):
                     col_index = 0
                     row_index += 1
 
-
