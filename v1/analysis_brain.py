@@ -1,6 +1,3 @@
-# LOAD FILE AS DF
-# ANALYSIS FUNCTIONS
-# MAKE IT A CLASS
 import pandas as pd
 import numpy as np
 import tkinter as tk
@@ -114,7 +111,6 @@ class AnalysisBrain:
         self.columns = None
         self.df = None
         self.tree = None
-        self.stats_canvas = None
         self.data_types_in_cols = {}
         self.operation_buttons = []
 

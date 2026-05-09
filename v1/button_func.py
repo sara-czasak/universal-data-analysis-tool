@@ -127,7 +127,15 @@ def get_selected_cols(context):
     if operations is not None:
         buttons = [create_button(operation, stats_buttons_frame, lang_center, analysis_brain, cols_selected, stats_frame) for operation in operations]
         analysis_brain.operation_buttons = buttons
+        row_index = 0
+        buttons_in_row = 0
+        col_index = 0
+        while buttons_in_row < len(buttons):
+            for button in buttons:
+                button.grid(column=col_index, row=row_index, padx=10, pady=10)
+                buttons_in_row += 1
+                col_index += 1
+                if col_index > 2:
+                    col_index = 0
+                    row_index += 1
 
-        for index, button in enumerate(buttons):
-            button.grid(column=index, row=0, padx=10, pady=10)
-    print(f"creating {len(operations)} buttons: {operations}")
