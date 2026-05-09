@@ -63,6 +63,20 @@ def show_stat(button_id, context):
             label.grid(column=0, row=0)
 
 
+    elif button_id == 'get_median':
+        if reset_button_text(button, f'{lang_center.translate("get_median")}', analysis_brain):
+            median = analysis_brain.get_median(cols_selected)
+            label = ttk.Label(stats_frame, text=f'{lang_center.translate("The median value in column ")} {cols_selected}: {median:.2f}')
+            label.grid(column=0, row=0)
+
+
+    elif button_id == 'get_most_frequent':
+        if reset_button_text(button, f'{lang_center.translate("get_most_frequent")}', analysis_brain):
+            most_frequent = analysis_brain.get_most_frequent(cols_selected)
+            label = ttk.Label(stats_frame, text=f'{lang_center.translate("The most frequent value in column ")} {cols_selected}: {most_frequent}')
+            label.grid(column=0, row=0)
+
+
     elif button_id == 'unique_values':
         if reset_button_text(button, f'{lang_center.translate("unique_values")}', analysis_brain):
 

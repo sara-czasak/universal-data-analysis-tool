@@ -66,11 +66,11 @@ class AnalysisBrain:
         for column in columns:
             dtype = str(self.data_types_in_cols[column])
             if 'int' in dtype:
-                return ['get_highest_value', 'get_lowest_value', 'get_average']
+                return ['get_highest_value', 'get_lowest_value', 'get_average', 'get_median', 'get_most_frequent']
             elif 'float' in dtype:
-                return ['get_highest_value', 'get_lowest_value', 'get_average']
+                return ['get_highest_value', 'get_lowest_value', 'get_average', 'get_median', 'get_most_frequent']
             elif 'str' in dtype.lower() or 'object' in dtype.lower() or 'string' in dtype.lower():
-                return ['unique_values']
+                return ['unique_values', 'get_most_frequent']
         return None
 
 
@@ -99,6 +99,16 @@ class AnalysisBrain:
     def get_average(self, column):
         average = self.df[column].mean()
         return average
+
+
+    def get_median(self, column):
+        median = self.df[column].median()
+        return median
+
+
+    def get_most_frequent(self, column):
+        most_frequent = self.df[column].mode()[0]
+        return most_frequent
 
 
     def file_reset(self):

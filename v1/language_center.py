@@ -20,6 +20,10 @@ languages = {
         'The lowest value in column ': 'The lowest value in column ',
         "HIDE": "HIDE",
         'The average value in column ': 'The average value in column ',
+        'The median value in column ': 'The median value in column ',
+        'get_median': 'get_median',
+        'get_most_frequent': 'get_most_frequent',
+        'The most frequent value in column ': 'The most frequent value in column ',
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -38,6 +42,10 @@ languages = {
         'The lowest value in column ': '___PL___',
         "HIDE": '___PL___',
         'The average value in column ': '___PL___',
+        "get_median": '___PL___',
+        'The median value in column ': '___PL___',
+        'get_most_frequent': '___PL___',
+        'The most frequent value in column ': '___PL___',
     },
     'es': {
         'LOAD FILE': '___ES___',
@@ -56,6 +64,10 @@ languages = {
         'The lowest value in column ': '___ES___',
         "HIDE": '___ES___',
         'The average value in column ': '___ES___',
+        "get_median": '___ES___',
+        'The median value in column ': '___ES___',
+        'get_most_frequent': '___ES___',
+        'The most frequent value in column ': '___ES___',
     }
 }
 
