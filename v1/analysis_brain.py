@@ -87,7 +87,6 @@ class AnalysisBrain:
         if len(column) > 0 and isinstance(column, str):
             counts = self.df[column].value_counts()
             unique_values = counts.to_dict()
-            print(unique_values)
             return unique_values
         else:
             print('wrong column')

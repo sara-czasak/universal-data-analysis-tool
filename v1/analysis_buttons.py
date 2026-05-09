@@ -39,7 +39,6 @@ def reset_button_text(button, text, analysis_brain):
 
 
 def show_stat(button_id, context):
-    print(f"show_stat called: {button_id}")
 
     analysis_brain = context['analysis_brain']
     cols_selected = context['cols_selected'][0]
@@ -56,9 +55,10 @@ def show_stat(button_id, context):
     for child in stats_frame.winfo_children():
         if not isinstance(child, ttk.Button):
             child.destroy()
-            bg_stats_frame = Label(stats_frame, image=bg)
-            bg_stats_frame.place(x=0, y=0)
-            bg_stats_frame.lower()
+
+        bg_stats_frame = Label(stats_frame, image=bg)
+        bg_stats_frame.place(x=0, y=0)
+        bg_stats_frame.lower()
 
     if button_id == 'get_highest_value':
         if reset_button_text(button, f'{lang_center.translate("get_highest_value")}', analysis_brain):
@@ -140,7 +140,6 @@ def show_stat(button_id, context):
                     rows = analysis_brain.get_rows(cols_selected, value)
                     all_rows.append(rows)
 
-                print('cols selected: ', cols_selected)
                 tree = grow_tree(canvas=stats_frame, context={
                     'categories': unique,
                     'column_names': analysis_brain.columns,

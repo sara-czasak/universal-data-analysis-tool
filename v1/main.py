@@ -101,5 +101,4 @@ get_cols_button = ttk.Button(stats_buttons_frame, text=lang_center.translate('OK
     'home_frame': home_frame,
     'img': bg,
 }))
-
 root.mainloop()
