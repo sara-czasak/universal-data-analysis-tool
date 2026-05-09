@@ -127,6 +127,7 @@ def get_selected_cols(context):
     stats_buttons_frame = context['stats_buttons_frame']
     stats_frame = context['stats_frame']
     home_frame = context['home_frame']
+    img = context['img']
 
 
     if listbox.winfo_viewable():
@@ -146,7 +147,7 @@ def get_selected_cols(context):
 
     operations = analysis_brain.get_available_operations(cols_selected)
     if operations is not None:
-        buttons = [create_button(operation, home_frame, lang_center, analysis_brain, cols_selected, stats_buttons_frame, stats_frame) for operation in operations]
+        buttons = [create_button(operation, home_frame, lang_center, analysis_brain, cols_selected, stats_buttons_frame, stats_frame, img) for operation in operations]
         analysis_brain.operation_buttons = buttons
         row_index = 0
         buttons_in_row = 0

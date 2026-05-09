@@ -3,6 +3,7 @@ from tkinter import *
 from language_center import *
 from analysis_brain import *
 from button_func import *
+from style_mgr import *
 
 
 root = Tk()
@@ -15,16 +16,17 @@ root.columnconfigure(0, minsize=0, weight=1)
 root.columnconfigure(1, minsize=100)
 root.columnconfigure(2, minsize=0, weight=1)
 
+my_style = StyleWidgets(root)
 
 bg_label = Label(root, image=bg)
 bg_label.place(x=0, y=0)
 
 home_frame = ttk.Frame(root)
 home_frame.grid(column=1, row=0)
+root.columnconfigure(0, minsize=0, weight=1)
 
 home_frame.columnconfigure(0, minsize=0, weight=1)
 home_frame.columnconfigure(1, minsize=0)
-
 
 stats_buttons_frame = ttk.Frame(root)
 stats_buttons_frame.grid(column=1, row=1)
@@ -36,11 +38,17 @@ stats_buttons_frame.columnconfigure(2, minsize=0)
 
 stats_frame = ttk.Frame(root)
 stats_frame.grid(column=1, row=2)
-stats_frame.grid_remove()
 
 stats_frame.columnconfigure(0, minsize=0)
 stats_frame.columnconfigure(1, minsize=0)
 stats_frame.columnconfigure(2, minsize=0)
+
+bg_main_frame = Label(home_frame, image=bg)
+bg_main_frame.place(x=0, y=0)
+bg_stats_frame = Label(stats_frame, image=bg)
+bg_stats_frame.place(x=0, y=0)
+bg_stats_button_frame = Label(stats_buttons_frame, image=bg)
+bg_stats_button_frame.place(x=0, y=0)
 
 lang_center = LanguageCenter()
 analysis_brain = AnalysisBrain(lang_center)
@@ -91,6 +99,7 @@ get_cols_button = ttk.Button(stats_buttons_frame, text=lang_center.translate('OK
     'stats_buttons_frame': stats_buttons_frame,
     'stats_frame': stats_frame,
     'home_frame': home_frame,
+    'img': bg,
 }))
 
 root.mainloop()
