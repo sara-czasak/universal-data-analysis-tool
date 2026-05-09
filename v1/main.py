@@ -1,10 +1,8 @@
 from tkinter import ttk
 from tkinter import *
-from tkinter import PhotoImage
 from language_center import *
 from analysis_brain import *
 from button_func import *
-from PIL import Image, ImageTk
 
 
 root = Tk()
@@ -13,25 +11,38 @@ root.minsize(1000, 400)
 
 bg = tk.PhotoImage(file = "./img/plastic-texture-holographic-background.png")
 
-label1 = Label( root, image = bg)
-label1.place(x = 0, y = 0)
+root.columnconfigure(0, minsize=100, weight=1)
+root.columnconfigure(1, minsize=100)
+root.columnconfigure(2, minsize=100, weight=1)
 
 
-home_frame = ttk.Frame(root, padding=10)
-home_frame.grid(column=0, row=0)
+bg_label = Label(root, image=bg)
+bg_label.place(x=0, y=0)
 
-stats_buttons_frame = ttk.Frame(root, padding=10)
-stats_buttons_frame.grid(column=0, row=1)
+home_frame = ttk.Frame(root)
+home_frame.grid(column=1, row=0)
 
-stats_frame = ttk.Frame(root, padding=10)
-stats_frame.grid(column=0, row=2)
+home_frame.columnconfigure(0, minsize=0, weight=1)
+home_frame.columnconfigure(1, minsize=0)
+
+
+stats_buttons_frame = ttk.Frame(root)
+stats_buttons_frame.grid(column=1, row=1)
+
+stats_buttons_frame.columnconfigure(0, minsize=0, weight=1)
+stats_buttons_frame.columnconfigure(1, minsize=0,)
+stats_buttons_frame.columnconfigure(2, minsize=0,)
+
+
+stats_frame = ttk.Frame(root)
+stats_frame.grid(column=1, row=2)
 stats_frame.grid_remove()
-
-
 
 lang_center = LanguageCenter()
 analysis_brain = AnalysisBrain()
 
+filename_label = ttk.Label(home_frame, text='')
+filename_label.grid(column=1, row=0, padx=10, pady=10)
 
 get_file_button = ttk.Button(home_frame, text=lang_center.translate('LOAD FILE'), command=lambda: load_file_show_filename({
     'analysis_brain': analysis_brain,
@@ -43,10 +54,8 @@ get_file_button = ttk.Button(home_frame, text=lang_center.translate('LOAD FILE')
     'select_cols_button': select_cols_button,
     'home_frame': home_frame,
 }))
-get_file_button.grid(column=1, row=0, padx=10, pady=10)
+get_file_button.grid(column=0, row=0, padx=10, pady=10)
 
-filename_label = ttk.Label(home_frame, text='', width=40)
-filename_label.grid(column=0, row=0, padx=10, pady=10)
 
 
 # Show df head

@@ -19,8 +19,8 @@ def load_file_show_filename(context):
     analysis_brain.get_file(home_frame)
     filename = analysis_brain.filename
     filename_label.config(text=f'{lang_center.translate("File name:")} {filename}')
-    head_button.grid(column=0, row=1, padx=10, pady=10)
-    select_cols_button.grid(column=1, row=1, padx=10, pady=10)
+    head_button.grid(column=1, row=0, padx=10, pady=10)
+    select_cols_button.grid(column=2, row=0, padx=10, pady=10)
     get_file_button.config(text=f'{lang_center.translate("CHANGE FILE")}')
     col_names = analysis_brain.columns
     if listbox.size() > 0:
@@ -81,7 +81,7 @@ def show_df_head(context):
     else:
         col_names = analysis_brain.columns
         # view head
-        analysis_brain.tree = ttk.Treeview(show='headings', columns=col_names)
+        analysis_brain.tree = ttk.Treeview(stats_buttons_frame, show='headings', columns=col_names)
         for col in col_names:
             if len(col_names) >= 10:
                 analysis_brain.tree.heading(col, text=col)
@@ -93,7 +93,7 @@ def show_df_head(context):
         for _, row in analysis_brain.df.head().iterrows():
             analysis_brain.tree.insert('', 'end', values=list(row))
 
-        analysis_brain.tree.grid(column=0, row=2, padx=10, pady=10)
+        analysis_brain.tree.grid(column=1, row=1, padx=10, pady=10, columnspan=2)
         head_button.config(text=lang_center.translate('HIDE TABLE'))
 
 
