@@ -30,8 +30,8 @@ def load_file_show_filename(context):
             listbox.insert(END, i)
 
 
-def show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, home_frame):
-    children = home_frame.winfo_children()
+def show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, stats_buttons_frame):
+    children = stats_buttons_frame.winfo_children()
     for child in children:
         if isinstance(child, Canvas):
             child.destroy()
@@ -107,7 +107,7 @@ def get_selected_cols(context):
     select_cols_button = context['select_cols_button']
     lang_center = context['lang_center']
     get_cols_button = context['get_cols_button']
-    home_frame = context['home_frame']
+    stats_buttons_frame = context['stats_buttons_frame']
 
     if listbox.winfo_viewable():
         listbox.grid_remove()
@@ -124,9 +124,9 @@ def get_selected_cols(context):
 
     operations = analysis_brain.get_available_operations(cols_selected)
     if operations is not None:
-        buttons = [create_button(operation, home_frame, lang_center, analysis_brain, cols_selected) for operation in operations]
+        buttons = [create_button(operation, stats_buttons_frame, lang_center, analysis_brain, cols_selected) for operation in operations]
         analysis_brain.operation_buttons = buttons
 
         for index, button in enumerate(buttons):
-            button.grid(column=index, row=2, padx=10, pady=10)
+            button.grid(column=index, row=0, padx=10, pady=10)
     print(f"creating {len(operations)} buttons: {operations}")
