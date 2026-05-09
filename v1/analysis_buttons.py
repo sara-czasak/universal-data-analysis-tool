@@ -4,13 +4,14 @@ from helpers import *
 from stats_trees import *
 
 
-def create_button(operation, home_frame, lang_center, analysis_brain, cols_selected):
+def create_button(operation, home_frame, lang_center, analysis_brain, cols_selected, stats_frame):
     button = ttk.Button(home_frame, text=lang_center.translate(operation), command=lambda: show_stat(button_id=operation, context={
         'analysis_brain': analysis_brain,
         'cols_selected': cols_selected,
         'lang_center': lang_center,
         'home_frame': home_frame,
         'button': button,
+        'stats_frame': stats_frame,
         }))
     return button
 
@@ -32,10 +33,13 @@ def show_stat(button_id, context):
     lang_center = context['lang_center']
     home_frame = context['home_frame']
     button = context['button']
+    stats_frame = context['stats_frame']
 
 
     if button_id == 'get_highest_value':
         if not reset_button_text(button, f'{lang_center.translate("get_highest_value")}', analysis_brain):
+
+
             if analysis_brain.stats_canvas is not None:
                 analysis_brain.stats_canvas.destroy()
                 analysis_brain.stats_canvas = None

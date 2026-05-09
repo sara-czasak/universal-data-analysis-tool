@@ -108,6 +108,7 @@ def get_selected_cols(context):
     lang_center = context['lang_center']
     get_cols_button = context['get_cols_button']
     stats_buttons_frame = context['stats_buttons_frame']
+    stats_frame = context['stats_frame']
 
     if listbox.winfo_viewable():
         listbox.grid_remove()
@@ -124,7 +125,7 @@ def get_selected_cols(context):
 
     operations = analysis_brain.get_available_operations(cols_selected)
     if operations is not None:
-        buttons = [create_button(operation, stats_buttons_frame, lang_center, analysis_brain, cols_selected) for operation in operations]
+        buttons = [create_button(operation, stats_buttons_frame, lang_center, analysis_brain, cols_selected, stats_frame) for operation in operations]
         analysis_brain.operation_buttons = buttons
 
         for index, button in enumerate(buttons):

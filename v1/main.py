@@ -40,7 +40,7 @@ filename_label.grid(column=0, row=0, columnspan=2, padx=10, pady=10)
 
 
 # Show df head
-head_button = ttk.Button(stats_buttons_frame, text=lang_center.translate('SHOW TABLE'), command=lambda: show_df_head({
+head_button = ttk.Button(home_frame, text=lang_center.translate('SHOW TABLE'), command=lambda: show_df_head({
     'analysis_brain': analysis_brain,
     'home_frame': home_frame,
     'listbox': listbox,
@@ -52,7 +52,7 @@ head_button = ttk.Button(stats_buttons_frame, text=lang_center.translate('SHOW T
 
 
 # Show col names
-select_cols_button = ttk.Button(stats_buttons_frame, text=lang_center.translate('SELECT COLUMNS'), command=lambda: show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, stats_buttons_frame))
+select_cols_button = ttk.Button(home_frame, text=lang_center.translate('SELECT COLUMNS'), command=lambda: show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, stats_buttons_frame))
 
 # Column list
 listbox = Listbox(home_frame, height=10, selectmode=SINGLE)
@@ -64,6 +64,7 @@ get_cols_button = ttk.Button(home_frame, text=lang_center.translate('OK'), comma
     'select_cols_button': select_cols_button,
     'get_cols_button': get_cols_button,
     'stats_buttons_frame': stats_buttons_frame,
+    'stats_frame': stats_frame,
 }))
 
 root.mainloop()
