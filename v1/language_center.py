@@ -14,10 +14,12 @@ languages = {
         'OK': 'OK',
         'get_highest_value': 'get_highest_value',
         'get_lowest_value': 'get_lowest_value',
+        'get_average': 'get_average',
         'unique_values': 'unique_values',
         "The highest value in column ": "The highest value in column",
         'The lowest value in column ': 'The lowest value in column ',
         "HIDE": "HIDE",
+        'The average value in column ': 'The average value in column ',
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -30,10 +32,12 @@ languages = {
         'OK': 'OK',
         'get_highest_value': '___PL___',
         'get_lowest_value': '___PL___',
+        'get_average': '___PL___',
         'unique_values': '___PL___',
         "The highest value in column ": '___PL___',
         'The lowest value in column ': '___PL___',
         "HIDE": '___PL___',
+        'The average value in column ': '___PL___',
     },
     'es': {
         'LOAD FILE': '___ES___',
@@ -46,10 +50,12 @@ languages = {
         'OK': 'OK',
         'get_highest_value': '___ES___',
         'get_lowest_value': '___ES___',
+        'get_average': '___ES___',
         'unique_values': '___ES___',
         "The highest value in column ": '___ES___',
         'The lowest value in column ': '___ES___',
         "HIDE": '___ES___',
+        'The average value in column ': '___ES___',
     }
 }
 

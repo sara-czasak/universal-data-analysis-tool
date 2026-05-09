@@ -56,6 +56,13 @@ def show_stat(button_id, context):
             label.grid(column=0, row=0)
 
 
+    elif button_id == 'get_average':
+        if reset_button_text(button, f'{lang_center.translate("get_average")}', analysis_brain):
+            average = analysis_brain.get_average(cols_selected)
+            label = ttk.Label(stats_frame, text=f'{lang_center.translate("The average value in column ")} {cols_selected}: {average:.2f}')
+            label.grid(column=0, row=0)
+
+
     elif button_id == 'unique_values':
         if reset_button_text(button, f'{lang_center.translate("unique_values")}', analysis_brain):
 

@@ -69,9 +69,9 @@ class AnalysisBrain:
         for column in columns:
             dtype = str(self.data_types_in_cols[column])
             if 'int' in dtype:
-                return ['get_highest_value', 'get_lowest_value']
+                return ['get_highest_value', 'get_lowest_value', 'get_average']
             elif 'float' in dtype:
-                return ['get_highest_value', 'get_lowest_value']
+                return ['get_highest_value', 'get_lowest_value', 'get_average']
             elif 'str' in dtype.lower() or 'object' in dtype.lower() or 'string' in dtype.lower():
                 return ['unique_values']
         return None
@@ -99,11 +99,14 @@ class AnalysisBrain:
         return lowest_value
 
 
+    def get_average(self, column):
+        average = self.df[column].mean()
+        return average
+
+
     def file_reset(self):
         for button in self.operation_buttons:
             button.destroy()
-        if self.stats_canvas is not None:
-            self.stats_canvas.destroy()
 
 
         self.filepath = None
