@@ -51,7 +51,7 @@ def show_col_names(listbox, analysis_brain, head_button, lang_center, select_col
         get_cols_button.grid(column=0, row=2, padx=10, pady=10)
     else:
         listbox.grid_remove()
-        select_cols_button.config(text=lang_center.translate('SELECT COLUMNS'))
+        select_cols_button.config(text=lang_center.translate('SELECT COLUMN'))
         get_cols_button.grid_remove()
 
 
@@ -75,7 +75,7 @@ def show_df_head(context):
 
     if listbox.winfo_viewable():
         listbox.grid_remove()
-        select_cols_button.config(text=lang_center.translate('SELECT COLUMNS'))
+        select_cols_button.config(text=lang_center.translate('SELECT COLUMN'))
 
     if analysis_brain.tree and analysis_brain.tree.winfo_exists():
         analysis_brain.tree.destroy()
@@ -112,7 +112,7 @@ def get_selected_cols(context):
 
     if listbox.winfo_viewable():
         listbox.grid_remove()
-        select_cols_button.config(text=lang_center.translate('SELECT COLUMNS'))
+        select_cols_button.config(text=lang_center.translate('SELECT COLUMN'))
 
     for btn in analysis_brain.operation_buttons:
         btn.destroy()

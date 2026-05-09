@@ -35,53 +35,29 @@ def show_stat(button_id, context):
     button = context['button']
     stats_frame = context['stats_frame']
 
+    children = stats_frame.winfo_children()
+    for child in children:
+        child.destroy()
+
 
     if button_id == 'get_highest_value':
-        if not reset_button_text(button, f'{lang_center.translate("get_highest_value")}', analysis_brain):
-
-
-            if analysis_brain.stats_canvas is not None:
-                analysis_brain.stats_canvas.destroy()
-                analysis_brain.stats_canvas = None
-        else:
-            stats_canvas = Canvas(home_frame)
-            stats_canvas.grid(column=0, row=3, padx=10, pady=10, columnspan=3)
-            analysis_brain.stats_canvas = stats_canvas
-
+        if reset_button_text(button, f'{lang_center.translate("get_highest_value")}', analysis_brain):
 
             highest = analysis_brain.get_highest_value(cols_selected)
-            label = ttk.Label(stats_canvas, text=f'{lang_center.translate("The highest value in column ")} {cols_selected}: {highest}')
+            label = ttk.Label(stats_frame, text=f'{lang_center.translate("The highest value in column ")} {cols_selected}: {highest}')
             label.grid(column=0, row=0)
 
 
     elif button_id == 'get_lowest_value':
-        if not reset_button_text(button, f'{lang_center.translate("get_lowest_value")}', analysis_brain):
-            if analysis_brain.stats_canvas is not None:
-                analysis_brain.stats_canvas.destroy()
-                analysis_brain.stats_canvas = None
-        else:
-
-            stats_canvas = Canvas(home_frame)
-            stats_canvas.grid(column=0, row=3, padx=10, pady=10)
-            analysis_brain.stats_canvas = stats_canvas
-            print(analysis_brain.stats_canvas)
-            print(id(stats_canvas))
+        if reset_button_text(button, f'{lang_center.translate("get_lowest_value")}', analysis_brain):
 
             lowest = analysis_brain.get_lowest_value(cols_selected)
-            label = ttk.Label(stats_canvas, text=f"{lang_center.translate('The lowest value in column ')} {cols_selected}: {lowest}")
+            label = ttk.Label(stats_frame, text=f"{lang_center.translate('The lowest value in column ')} {cols_selected}: {lowest}")
             label.grid(column=0, row=0)
 
 
     elif button_id == 'unique_values':
-        if not reset_button_text(button, f'{lang_center.translate("unique_values")}', analysis_brain):
-            if analysis_brain.stats_canvas is not None:
-                analysis_brain.stats_canvas.destroy()
-                analysis_brain.stats_canvas = None
-        else:
-
-            stats_canvas = Canvas(home_frame)
-            stats_canvas.grid(column=0, row=3, padx=10, pady=10)
-            analysis_brain.stats_canvas = stats_canvas
+        if reset_button_text(button, f'{lang_center.translate("unique_values")}', analysis_brain):
 
             unique = analysis_brain.unique_values(cols_selected)
 
@@ -93,7 +69,7 @@ def show_stat(button_id, context):
                     all_rows.append(rows)
 
                 print('cols selected: ', cols_selected)
-                tree = grow_tree(canvas=stats_canvas, context={
+                tree = grow_tree(canvas=stats_frame, context={
                     'categories': unique,
                     'column_names': analysis_brain.columns,
                     'cols_selected': cols_selected,

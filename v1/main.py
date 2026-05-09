@@ -52,7 +52,7 @@ head_button = ttk.Button(home_frame, text=lang_center.translate('SHOW TABLE'), c
 
 
 # Show col names
-select_cols_button = ttk.Button(home_frame, text=lang_center.translate('SELECT COLUMNS'), command=lambda: show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, stats_buttons_frame))
+select_cols_button = ttk.Button(home_frame, text=lang_center.translate('SELECT COLUMN'), command=lambda: show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, stats_buttons_frame))
 
 # Column list
 listbox = Listbox(home_frame, height=10, selectmode=SINGLE)
