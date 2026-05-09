@@ -43,7 +43,7 @@ stats_frame.columnconfigure(1, minsize=0)
 stats_frame.columnconfigure(2, minsize=0)
 
 lang_center = LanguageCenter()
-analysis_brain = AnalysisBrain()
+analysis_brain = AnalysisBrain(lang_center)
 
 filename_label = ttk.Label(home_frame, text='')
 filename_label.grid(column=1, row=0, padx=10, pady=10)
@@ -57,6 +57,7 @@ get_file_button = ttk.Button(home_frame, text=lang_center.translate('LOAD FILE')
     'head_button': head_button,
     'select_cols_button': select_cols_button,
     'home_frame': home_frame,
+    'stats_buttons_frame': stats_buttons_frame,
 }))
 get_file_button.grid(column=0, row=0, padx=10, pady=10)
 
@@ -76,7 +77,7 @@ head_button = ttk.Button(stats_buttons_frame, text=lang_center.translate('SHOW T
 
 
 # Show col names
-select_cols_button = ttk.Button(stats_buttons_frame, text=lang_center.translate('SELECT COLUMN'), command=lambda: show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, stats_buttons_frame))
+select_cols_button = ttk.Button(stats_buttons_frame, text=lang_center.translate('SELECT COLUMN'), command=lambda: show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, stats_buttons_frame, stats_frame))
 
 # Column list
 listbox = Listbox(stats_buttons_frame, height=10, selectmode=SINGLE)

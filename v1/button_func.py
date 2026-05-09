@@ -15,9 +15,21 @@ def load_file_show_filename(context):
     head_button = context['head_button']
     select_cols_button = context['select_cols_button']
     home_frame = context['home_frame']
+    stats_buttons_frame = context['stats_buttons_frame']
 
-    analysis_brain.get_file(home_frame)
+    if analysis_brain.get_file(home_frame) is None:
+        head_button.config(text=lang_center.translate('SHOW TABLE'))
+        select_cols_button.config(text=lang_center.translate('SELECT COLUMN'))
+        filename_label.config(text='')
+        for child in stats_buttons_frame.winfo_children():
+            child.grid_remove()
+        stats_buttons_frame.grid_remove()
+        return
+
+    stats_buttons_frame.grid(column=1, row=1)
+
     filename = analysis_brain.filename
+
     filename_label.config(text=f'{lang_center.translate("File name:")} {filename}')
     head_button.grid(column=1, row=0, padx=10, pady=10)
     select_cols_button.grid(column=2, row=0, padx=10, pady=10)
@@ -30,7 +42,12 @@ def load_file_show_filename(context):
             listbox.insert(END, i)
 
 
-def show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, stats_buttons_frame):
+def show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, stats_buttons_frame, stats_frame):
+
+    stats_frame.grid_remove()
+
+    if analysis_brain.df is None:
+        return
 
     for btn in analysis_brain.operation_buttons:
         btn.destroy()
@@ -60,7 +77,11 @@ def show_df_head(context):
     get_cols_button = context['get_cols_button']
     stats_buttons_frame = context['stats_buttons_frame']
 
+    stats_frame.grid_remove()
     get_cols_button.grid_remove()
+
+    if analysis_brain.df is None:
+        return
 
 
     children = stats_frame.winfo_children()

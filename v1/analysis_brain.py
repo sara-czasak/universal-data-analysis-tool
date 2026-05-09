@@ -2,10 +2,11 @@ import pandas as pd
 import numpy as np
 import tkinter as tk
 from tkinter import ttk, filedialog
+from popups import *
 
 
 class AnalysisBrain:
-    def __init__(self):
+    def __init__(self, lang_center):
         self.filepath = None
         self.filename = None
         self.columns = None
@@ -18,18 +19,25 @@ class AnalysisBrain:
             'csv': ['csv'],
         }]
         self.root = None
+        self.lang_center = lang_center
 
 
     def get_file(self, root):
         if self.filepath is None:
             self.root = root
             self.filepath = filedialog.askopenfilename()
+            if self.filepath == '':
+                self.filepath = None
+                return None
             self.filename = self.filepath.split('/')[-1]
             self.create_dataframe()
             return self.filename
         else:
             self.file_reset()
             self.filepath = filedialog.askopenfilename()
+            if self.filepath == '':
+                self.filepath = None
+                return None
             self.filename = self.filepath.split('/')[-1]
             self.create_dataframe()
             return self.filename

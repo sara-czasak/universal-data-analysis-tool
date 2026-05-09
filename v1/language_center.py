@@ -24,6 +24,8 @@ languages = {
         'get_median': 'get_median',
         'get_most_frequent': 'get_most_frequent',
         'The most frequent value in column ': 'The most frequent value in column ',
+        "Error": "Error",
+        "An error occurred": "An error occurred",
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -46,6 +48,8 @@ languages = {
         'The median value in column ': '___PL___',
         'get_most_frequent': '___PL___',
         'The most frequent value in column ': '___PL___',
+        "Error": '___PL___',
+        "An error occurred": '___PL___',
     },
     'es': {
         'LOAD FILE': '___ES___',
@@ -68,6 +72,8 @@ languages = {
         'The median value in column ': '___ES___',
         'get_most_frequent': '___ES___',
         'The most frequent value in column ': '___ES___',
+        "Error": '___ES___',
+        "An error occurred": '___ES___',
     }
 }
 

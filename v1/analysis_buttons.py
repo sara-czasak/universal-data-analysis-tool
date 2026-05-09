@@ -14,6 +14,7 @@ def create_button(operation, home_frame, lang_center, analysis_brain, cols_selec
         'stats_buttons_frame': stats_buttons_frame,
         'stats_frame': stats_frame,
         }))
+    button.id = operation
     return button
 
 
@@ -24,8 +25,12 @@ def clean_ui(stats_frame):
 
 
 def reset_button_text(button, text, analysis_brain):
-    if button.cget('text') == text:
+    all_btns = analysis_brain.operation_buttons
+    if button.cget('text') != 'HIDE':
         button.config(text='HIDE')
+        for btn in all_btns:
+            if btn.id != button.id:
+                btn.config(text=btn.id)
         return True
     else:
         button.config(text=text)
@@ -41,12 +46,16 @@ def show_stat(button_id, context):
     home_frame = context['home_frame']
     button = context['button']
     stats_frame = context['stats_frame']
+    stats_buttons_frame = context['stats_buttons_frame']
 
     stats_frame.grid(column=1, row=2)
 
 
     if button_id == 'get_highest_value':
         if reset_button_text(button, f'{lang_center.translate("get_highest_value")}', analysis_brain):
+            for child in stats_buttons_frame.winfo_children():
+                if isinstance(child, ttk.Button):
+                    pass
 
             highest = analysis_brain.get_highest_value(cols_selected)
             label = ttk.Label(stats_frame, text=f'{lang_center.translate("The highest value in column ")} {cols_selected}: {highest}')
