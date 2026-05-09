@@ -42,7 +42,7 @@ def show_stat(button_id, context):
     button = context['button']
     stats_frame = context['stats_frame']
 
-    stats_frame.grid(column=0, row=2)
+    stats_frame.grid(column=1, row=2)
 
 
     if button_id == 'get_highest_value':

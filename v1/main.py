@@ -11,9 +11,9 @@ root.minsize(1000, 400)
 
 bg = tk.PhotoImage(file = "./img/plastic-texture-holographic-background.png")
 
-root.columnconfigure(0, minsize=100, weight=1)
+root.columnconfigure(0, minsize=0, weight=1)
 root.columnconfigure(1, minsize=100)
-root.columnconfigure(2, minsize=100, weight=1)
+root.columnconfigure(2, minsize=0, weight=1)
 
 
 bg_label = Label(root, image=bg)
@@ -29,14 +29,18 @@ home_frame.columnconfigure(1, minsize=0)
 stats_buttons_frame = ttk.Frame(root)
 stats_buttons_frame.grid(column=1, row=1)
 
-stats_buttons_frame.columnconfigure(0, minsize=0, weight=1)
-stats_buttons_frame.columnconfigure(1, minsize=0,)
-stats_buttons_frame.columnconfigure(2, minsize=0,)
+stats_buttons_frame.columnconfigure(0, minsize=0)
+stats_buttons_frame.columnconfigure(1, minsize=0)
+stats_buttons_frame.columnconfigure(2, minsize=0)
 
 
 stats_frame = ttk.Frame(root)
 stats_frame.grid(column=1, row=2)
 stats_frame.grid_remove()
+
+stats_frame.columnconfigure(0, minsize=0)
+stats_frame.columnconfigure(1, minsize=0)
+stats_frame.columnconfigure(2, minsize=0)
 
 lang_center = LanguageCenter()
 analysis_brain = AnalysisBrain()

@@ -121,7 +121,7 @@ def get_selected_cols(context):
         cols_selected.append(listbox.get(i))
     get_cols_button.grid_remove()
 
-    stats_frame.grid(column=0, row=2, padx=10, pady=10)
+    stats_frame.grid(column=1, row=2, padx=10, pady=10)
 
     operations = analysis_brain.get_available_operations(cols_selected)
     if operations is not None:
