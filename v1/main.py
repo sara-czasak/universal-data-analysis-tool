@@ -17,6 +17,7 @@ stats_buttons_frame.grid(column=0, row=1)
 
 stats_frame = ttk.Frame(root, padding=10)
 stats_frame.grid(column=0, row=2)
+stats_frame.grid_remove()
 
 
 lang_center = LanguageCenter()
@@ -33,31 +34,32 @@ get_file_button = ttk.Button(home_frame, text=lang_center.translate('LOAD FILE')
     'select_cols_button': select_cols_button,
     'home_frame': home_frame,
 }))
-get_file_button.grid(column=3, row=0, padx=10, pady=10)
+get_file_button.grid(column=1, row=0, padx=10, pady=10)
 
-filename_label = ttk.Label(home_frame, text='')
-filename_label.grid(column=0, row=0, columnspan=2, padx=10, pady=10)
+filename_label = ttk.Label(home_frame, text='', width=40)
+filename_label.grid(column=0, row=0, padx=10, pady=10)
 
 
 # Show df head
-head_button = ttk.Button(home_frame, text=lang_center.translate('SHOW TABLE'), command=lambda: show_df_head({
+head_button = ttk.Button(stats_buttons_frame, text=lang_center.translate('SHOW TABLE'), command=lambda: show_df_head({
     'analysis_brain': analysis_brain,
-    'home_frame': home_frame,
+    'stats_frame': stats_frame,
     'listbox': listbox,
     'head_button': head_button,
     'lang_center': lang_center,
     'select_cols_button': select_cols_button,
     'get_cols_button': get_cols_button,
+    'stats_buttons_frame': stats_buttons_frame,
 }))
 
 
 # Show col names
-select_cols_button = ttk.Button(home_frame, text=lang_center.translate('SELECT COLUMN'), command=lambda: show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, stats_buttons_frame))
+select_cols_button = ttk.Button(stats_buttons_frame, text=lang_center.translate('SELECT COLUMN'), command=lambda: show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, stats_buttons_frame))
 
 # Column list
-listbox = Listbox(home_frame, height=10, selectmode=SINGLE)
+listbox = Listbox(stats_buttons_frame, height=10, selectmode=SINGLE)
 
-get_cols_button = ttk.Button(home_frame, text=lang_center.translate('OK'), command=lambda: get_selected_cols({
+get_cols_button = ttk.Button(stats_buttons_frame, text=lang_center.translate('OK'), command=lambda: get_selected_cols({
     'listbox': listbox,
     'analysis_brain': analysis_brain,
     'lang_center': lang_center,
@@ -65,6 +67,7 @@ get_cols_button = ttk.Button(home_frame, text=lang_center.translate('OK'), comma
     'get_cols_button': get_cols_button,
     'stats_buttons_frame': stats_buttons_frame,
     'stats_frame': stats_frame,
+    'home_frame': home_frame,
 }))
 
 root.mainloop()

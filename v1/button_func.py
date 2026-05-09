@@ -31,11 +31,6 @@ def load_file_show_filename(context):
 
 
 def show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, stats_buttons_frame):
-    children = stats_buttons_frame.winfo_children()
-    for child in children:
-        if isinstance(child, Canvas):
-            child.destroy()
-
 
     for btn in analysis_brain.operation_buttons:
         btn.destroy()
@@ -56,19 +51,19 @@ def show_col_names(listbox, analysis_brain, head_button, lang_center, select_col
 
 
 def show_df_head(context):
-    home_frame = context['home_frame']
+    stats_frame = context['stats_frame']
     analysis_brain = context['analysis_brain']
     head_button = context['head_button']
     lang_center = context['lang_center']
     listbox = context['listbox']
     select_cols_button = context['select_cols_button']
     get_cols_button = context['get_cols_button']
-
+    stats_buttons_frame = context['stats_buttons_frame']
 
     get_cols_button.grid_remove()
 
 
-    children = home_frame.winfo_children()
+    children = stats_frame.winfo_children()
     for child in children:
         if isinstance(child, Canvas):
             child.destroy()
@@ -80,6 +75,7 @@ def show_df_head(context):
     if analysis_brain.tree and analysis_brain.tree.winfo_exists():
         analysis_brain.tree.destroy()
         analysis_brain.tree = None
+        stats_frame.grid_remove()
         head_button.config(text=lang_center.translate('SHOW TABLE'))
 
     else:
@@ -109,6 +105,8 @@ def get_selected_cols(context):
     get_cols_button = context['get_cols_button']
     stats_buttons_frame = context['stats_buttons_frame']
     stats_frame = context['stats_frame']
+    home_frame = context['home_frame']
+
 
     if listbox.winfo_viewable():
         listbox.grid_remove()
@@ -123,9 +121,11 @@ def get_selected_cols(context):
         cols_selected.append(listbox.get(i))
     get_cols_button.grid_remove()
 
+    stats_frame.grid(column=0, row=2, padx=10, pady=10)
+
     operations = analysis_brain.get_available_operations(cols_selected)
     if operations is not None:
-        buttons = [create_button(operation, stats_buttons_frame, lang_center, analysis_brain, cols_selected, stats_frame) for operation in operations]
+        buttons = [create_button(operation, home_frame, lang_center, analysis_brain, cols_selected, stats_buttons_frame, stats_frame) for operation in operations]
         analysis_brain.operation_buttons = buttons
         row_index = 0
         buttons_in_row = 0
@@ -138,4 +138,5 @@ def get_selected_cols(context):
                 if col_index > 2:
                     col_index = 0
                     row_index += 1
+
 
