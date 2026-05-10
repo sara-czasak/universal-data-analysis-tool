@@ -71,12 +71,18 @@ class AnalysisBrain:
             if file_extension in extension['excel']:
                 self.df = pd.read_excel(self.filepath)
                 self.columns = list(self.df.columns)
-                # self.columns = self.df.columns.values
                 self.get_cols_datatypes()
+                for col in self.columns:
+                    if self.df[col].dtype == object:
+                        self.df[col] = self.df[col].fillna('')
+
             elif file_extension in extension['csv']:
                 self.df = pd.read_csv(self.filepath)
                 self.columns = self.df.columns.values
                 self.get_cols_datatypes()
+                for col in self.columns:
+                    if self.df[col].dtype == object:
+                        self.df[col] = self.df[col].fillna('')
             else:
                 feedback('wrong file extension', self.lang_center)
                 return None
@@ -295,9 +301,8 @@ class ReportWriter:
 
                     line = line.replace('col_name', col_name)
                     file.write(line)
-            file.write('\n')
-            file.write("-"*50)
-            file.write('\n')
+            file.write('\n\n')
+
 
 
 

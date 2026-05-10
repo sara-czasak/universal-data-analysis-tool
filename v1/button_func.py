@@ -110,7 +110,8 @@ def show_df_head(context):
                 analysis_brain.tree.column(col, width=100)
 
         for _, row in analysis_brain.df.iterrows():
-            analysis_brain.tree.insert('', 'end', values=list(row))
+            values = ['' if str(v).lower() == 'nan' else v for v in row]
+            analysis_brain.tree.insert('','end', values=values)
 
         analysis_brain.tree.grid(column=1, row=1, padx=10, pady=10, columnspan=2)
         head_button.config(text=lang_center.translate('HIDE TABLE'))

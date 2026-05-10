@@ -22,7 +22,12 @@ def grow_tree(canvas, context):
 
         rows = all_rows[i]
 
+        # for _, row in rows.iterrows():
+        #     tree.insert(parent_id, 'end', values=list(row))
+
         for _, row in rows.iterrows():
-            tree.insert(parent_id, 'end', values=list(row))
+            values = ['' if str(v).lower() == 'nan' else v for v in row]
+            tree.insert(parent_id, 'end', values=values)
 
     return tree
+
