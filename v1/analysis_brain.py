@@ -118,10 +118,21 @@ class AnalysisBrain:
         if len(column) > 0 and isinstance(column, str):
             counts = self.df[column].value_counts()
             unique_values = counts.to_dict()
-            return unique_values
+            if self.is_all_unique(column):
+                return 'all values are unique'
+            if self.is_all_same(column):
+                return 'all values are same'
+            else:
+                return unique_values
         else:
             print('wrong column')
             return None
+
+    def is_all_unique(self, column):
+        return self.df[column].nunique() == len(self.df[column])
+
+    def is_all_same(self, column):
+        return self.df[column].nunique() == 1
 
 
     def get_highest_value(self, column):
@@ -155,8 +166,14 @@ class AnalysisBrain:
 
 
     def get_most_frequent(self, column):
-        most_frequent = self.df[column].mode()[0]
-        return most_frequent
+        modes = self.df[column].mode()
+        # print(most_frequent)
+        if self.is_all_same(column):
+            return 'All values are the same'
+        elif len(modes) > 1:
+            return 'Equal frequency.'
+        else:
+            return modes[0]
 
 
     def get_percentiles(self, column):

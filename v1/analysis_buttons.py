@@ -158,7 +158,6 @@ def show_stat(button_id, context):
         if reset_button_text(button, f'{lang_center.translate("get_most_frequent")}', analysis_brain):
             most_frequent = analysis_brain.get_most_frequent(cols_selected)
             label = ttk.Label(stats_frame, text=f'{lang_center.translate("The most frequent value in column ")} {cols_selected}: {most_frequent}')
-
             row_index = (stats_frame.grid_size()[0]) + 1
             label.grid(column=0, row=row_index, columnspan=3)
 
@@ -171,7 +170,7 @@ def show_stat(button_id, context):
 
             unique = analysis_brain.unique_values(cols_selected)
 
-            if unique:
+            if isinstance(unique, dict):
                 values = [i for i in unique.keys()]
                 all_rows = []
                 for value in values:
@@ -186,6 +185,10 @@ def show_stat(button_id, context):
                 })
                 row_index = (stats_frame.grid_size()[0]) + 1
                 tree.grid(column=0, row=row_index, columnspan=10, padx=10, pady=10)
+            elif isinstance(unique, str):
+                row_index = (stats_frame.grid_size()[0]) + 1
+                label_info = ttk.Label(stats_frame, text=unique)
+                label_info.grid(column=0, row=row_index, columnspan=3)
 
         else:
             clean_ui(stats_frame)
