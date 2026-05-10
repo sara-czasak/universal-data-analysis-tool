@@ -3,7 +3,6 @@ import numpy as np
 import tkinter as tk
 from tkinter import ttk, filedialog
 from popups import *
-from report_templates.report_writer import *
 
 
 class AnalysisBrain:
@@ -37,6 +36,7 @@ class AnalysisBrain:
                 return None
 
             report = ReportWriter(self)
+            report.ask_filename()
             return self.filename
         else:
             self.file_reset()
@@ -166,3 +166,20 @@ class AnalysisBrain:
     def get_rows(self, col_name, value):
         rows = self.df[self.df[col_name] == value]
         return rows
+
+
+class ReportWriter:
+    def __init__(self, analysis_brain):
+        self.analysis_brain = analysis_brain
+        self.save_path = None
+        self.name = None
+
+    def ask_filename(self):
+        self.save_path = filedialog.asksaveasfilename(defaultextension='.txt', filetypes=(('Text Files', '*.txt'),))
+        self.name = self.save_path.split('/')[-1].split('.')[0]
+
+
+    def analise(self):
+        pass
+
+
