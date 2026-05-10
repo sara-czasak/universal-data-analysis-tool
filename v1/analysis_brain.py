@@ -81,9 +81,9 @@ class AnalysisBrain:
         for column in columns:
             dtype = str(self.data_types_in_cols[column])
             if 'int' in dtype:
-                return ['get_highest_value', 'get_lowest_value', 'get_average', 'get_median', 'get_most_frequent', 'get_standard_deviation', 'get_variance']
+                return ['get_highest_value', 'get_lowest_value', 'get_average', 'get_median', 'get_most_frequent', 'get_standard_deviation', 'get_variance', 'get_percentiles']
             elif 'float' in dtype:
-                return ['get_highest_value', 'get_lowest_value', 'get_average', 'get_median', 'get_most_frequent', 'get_standard_deviation', 'get_variance']
+                return ['get_highest_value', 'get_lowest_value', 'get_average', 'get_median', 'get_most_frequent', 'get_standard_deviation', 'get_variance', 'get_percentiles']
             elif 'str' in dtype.lower() or 'object' in dtype.lower() or 'string' in dtype.lower():
                 return ['unique_values', 'get_most_frequent']
         return None
@@ -133,6 +133,18 @@ class AnalysisBrain:
     def get_most_frequent(self, column):
         most_frequent = self.df[column].mode()[0]
         return most_frequent
+
+
+    def get_percentiles(self, column):
+
+        q1 = self.df[column].quantile(0.25)
+        q3 = self.df[column].quantile(0.75)
+        iqr = q3 - q1
+
+        percentiles = {'Q1': q1, 'Q3': q3, 'IQR': iqr}
+
+        return percentiles
+
 
 
     def file_reset(self):

@@ -135,6 +135,25 @@ def show_stat(button_id, context):
             clean_ui(stats_frame)
 
 
+    elif button_id == 'get_percentiles':
+        if reset_button_text(button, f'{lang_center.translate("get_percentiles")}', analysis_brain):
+            percentiles = analysis_brain.get_percentiles(cols_selected)
+
+            text = f'''
+            Q1: {percentiles['Q1']}
+            Q3: {percentiles['Q3']}
+            IQR: {percentiles['IQR']}
+            '''
+
+            label = ttk.Label(stats_frame, text=text)
+
+            row_index = (stats_frame.grid_size()[0]) + 1
+            label.grid(column=0, row=row_index, columnspan=3)
+
+        else:
+            clean_ui(stats_frame)
+
+
     elif button_id == 'get_most_frequent':
         if reset_button_text(button, f'{lang_center.translate("get_most_frequent")}', analysis_brain):
             most_frequent = analysis_brain.get_most_frequent(cols_selected)
