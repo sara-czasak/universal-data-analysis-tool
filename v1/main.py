@@ -16,16 +16,11 @@ def main():
     root.title('Universal Data Analyser')
     root.minsize(1000, 400)
 
-    # bg = tk.PhotoImage(file = "./img/plastic-texture-holographic-background.png")
-
     root.columnconfigure(0, minsize=0, weight=1)
     root.columnconfigure(1, minsize=100)
     root.columnconfigure(2, minsize=0, weight=1)
 
     my_style = StyleWidgets(root)
-
-    # bg_label = Label(root, image=bg)
-    # bg_label.place(x=0, y=0)
 
     home_frame = ttk.Frame(root)
     home_frame.grid(column=1, row=0)
@@ -49,13 +44,6 @@ def main():
     stats_frame.columnconfigure(1, minsize=0)
     stats_frame.columnconfigure(2, minsize=0)
 
-    # bg_main_frame = Label(home_frame, image=bg)
-    # bg_main_frame.place(x=0, y=0)
-    # bg_stats_frame = Label(stats_frame, image=bg)
-    # bg_stats_frame.place(x=0, y=0)
-    # bg_stats_button_frame = Label(stats_buttons_frame, image=bg)
-    # bg_stats_button_frame.place(x=0, y=0)
-
     lang_center = LanguageCenter()
     analysis_brain = AnalysisBrain(lang_center)
 
@@ -74,7 +62,6 @@ def main():
         'stats_buttons_frame': stats_buttons_frame,
     }))
     get_file_button.grid(column=0, row=0, padx=10, pady=10)
-
 
 
     # Show df head
@@ -105,7 +92,6 @@ def main():
         'stats_buttons_frame': stats_buttons_frame,
         'stats_frame': stats_frame,
         'home_frame': home_frame,
-        # 'img': bg,
     }))
 
 

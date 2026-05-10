@@ -121,7 +121,7 @@ def get_selected_cols(context):
     stats_buttons_frame = context['stats_buttons_frame']
     stats_frame = context['stats_frame']
     home_frame = context['home_frame']
-    # img = context['img']
+
 
 
     if listbox.winfo_viewable():

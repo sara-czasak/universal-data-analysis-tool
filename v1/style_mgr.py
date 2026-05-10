@@ -10,9 +10,8 @@ class StyleWidgets:
 
     def my_theme(self):
         style = ttk.Style()
-        style.configure('TButton', font=('Verdana', 10))
+        style.configure('TButton', font=('Verdana', 15))
         style.map('TButton', foreground=[('pressed', 'blue'), ('!pressed', 'black')],
                   background=[('pressed', 'blue'), ('!pressed', 'white')])
-        style.configure('TLabel', font=('Verdana', 10))
-        style.configure('TEntry', font=('Verdana', 10))
+        style.configure('TLabel', font=('Verdana', 15))
         style.configure('Treeview', font=('Verdana', 8))
