@@ -208,11 +208,21 @@ class ReportWriter:
 
 
     def get_report_data(self):
-        # print(self.analysis_brain.all_operations)
+        report = {}
+
         for col_name, operations in self.analysis_brain.operations_per_col.items():
+            col_data = {}
+            report[col_name] = col_data
             for operation in operations:
-                if self.analysis_brain.all_operations[operation]:
-                    result = self.analysis_brain.all_operations[operation](col_name)
-                    print(col_name, ": ", result)
+                result = self.analysis_brain.all_operations[operation](col_name)
+
+                if isinstance(result, dict):
+                    result = {k: v.item() if hasattr(v, 'item') else v for k, v in result.items()}
+                elif hasattr(result, 'item'):
+                    result = result.item()
+                col_data[operation] = result
+
+        print(report)
+
 
 
