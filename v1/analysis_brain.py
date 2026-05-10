@@ -81,9 +81,9 @@ class AnalysisBrain:
         for column in columns:
             dtype = str(self.data_types_in_cols[column])
             if 'int' in dtype:
-                return ['get_highest_value', 'get_lowest_value', 'get_average', 'get_median', 'get_most_frequent', 'get_standard_deviation']
+                return ['get_highest_value', 'get_lowest_value', 'get_average', 'get_median', 'get_most_frequent', 'get_standard_deviation', 'get_variance']
             elif 'float' in dtype:
-                return ['get_highest_value', 'get_lowest_value', 'get_average', 'get_median', 'get_most_frequent', 'get_standard_deviation']
+                return ['get_highest_value', 'get_lowest_value', 'get_average', 'get_median', 'get_most_frequent', 'get_standard_deviation', 'get_variance']
             elif 'str' in dtype.lower() or 'object' in dtype.lower() or 'string' in dtype.lower():
                 return ['unique_values', 'get_most_frequent']
         return None
@@ -123,6 +123,11 @@ class AnalysisBrain:
     def get_standard_deviation(self, column):
         std = self.df[column].std()
         return std
+
+
+    def get_variance(self, column):
+        var = self.df[column].var()
+        return var
 
 
     def get_most_frequent(self, column):

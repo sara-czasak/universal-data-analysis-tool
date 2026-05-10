@@ -29,6 +29,8 @@ languages = {
         'wrong file extension': 'wrong file extension',
         "get_standard_deviation": "get_standard_deviation",
         "The standard deviation value in column ": "The standard deviation value in column ",
+        'get_variance': 'get_variance',
+        'The variance in column ': 'The variance in column ',
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -56,6 +58,8 @@ languages = {
         'wrong file extension': '___PL___',
         "get_standard_deviation": '___PL___',
         "The standard deviation value in column ": '___PL___',
+        'get_variance': '___PL___',
+        'The variance in column ': '___PL___',
 
     },
     'es': {
@@ -84,6 +88,8 @@ languages = {
         'wrong file extension': '___ES___',
         "get_standard_deviation": '___ES___',
         "The standard deviation value in column ": '___ES___',
+        'get_variance': '___ES___',
+        'The variance in column ': '___ES___',
     }
 }
 
