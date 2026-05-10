@@ -196,10 +196,20 @@ class ReportWriter:
     def __init__(self, analysis_brain):
         self.analysis_brain = analysis_brain
 
+        self.string_template = None
+        self.numerical_template = None
         self.save_path = None
         self.name = None
         self.ask_filename()
         self.get_report_data()
+        self.get_report_templates()
+
+
+    def get_report_templates(self):
+        with open('report_templates/string.txt', 'r') as f:
+            self.string_template = f.readlines()
+        with open('report_templates/numerical.txt', 'r') as f:
+            self.numerical_template = f.readlines()
 
 
     def ask_filename(self):
@@ -212,6 +222,7 @@ class ReportWriter:
 
         for col_name, operations in self.analysis_brain.operations_per_col.items():
             col_data = {}
+            col_data['type'] = self.analysis_brain.data_types_in_cols[col_name]
             report[col_name] = col_data
             for operation in operations:
                 result = self.analysis_brain.all_operations[operation](col_name)
@@ -220,9 +231,13 @@ class ReportWriter:
                     result = {k: v.item() if hasattr(v, 'item') else v for k, v in result.items()}
                 elif hasattr(result, 'item'):
                     result = result.item()
+
                 col_data[operation] = result
 
         print(report)
 
+
+    def write_report_file(self):
+        pass
 
 

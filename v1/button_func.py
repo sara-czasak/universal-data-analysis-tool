@@ -105,7 +105,7 @@ def show_df_head(context):
                 analysis_brain.tree.heading(col, text=col)
                 analysis_brain.tree.column(col, width=100)
 
-        for _, row in analysis_brain.df.head(10).iterrows():
+        for _, row in analysis_brain.df.iterrows():
             analysis_brain.tree.insert('', 'end', values=list(row))
 
         analysis_brain.tree.grid(column=1, row=1, padx=10, pady=10, columnspan=2)
