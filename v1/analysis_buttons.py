@@ -4,7 +4,7 @@ from helpers import *
 from stats_trees import *
 
 
-def create_button(operation, home_frame, lang_center, analysis_brain, cols_selected, stats_buttons_frame, stats_frame, img):
+def create_button(operation, home_frame, lang_center, analysis_brain, cols_selected, stats_buttons_frame, stats_frame):
     button = ttk.Button(stats_frame, text=lang_center.translate(operation), command=lambda: show_stat(button_id=operation, context={
         'analysis_brain': analysis_brain,
         'cols_selected': cols_selected,
@@ -13,7 +13,7 @@ def create_button(operation, home_frame, lang_center, analysis_brain, cols_selec
         'button': button,
         'stats_buttons_frame': stats_buttons_frame,
         'stats_frame': stats_frame,
-        'img': img,
+        # 'img': img,
         }))
     button.id = operation
     return button
@@ -47,7 +47,7 @@ def show_stat(button_id, context):
     button = context['button']
     stats_frame = context['stats_frame']
     stats_buttons_frame = context['stats_buttons_frame']
-    bg = context['img']
+    # bg = context['img']
 
     stats_frame.grid(column=1, row=2)
 
@@ -56,9 +56,9 @@ def show_stat(button_id, context):
         if not isinstance(child, ttk.Button):
             child.destroy()
 
-        bg_stats_frame = Label(stats_frame, image=bg)
-        bg_stats_frame.place(x=0, y=0)
-        bg_stats_frame.lower()
+        # bg_stats_frame = Label(stats_frame, image=bg)
+        # bg_stats_frame.place(x=0, y=0)
+        # bg_stats_frame.lower()
 
     if button_id == 'get_highest_value':
         if reset_button_text(button, f'{lang_center.translate("get_highest_value")}', analysis_brain):

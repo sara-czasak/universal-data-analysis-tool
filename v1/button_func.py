@@ -105,7 +105,7 @@ def show_df_head(context):
                 analysis_brain.tree.heading(col, text=col)
                 analysis_brain.tree.column(col, width=100)
 
-        for _, row in analysis_brain.df.iterrows():
+        for _, row in analysis_brain.df.head(10).iterrows():
             analysis_brain.tree.insert('', 'end', values=list(row))
 
         analysis_brain.tree.grid(column=1, row=1, padx=10, pady=10, columnspan=2)
@@ -121,7 +121,7 @@ def get_selected_cols(context):
     stats_buttons_frame = context['stats_buttons_frame']
     stats_frame = context['stats_frame']
     home_frame = context['home_frame']
-    img = context['img']
+    # img = context['img']
 
 
     if listbox.winfo_viewable():
@@ -141,7 +141,7 @@ def get_selected_cols(context):
 
     operations = analysis_brain.get_available_operations(cols_selected)
     if operations is not None:
-        buttons = [create_button(operation, home_frame, lang_center, analysis_brain, cols_selected, stats_buttons_frame, stats_frame, img) for operation in operations]
+        buttons = [create_button(operation, home_frame, lang_center, analysis_brain, cols_selected, stats_buttons_frame, stats_frame) for operation in operations]
         analysis_brain.operation_buttons = buttons
         row_index = 0
         buttons_in_row = 0
