@@ -83,12 +83,6 @@ def show_df_head(context):
     if analysis_brain.df is None:
         return
 
-
-    children = stats_frame.winfo_children()
-    for child in children:
-        if isinstance(child, Canvas):
-            child.destroy()
-
     if listbox.winfo_viewable():
         listbox.grid_remove()
         select_cols_button.config(text=lang_center.translate('SELECT COLUMN'))
@@ -111,7 +105,7 @@ def show_df_head(context):
                 analysis_brain.tree.heading(col, text=col)
                 analysis_brain.tree.column(col, width=100)
 
-        for _, row in analysis_brain.df.head().iterrows():
+        for _, row in analysis_brain.df.iterrows():
             analysis_brain.tree.insert('', 'end', values=list(row))
 
         analysis_brain.tree.grid(column=1, row=1, padx=10, pady=10, columnspan=2)

@@ -26,6 +26,7 @@ languages = {
         'The most frequent value in column ': 'The most frequent value in column ',
         "Error": "Error",
         "An error occurred": "An error occurred",
+        'wrong file extension': 'wrong file extension',
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -50,6 +51,7 @@ languages = {
         'The most frequent value in column ': '___PL___',
         "Error": '___PL___',
         "An error occurred": '___PL___',
+        'wrong file extension': '___PL___',
     },
     'es': {
         'LOAD FILE': '___ES___',
@@ -74,6 +76,7 @@ languages = {
         'The most frequent value in column ': '___ES___',
         "Error": '___ES___',
         "An error occurred": '___ES___',
+        'wrong file extension': '___ES___',
     }
 }
 

@@ -30,7 +30,10 @@ class AnalysisBrain:
                 self.filepath = None
                 return None
             self.filename = self.filepath.split('/')[-1]
-            self.create_dataframe()
+            result = self.create_dataframe()
+            if result is None:
+                self.file_reset()
+                return None
             return self.filename
         else:
             self.file_reset()
@@ -39,7 +42,10 @@ class AnalysisBrain:
                 self.filepath = None
                 return None
             self.filename = self.filepath.split('/')[-1]
-            self.create_dataframe()
+            result = self.create_dataframe()
+            if result is None:
+                self.file_reset()
+                return None
             return self.filename
 
 
@@ -58,7 +64,8 @@ class AnalysisBrain:
                 self.columns = self.df.columns.values
                 self.get_cols_datatypes()
             else:
-                print('wrong file extension')
+                feedback('wrong file extension', self.lang_center)
+                return None
         return self.columns
 
 
