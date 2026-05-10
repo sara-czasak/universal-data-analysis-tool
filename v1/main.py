@@ -60,8 +60,11 @@ def main():
         'select_cols_button': select_cols_button,
         'home_frame': home_frame,
         'stats_buttons_frame': stats_buttons_frame,
+        'get_report_button' : get_report_button,
     }))
     get_file_button.grid(column=0, row=0, padx=10, pady=10)
+
+
 
 
     # Show df head
@@ -76,6 +79,11 @@ def main():
         'stats_buttons_frame': stats_buttons_frame,
     }))
 
+    def save_report():
+        report = ReportWriter(analysis_brain)
+
+
+    get_report_button = ttk.Button(home_frame, text="SAVE REPORT", command=save_report)
 
     # Show col names
     select_cols_button = ttk.Button(stats_buttons_frame, text=lang_center.translate('SELECT COLUMN'), command=lambda: show_col_names(listbox, analysis_brain, head_button, lang_center, select_cols_button, get_cols_button, stats_buttons_frame, stats_frame))

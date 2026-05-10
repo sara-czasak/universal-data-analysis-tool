@@ -48,8 +48,6 @@ class AnalysisBrain:
                 self.file_reset()
                 return None
 
-            report = ReportWriter(self)
-
             return self.filename
         else:
             self.file_reset()
@@ -200,9 +198,13 @@ class ReportWriter:
         self.numerical_template = None
         self.save_path = None
         self.name = None
+        self.report = None
+
         self.ask_filename()
         self.get_report_data()
         self.get_report_templates()
+        self.set_file_header()
+        self.write_report_file()
 
 
     def get_report_templates(self):
@@ -234,10 +236,53 @@ class ReportWriter:
 
                 col_data[operation] = result
 
-        print(report)
+        self.report = report
 
 
     def write_report_file(self):
-        pass
+        for col_name, col_data in self.report.items():
+            dtype = str(col_data['type'])
+            if 'int' in dtype.lower() or 'float' in dtype.lower():
+                self.fill_out_templates(col_name, col_data, 'numerical')
+            elif 'str' in dtype.lower() or 'object' in dtype.lower():
+                self.fill_out_templates(col_name, col_data, 'string')
+
+
+    def set_file_header(self):
+        with open(self.save_path, mode='a') as file:
+            file.write(self.name + '\n\n')
+
+
+    def fill_out_templates(self, col_name, col_data, type_of_data):
+        with open(self.save_path, mode='a') as file:
+            if type_of_data == 'numerical':
+                for line in self.numerical_template:
+                    for key, value in col_data.items():
+                        if isinstance(value, dict):
+                            for k, v in value.items():
+                                line = line.replace(k.lower(), str(v))
+                        else:
+                            line =line.replace(key, str(value))
+
+                    line = line.replace('col_name', col_name)
+                    file.write(line)
+
+            elif type_of_data == 'string':
+                for line in self.string_template:
+                    for key, value in col_data.items():
+                        if isinstance(value, dict):
+                            unique_block = '\n'.join(f'    {k}: {v}' for k, v in value.items())
+                            line = line.replace(key, '\n' + unique_block)
+                        else:
+                            line = line.replace(key, str(value))
+
+                    line = line.replace('col_name', col_name)
+                    file.write(line)
+            file.write('\n')
+            file.write("-"*50)
+            file.write('\n')
+
+
+
 
 

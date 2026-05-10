@@ -4,6 +4,7 @@ import pandastable as pt
 from helpers import *
 from analysis_buttons import *
 from helpers import *
+from analysis_brain import ReportWriter
 
 
 def load_file_show_filename(context):
@@ -16,6 +17,8 @@ def load_file_show_filename(context):
     select_cols_button = context['select_cols_button']
     home_frame = context['home_frame']
     stats_buttons_frame = context['stats_buttons_frame']
+    get_report_button = context['get_report_button']
+
 
     if analysis_brain.get_file(home_frame) is None:
         head_button.config(text=lang_center.translate('SHOW TABLE'))
@@ -31,6 +34,7 @@ def load_file_show_filename(context):
     filename = analysis_brain.filename
 
     filename_label.config(text=f'{lang_center.translate("File name:")} {filename}')
+    get_report_button.grid(column=2, row=0, padx=10, pady=10)
     head_button.grid(column=1, row=0, padx=10, pady=10)
     select_cols_button.grid(column=2, row=0, padx=10, pady=10)
     get_file_button.config(text=f'{lang_center.translate("CHANGE FILE")}')
