@@ -18,6 +18,7 @@ def load_file_show_filename(context):
     home_frame = context['home_frame']
     stats_buttons_frame = context['stats_buttons_frame']
     get_report_button = context['get_report_button']
+    advanced_analysis_button = context['advanced_analysis_button']
 
 
     if analysis_brain.get_file(home_frame) is None:
@@ -37,6 +38,9 @@ def load_file_show_filename(context):
     get_report_button.grid(column=2, row=0, padx=10, pady=10)
     head_button.grid(column=1, row=0, padx=10, pady=10)
     select_cols_button.grid(column=2, row=0, padx=10, pady=10)
+
+    advanced_analysis_button.grid(column=3, row=0, padx=10, pady=10)
+
     get_file_button.config(text=f'{lang_center.translate("CHANGE FILE")}')
     col_names = analysis_brain.columns
     if listbox.size() > 0:

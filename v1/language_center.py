@@ -32,6 +32,7 @@ languages = {
         'get_variance': 'get_variance',
         'The variance in column ': 'The variance in column ',
         'get_percentiles': 'get_percentiles',
+        'ADVANCED ANALYSIS': 'ADVANCED ANALYSIS',
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -62,6 +63,7 @@ languages = {
         'get_variance': '___PL___',
         'The variance in column ': '___PL___',
         'get_percentiles': '___PL___',
+        'ADVANCED ANALYSIS': '___PL___',
     },
     'es': {
         'LOAD FILE': '___ES___',
@@ -92,6 +94,7 @@ languages = {
         'get_variance': '___ES___',
         'The variance in column ': '___ES___',
         'get_percentiles': '___ES___',
+        'ADVANCED ANALYSIS': '___ES___',
     }
 }
 

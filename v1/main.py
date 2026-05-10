@@ -61,10 +61,12 @@ def main():
         'home_frame': home_frame,
         'stats_buttons_frame': stats_buttons_frame,
         'get_report_button' : get_report_button,
+        'advanced_analysis_button': advanced_analysis_button,
     }))
     get_file_button.grid(column=0, row=0, padx=10, pady=10)
 
 
+    advanced_analysis_button = ttk.Button(stats_buttons_frame, text=lang_center.translate('ADVANCED ANALYSIS'))
 
 
     # Show df head
