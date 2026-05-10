@@ -146,7 +146,6 @@ class AnalysisBrain:
         return percentiles
 
 
-
     def file_reset(self):
         for button in self.operation_buttons:
             button.destroy()
