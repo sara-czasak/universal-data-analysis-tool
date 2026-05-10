@@ -27,6 +27,8 @@ languages = {
         "Error": "Error",
         "An error occurred": "An error occurred",
         'wrong file extension': 'wrong file extension',
+        "get_standard_deviation": "get_standard_deviation",
+        "The standard deviation value in column ": "The standard deviation value in column ",
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -52,6 +54,9 @@ languages = {
         "Error": '___PL___',
         "An error occurred": '___PL___',
         'wrong file extension': '___PL___',
+        "get_standard_deviation": '___PL___',
+        "The standard deviation value in column ": '___PL___',
+
     },
     'es': {
         'LOAD FILE': '___ES___',
@@ -77,6 +82,8 @@ languages = {
         "Error": '___ES___',
         "An error occurred": '___ES___',
         'wrong file extension': '___ES___',
+        "get_standard_deviation": '___ES___',
+        "The standard deviation value in column ": '___ES___',
     }
 }
 

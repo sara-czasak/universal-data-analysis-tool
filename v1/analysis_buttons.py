@@ -116,6 +116,18 @@ def show_stat(button_id, context):
             clean_ui(stats_frame)
 
 
+    elif button_id == 'get_standard_deviation':
+        if reset_button_text(button, f'{lang_center.translate("get_standard_deviation")}', analysis_brain):
+            std = analysis_brain.get_median(cols_selected)
+            label = ttk.Label(stats_frame, text=f'{lang_center.translate("The standard deviation value in column ")} {cols_selected}: {std}')
+
+            row_index = (stats_frame.grid_size()[0]) + 1
+            label.grid(column=0, row=row_index, columnspan=3)
+
+        else:
+            clean_ui(stats_frame)
+
+
     elif button_id == 'get_most_frequent':
         if reset_button_text(button, f'{lang_center.translate("get_most_frequent")}', analysis_brain):
             most_frequent = analysis_brain.get_most_frequent(cols_selected)
