@@ -3,6 +3,7 @@ import numpy as np
 import tkinter as tk
 from tkinter import ttk, filedialog
 from popups import *
+from report_templates.report_writer import *
 
 
 class AnalysisBrain:
@@ -34,6 +35,8 @@ class AnalysisBrain:
             if result is None:
                 self.file_reset()
                 return None
+
+            report = ReportWriter(self)
             return self.filename
         else:
             self.file_reset()
