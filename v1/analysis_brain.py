@@ -72,17 +72,12 @@ class AnalysisBrain:
                 self.df = pd.read_excel(self.filepath)
                 self.columns = list(self.df.columns)
                 self.get_cols_datatypes()
-                for col in self.columns:
-                    if self.df[col].dtype == object:
-                        self.df[col] = self.df[col].fillna('')
 
             elif file_extension in extension['csv']:
                 self.df = pd.read_csv(self.filepath)
                 self.columns = self.df.columns.values
                 self.get_cols_datatypes()
-                for col in self.columns:
-                    if self.df[col].dtype == object:
-                        self.df[col] = self.df[col].fillna('')
+
             else:
                 feedback('wrong file extension', self.lang_center)
                 return None
@@ -242,6 +237,13 @@ class ReportWriter:
         self.name = self.save_path.split('/')[-1].split('.')[0]
 
 
+    def get_nan_percentage(self, column):
+        nan_count = self.analysis_brain.df[column].isna().sum()
+        total = len(self.analysis_brain.df[column])
+        nan_percentage = (nan_count / total) * 100
+        return round(nan_percentage, 2)
+
+
     def get_report_data(self):
         report = {}
 
@@ -258,6 +260,11 @@ class ReportWriter:
                     result = result.item()
 
                 col_data[operation] = result
+
+            actual_data_percentage = 100 - self.get_nan_percentage(col_name)
+
+            col_data['actual_data_percentage'] = actual_data_percentage
+            col_data['nan_percentage'] = self.get_nan_percentage(col_name)
 
         self.report = report
 

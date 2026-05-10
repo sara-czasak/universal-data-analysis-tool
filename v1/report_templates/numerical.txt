@@ -1,5 +1,7 @@
-
+--------------------------------------------------------
 COLUMN NAME col_name
+PERCENT MISSING VALUES(nan) : nan_percentage %
+ACTUAL DATA PERCENT : actual_data_percentage %
 
 HIGHEST VALUE: get_highest_value
 LOWEST VALUE: get_lowest_value

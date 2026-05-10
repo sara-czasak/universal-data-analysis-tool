@@ -1,5 +1,7 @@
-
+--------------------------------------------------------
 COLUMN NAME: col_name
+PERCENT MISSING VALUES(nan) : nan_percentage %
+ACTUAL DATA PERCENT : actual_data_percentage %
 
 UNIQUE VALUES: unique_values
 MOST FREQUENT VALUES: get_most_frequent
