@@ -12,14 +12,27 @@ class AnalysisBrain:
         self.columns = None
         self.df = None
         self.tree = None
+        self.operations_per_col = {}
         self.data_types_in_cols = {}
         self.operation_buttons = []
+        self.all_operations = {
+            'unique_values': self.unique_values,
+            'get_highest_value': self.get_highest_value,
+            'get_lowest_value' : self.get_lowest_value,
+            'get_average': self.get_average,
+            'get_median': self.get_median,
+            'get_standard_deviation': self.get_standard_deviation,
+            'get_variance': self.get_variance,
+            'get_most_frequent': self.get_most_frequent,
+            'get_percentiles': self.get_percentiles,
+        }
         self.good_extensions = [{
             'excel': ['xls', 'xlsx', 'xlsm', 'xlsb', 'odf', 'ods', 'odt'],
             'csv': ['csv'],
         }]
         self.root = None
         self.lang_center = lang_center
+
 
 
     def get_file(self, root):
@@ -36,7 +49,7 @@ class AnalysisBrain:
                 return None
 
             report = ReportWriter(self)
-            report.ask_filename()
+
             return self.filename
         else:
             self.file_reset()
@@ -69,6 +82,10 @@ class AnalysisBrain:
             else:
                 feedback('wrong file extension', self.lang_center)
                 return None
+
+        for col in self.columns:
+            self.get_available_operations([col])
+
         return self.columns
 
 
@@ -84,11 +101,17 @@ class AnalysisBrain:
         for column in columns:
             dtype = str(self.data_types_in_cols[column])
             if 'int' in dtype:
-                return ['get_highest_value', 'get_lowest_value', 'get_average', 'get_median', 'get_most_frequent', 'get_standard_deviation', 'get_variance', 'get_percentiles']
+                operations = ['get_highest_value', 'get_lowest_value', 'get_average', 'get_median', 'get_most_frequent', 'get_standard_deviation', 'get_variance', 'get_percentiles']
+                self.operations_per_col[column] = operations
+                return operations
             elif 'float' in dtype:
-                return ['get_highest_value', 'get_lowest_value', 'get_average', 'get_median', 'get_most_frequent', 'get_standard_deviation', 'get_variance', 'get_percentiles']
+                operations =  ['get_highest_value', 'get_lowest_value', 'get_average', 'get_median', 'get_most_frequent', 'get_standard_deviation', 'get_variance', 'get_percentiles']
+                self.operations_per_col[column] = operations
+                return operations
             elif 'str' in dtype.lower() or 'object' in dtype.lower() or 'string' in dtype.lower():
-                return ['unique_values', 'get_most_frequent']
+                operations =  ['unique_values', 'get_most_frequent']
+                self.operations_per_col[column] = operations
+                return operations
         return None
 
 
@@ -168,18 +191,28 @@ class AnalysisBrain:
         return rows
 
 
+
 class ReportWriter:
     def __init__(self, analysis_brain):
         self.analysis_brain = analysis_brain
+
         self.save_path = None
         self.name = None
+        self.ask_filename()
+        self.get_report_data()
+
 
     def ask_filename(self):
         self.save_path = filedialog.asksaveasfilename(defaultextension='.txt', filetypes=(('Text Files', '*.txt'),))
         self.name = self.save_path.split('/')[-1].split('.')[0]
 
 
-    def analise(self):
-        pass
+    def get_report_data(self):
+        # print(self.analysis_brain.all_operations)
+        for col_name, operations in self.analysis_brain.operations_per_col.items():
+            for operation in operations:
+                if self.analysis_brain.all_operations[operation]:
+                    result = self.analysis_brain.all_operations[operation](col_name)
+                    print(col_name, ": ", result)
 
 

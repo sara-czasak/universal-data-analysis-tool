@@ -95,7 +95,7 @@ def main():
     }))
 
 
-splash_root.after(3000, main)
+splash_root.after(500, main)
 
 
 mainloop()
