@@ -6,6 +6,18 @@ from tkinter import *
 # TODO 2: REMOVE RELEVANT BUTTONS ON BASIC UI
 
 
+def get_selected_columns_advanced(context):
+    multiple_column_selection_advanced = context['multiple_column_selection_advanced']
+    select_columns_advanced_btn = context['select_columns_advanced_btn']
+    lang_center = context['lang_center']
+    get_selected_columns_advanced_btn = context['get_selected_columns_advanced_btn']
+
+
+    multiple_column_selection_advanced.grid_remove()
+    select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'))
+    get_selected_columns_advanced_btn.grid_remove()
+
+
 def populate_list(context):
     analysis_brain = context['analysis_brain']
     advanced_stats_frame = context['advanced_stats_frame']
@@ -13,15 +25,26 @@ def populate_list(context):
     get_selected_columns_advanced_btn = context['get_selected_columns_advanced_btn']
     select_columns_advanced_btn = context['select_columns_advanced_btn']
     lang_center = context['lang_center']
+    advanced_stats_buttons_frame = context['advanced_stats_buttons_frame']
 
 
     if analysis_brain.columns is not None:
-        items = [i for i in analysis_brain.columns]
-        for item in items:
-            multiple_column_selection_advanced.insert(0, item)
-        multiple_column_selection_advanced.grid(column=1, row=2, columnspan=3, padx=10, pady=10)
-        get_selected_columns_advanced_btn.grid(column=0, row=2, padx=10, pady=10)
-        select_columns_advanced_btn.config(text=lang_center.translate('HIDE COLUMNS'))
+        for i in advanced_stats_buttons_frame.winfo_children():
+            if not isinstance(i, Listbox):
+                items = [i for i in analysis_brain.columns]
+                for item in items:
+                    multiple_column_selection_advanced.insert(0, item)
+                multiple_column_selection_advanced.grid(column=1, row=2, columnspan=3, padx=10, pady=10)
+                get_selected_columns_advanced_btn.grid(column=0, row=2, padx=10, pady=10)
+                get_selected_columns_advanced_btn.config(command=lambda: get_selected_columns_advanced({
+                    'multiple_column_selection_advanced': multiple_column_selection_advanced,
+                    'select_columns_advanced_btn': select_columns_advanced_btn,
+                    'lang_center': lang_center,
+                    'get_selected_columns_advanced_btn': get_selected_columns_advanced_btn,
+                }))
+                select_columns_advanced_btn.config(text=lang_center.translate('HIDE COLUMNS'))
+            else:
+                return
     else:
         return
 
@@ -42,6 +65,7 @@ def swap_frames(button_id, context):
     select_columns_advanced_btn = context["select_columns_advanced_btn"]
     select_cols_button = context["select_cols_button"]
     multiple_column_selection_advanced = context["multiple_column_selection_advanced"]
+
 
     if analysis_brain.tree and analysis_brain.tree.winfo_exists():
         analysis_brain.tree.destroy()
@@ -73,8 +97,8 @@ def swap_frames(button_id, context):
             'get_selected_columns_advanced_btn': get_selected_columns_advanced_btn,
             'select_columns_advanced_btn': select_columns_advanced_btn,
             'lang_center': lang_center,
+            'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
         }))
-        # multiple_column_selection_advanced.grid(column=2, row=0, padx=10, pady=10)
 
 
         basic_analysis_button.grid(column=3, row=0, padx=10, pady=10)
