@@ -37,6 +37,7 @@ languages = {
         "Basic Analysis": 'Basic Analysis',
         "Advanced Analysis": 'Advanced Analysis',
         'SELECT COLUMNS': 'SELECT COLUMNS',
+        'PLEASE SELECT AT LEAST TWO COLUMNS': 'PLEASE SELECT AT LEAST TWO COLUMNS',
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -72,6 +73,7 @@ languages = {
         "Basic Analysis": '___PL___',
         "Advanced Analysis": '___PL___',
         'SELECT COLUMNS': '___PL___',
+        'PLEASE SELECT AT LEAST TWO COLUMNS': '___PL___',
     },
     'es': {
         'LOAD FILE': '___ES___',
@@ -107,6 +109,7 @@ languages = {
         "Basic Analysis": '___ES___',
         "Advanced Analysis": '___ES___',
         'SELECT COLUMNS': '___ES___',
+        'PLEASE SELECT AT LEAST TWO COLUMNS': '___ES___',
     }
 }
 
