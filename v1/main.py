@@ -5,6 +5,7 @@ from analysis_brain import *
 from button_func import *
 from style_mgr import *
 from splash_screen import *
+from advanced_ui import *
 
 
 splash_root = make_a_splash()
@@ -36,13 +37,23 @@ def main():
     stats_buttons_frame.columnconfigure(1, minsize=0)
     stats_buttons_frame.columnconfigure(2, minsize=0)
 
-
     stats_frame = ttk.Frame(root)
     stats_frame.grid(column=1, row=2)
 
     stats_frame.columnconfigure(0, minsize=0)
     stats_frame.columnconfigure(1, minsize=0)
     stats_frame.columnconfigure(2, minsize=0)
+
+
+
+    # FRAMES TO HANDLE ADVANCED ANALYSIS
+    advanced_stats_buttons_frame = ttk.Frame(root)
+    # advanced_stats_buttons_frame.grid(column=1, row=1)
+
+    advanced_stats_frame = ttk.Frame(root)
+    # advanced_stats_frame.grid(column=1, row=2)
+
+
 
     lang_center = LanguageCenter()
     analysis_brain = AnalysisBrain(lang_center)
@@ -62,11 +73,32 @@ def main():
         'stats_buttons_frame': stats_buttons_frame,
         'get_report_button' : get_report_button,
         'advanced_analysis_button': advanced_analysis_button,
+        'advanced_or_basic_label': advanced_or_basic_label,
     }))
     get_file_button.grid(column=0, row=0, padx=10, pady=10)
 
 
-    advanced_analysis_button = ttk.Button(stats_buttons_frame, text=lang_center.translate('ADVANCED ANALYSIS'))
+    advanced_analysis_button = ttk.Button(home_frame, text=lang_center.translate('GO TO\nADVANCED\nANALYSIS'), command=lambda: swap_frames(button_id='advanced', context = {
+        'stats_frame': stats_frame,
+        'stats_buttons_frame': stats_buttons_frame,
+        'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
+        'advanced_stats_frame': advanced_stats_frame,
+        'advanced_analysis_button': advanced_analysis_button,
+        'basic_analysis_button': basic_analysis_button,
+        'advanced_or_basic_label': advanced_or_basic_label,
+        'lang_center': lang_center,
+    }))
+
+    basic_analysis_button = ttk.Button(home_frame, text=lang_center.translate('GO TO\nBASIC\nANALYSIS'), command=lambda: swap_frames(button_id='basic', context = {
+        'stats_frame': stats_frame,
+        'stats_buttons_frame': stats_buttons_frame,
+        'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
+        'advanced_stats_frame': advanced_stats_frame,
+        'advanced_analysis_button': advanced_analysis_button,
+        'basic_analysis_button': basic_analysis_button,
+        'advanced_or_basic_label': advanced_or_basic_label,
+        'lang_center': lang_center,
+    }))
 
 
     # Show df head
@@ -103,6 +135,9 @@ def main():
         'stats_frame': stats_frame,
         'home_frame': home_frame,
     }))
+
+
+    advanced_or_basic_label = ttk.Label(home_frame, text=lang_center.translate("Basic Analysis"))
 
 
 splash_root.after(500, main)

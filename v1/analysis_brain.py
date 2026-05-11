@@ -233,8 +233,16 @@ class ReportWriter:
 
 
     def ask_filename(self):
+        import os
         self.save_path = filedialog.asksaveasfilename(defaultextension='.txt', filetypes=(('Text Files', '*.txt'),))
+        if not self.save_path:
+            return
         self.name = self.save_path.split('/')[-1].split('.')[0]
+
+        dir_path = '/'.join(self.save_path.split('/')[:-1]) + '/' + self.name
+        os.makedirs(dir_path, exist_ok=True)
+
+        self.save_path = dir_path + '/' + self.name + '.txt'
 
 
     def get_nan_percentage(self, column):

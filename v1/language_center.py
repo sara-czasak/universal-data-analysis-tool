@@ -32,7 +32,10 @@ languages = {
         'get_variance': 'get_variance',
         'The variance in column ': 'The variance in column ',
         'get_percentiles': 'get_percentiles',
-        'ADVANCED ANALYSIS': 'ADVANCED ANALYSIS',
+        'GO TO\nADVANCED\nANALYSIS': 'GO TO\nADVANCED\nANALYSIS',
+        'GO TO\nBASIC\nANALYSIS': 'GO TO\nBASIC\nANALYSIS',
+        "Basic Analysis": 'Basic Analysis',
+        "Advanced Analysis": 'Advanced Analysis',
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -63,7 +66,10 @@ languages = {
         'get_variance': '___PL___',
         'The variance in column ': '___PL___',
         'get_percentiles': '___PL___',
-        'ADVANCED ANALYSIS': '___PL___',
+        'GO TO\nADVANCED\nANALYSIS': '___PL___',
+        'GO TO\nBASIC\nANALYSIS': '___PL___',
+        "Basic Analysis": '___PL___',
+        "Advanced Analysis": '___PL___',
     },
     'es': {
         'LOAD FILE': '___ES___',
@@ -94,7 +100,10 @@ languages = {
         'get_variance': '___ES___',
         'The variance in column ': '___ES___',
         'get_percentiles': '___ES___',
-        'ADVANCED ANALYSIS': '___ES___',
+        'GO TO\nADVANCED\nANALYSIS': '___ES___',
+        'GO TO\nBASIC\nANALYSIS': '___ES___',
+        "Basic Analysis": '___ES___',
+        "Advanced Analysis": '___ES___',
     }
 }
 
