@@ -1,8 +1,5 @@
 from tkinter import ttk
 from tkinter import *
-
-from openpyxl.drawing.geometry import StyleMatrixReference
-
 from language_center import *
 from analysis_brain import *
 from button_func import *
@@ -67,6 +64,8 @@ def main():
 
     # Advanced UI elements !!!
     select_columns_advanced_btn = ttk.Button(advanced_stats_buttons_frame)
+    multiple_column_selection_advanced = Listbox(advanced_stats_buttons_frame, selectmode=MULTIPLE)
+    get_selected_columns_advanced_btn = ttk.Button(advanced_stats_frame, text='OK')
 
 
     get_file_button = ttk.Button(home_frame, text=lang_center.translate('LOAD FILE'), command=lambda: load_file_show_filename({
@@ -99,6 +98,8 @@ def main():
         'head_button': head_button,
         'select_columns_advanced_btn': select_columns_advanced_btn,
         'select_cols_button': select_cols_button,
+        'multiple_column_selection_advanced': multiple_column_selection_advanced,
+        'get_selected_columns_advanced_btn': get_selected_columns_advanced_btn,
     }))
 
     basic_analysis_button = ttk.Button(home_frame, text=lang_center.translate('GO TO\nBASIC\nANALYSIS'), command=lambda: swap_frames(button_id='basic', context = {
@@ -114,6 +115,7 @@ def main():
         'head_button': head_button,
         'select_cols_button': select_cols_button,
         'select_columns_advanced_btn': select_columns_advanced_btn,
+        'multiple_column_selection_advanced': multiple_column_selection_advanced,
     }))
 
 
