@@ -1,5 +1,8 @@
 from tkinter import ttk
 from tkinter import *
+
+from pandas.core.sample import process_sampling_size
+
 from popups import *
 
 
@@ -10,16 +13,68 @@ def get_selected_columns_advanced(context):
     select_columns_advanced_btn = context['select_columns_advanced_btn']
     lang_center = context['lang_center']
     get_selected_columns_advanced_btn = context['get_selected_columns_advanced_btn']
+    analysis_brain = context['analysis_brain']
+    advanced_stats_buttons_frame = context['advanced_stats_buttons_frame']
 
-    selected_indexes = multiple_column_selection_advanced.curselection()
 
-    selected_list = [
-        multiple_column_selection_advanced.get(i) for i in selected_indexes
-    ]
-    if len(selected_list) < 2:
-        feedback('PLEASE SELECT AT LEAST TWO COLUMNS', lang_center)
-    else:
-        print(selected_list)
+    num_cols = []
+    str_cols = []
+    selected_indexes = []
+    # multiple_column_selection_advanced.curselection()
+
+    index = multiple_column_selection_advanced.curselection()[0]
+    item = multiple_column_selection_advanced.get(index)
+    print(item)
+    # Do this only if an item wasn't selected yet
+    if analysis_brain.col_set_type is None:
+        if analysis_brain.data_types_in_cols[item] != 'str':
+            analysis_brain.col_set_type = 'str'
+            str_cols = item
+            print('str')
+        else:
+            analysis_brain.col_set_type = 'num'
+            num_cols = item
+            print('num')
+
+    elif analysis_brain.col_set_type == 'num':
+        data = num_cols
+        populate_list({
+            'redraw': True,
+            'analysis_brain': analysis_brain,
+            'multiple_column_selection_advanced': multiple_column_selection_advanced,
+            'get_selected_columns_advanced_btn': get_selected_columns_advanced_btn,
+            'select_columns_advanced_btn': select_columns_advanced_btn,
+            'lang_center': lang_center,
+            'type_data': analysis_brain.col_set_type,
+            'data': data,
+            'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
+        })
+
+    elif analysis_brain.col_set_type == 'str':
+        pass
+
+
+
+
+    # selected_list = [
+    #     multiple_column_selection_advanced.get(i) for i in selected_indexes
+    # ]
+    # if len(selected_list) < 2:
+    #     feedback('PLEASE SELECT AT LEAST TWO COLUMNS', lang_center)
+    # else:
+
+
+    # print(selected_list)
+    # for i in selected_list:
+    #     if analysis_brain.data_types_in_cols[i] != 'str':
+    #         numerical_cols.append(i)
+    #     else:
+    #         string_cols.append(i)
+    #
+    #     print(string_cols)
+    #     print(numerical_cols)
+
+    # TODO 1: Make a filtering mechanism so only values that can have an operation done on them can be selected. E.g.: select one column -> empty listbox -> redraw listbox with selected col at the top and only columns that can have an operation done on them below.
 
 
     multiple_column_selection_advanced.grid_remove()
@@ -27,9 +82,10 @@ def get_selected_columns_advanced(context):
     get_selected_columns_advanced_btn.grid_remove()
 
 
-def populate_list(context):
+def populate_list(context, redraw=False):
     analysis_brain = context['analysis_brain']
     advanced_stats_frame = context['advanced_stats_frame']
+    advanced_stats_buttons_frame = context['advanced_stats_buttons_frame']
     multiple_column_selection_advanced =  context['multiple_column_selection_advanced']
     get_selected_columns_advanced_btn = context['get_selected_columns_advanced_btn']
     select_columns_advanced_btn = context['select_columns_advanced_btn']
@@ -37,24 +93,57 @@ def populate_list(context):
     advanced_stats_buttons_frame = context['advanced_stats_buttons_frame']
 
 
+
     if analysis_brain.columns is not None:
-        items = analysis_brain.columns
 
-        multiple_column_selection_advanced.delete(0, END)
+        if context.get('redraw'):
+            data = context['data']
+            type_data = context['type_data']
+            items = None
+            if analysis_brain.col_set_type == 'num':
+                items = data
+                print(items)
+            elif analysis_brain.col_set_type == 'str':
+                items = data
+                print(items)
 
-        for item in items:
-            multiple_column_selection_advanced.insert(END, item)
+            multiple_column_selection_advanced.delete(0, END)
+            if items is not None:
+                for item in items:
+                    multiple_column_selection_advanced.insert(END, item)
 
-                    # multiple_column_selection_advanced.insert(0, item)
-        multiple_column_selection_advanced.grid(column=1, row=2, columnspan=3, padx=10, pady=10)
-        get_selected_columns_advanced_btn.grid(column=0, row=2, padx=10, pady=10)
-        get_selected_columns_advanced_btn.config(command=lambda: get_selected_columns_advanced({
-            'multiple_column_selection_advanced': multiple_column_selection_advanced,
-            'select_columns_advanced_btn': select_columns_advanced_btn,
-            'lang_center': lang_center,
-            'get_selected_columns_advanced_btn': get_selected_columns_advanced_btn,
-        }))
-        select_columns_advanced_btn.config(text=lang_center.translate('HIDE COLUMNS'))
+                multiple_column_selection_advanced.grid(column=1, row=2, columnspan=3, padx=10, pady=10)
+                get_selected_columns_advanced_btn.grid(column=0, row=2, padx=10, pady=10)
+                get_selected_columns_advanced_btn.config(command=lambda: get_selected_columns_advanced({
+                    'multiple_column_selection_advanced': multiple_column_selection_advanced,
+                    'select_columns_advanced_btn': select_columns_advanced_btn,
+                    'lang_center': lang_center,
+                    'get_selected_columns_advanced_btn': get_selected_columns_advanced_btn,
+                    'analysis_brain': analysis_brain,
+                    'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
+                }))
+                select_columns_advanced_btn.config(text=lang_center.translate('HIDE COLUMNS'))
+        else:
+
+
+            items = analysis_brain.columns
+
+            multiple_column_selection_advanced.delete(0, END)
+
+            for item in items:
+                multiple_column_selection_advanced.insert(END, item)
+
+            multiple_column_selection_advanced.grid(column=1, row=2, columnspan=3, padx=10, pady=10)
+            get_selected_columns_advanced_btn.grid(column=0, row=2, padx=10, pady=10)
+            get_selected_columns_advanced_btn.config(command=lambda: get_selected_columns_advanced({
+                'multiple_column_selection_advanced': multiple_column_selection_advanced,
+                'select_columns_advanced_btn': select_columns_advanced_btn,
+                'lang_center': lang_center,
+                'get_selected_columns_advanced_btn': get_selected_columns_advanced_btn,
+                'analysis_brain': analysis_brain,
+                'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
+            }))
+            select_columns_advanced_btn.config(text=lang_center.translate('HIDE COLUMNS'))
     else:
         return
 

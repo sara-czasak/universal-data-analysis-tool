@@ -6,6 +6,7 @@ from button_func import *
 from style_mgr import *
 from splash_screen import *
 from advanced_ui import *
+from report_writer import *
 
 
 splash_root = make_a_splash()
@@ -64,7 +65,7 @@ def main():
 
     # Advanced UI elements !!!
     select_columns_advanced_btn = ttk.Button(advanced_stats_buttons_frame)
-    multiple_column_selection_advanced = Listbox(advanced_stats_buttons_frame, selectmode=MULTIPLE)
+    multiple_column_selection_advanced = Listbox(advanced_stats_buttons_frame, selectmode=SINGLE)
     get_selected_columns_advanced_btn = ttk.Button(advanced_stats_frame, text='OK')
 
 
