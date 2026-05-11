@@ -2,6 +2,11 @@ from tkinter import ttk
 from tkinter import *
 
 
+# TODO 1: PLACE RELEVANT BUTTONS ON ADVANCED UI
+# TODO 2: REMOVE RELEVANT BUTTONS ON BASIC UI
+
+
+
 def swap_frames(button_id, context):
     stats_frame = context['stats_frame']
     stats_buttons_frame = context['stats_buttons_frame']
@@ -24,6 +29,7 @@ def swap_frames(button_id, context):
     if button_id == 'advanced':
         stats_frame.grid_remove()
         stats_buttons_frame.grid_remove()
+
         for i in stats_frame.winfo_children():
             i.grid_remove()
         for i in stats_buttons_frame.winfo_children():
@@ -33,12 +39,17 @@ def swap_frames(button_id, context):
         advanced_stats_frame.grid(column=1, row=2)
         advanced_or_basic_label.config(text=lang_center.translate('Advanced Analysis'))
 
+        select_columns_advanced_btn.grid(column=1, row=0, padx=10, pady=10)
+        select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'))
+
         basic_analysis_button.grid(column=3, row=0, padx=10, pady=10)
         advanced_analysis_button.grid_remove()
 
     elif button_id == 'basic':
         advanced_stats_frame.grid_remove()
         advanced_analysis_button.grid_remove()
+        advanced_stats_buttons_frame.grid_remove()
+
         for i in advanced_stats_frame.winfo_children():
             i.grid_remove()
         for i in advanced_stats_buttons_frame.winfo_children():

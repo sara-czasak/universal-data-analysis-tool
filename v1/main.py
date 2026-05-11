@@ -1,5 +1,8 @@
 from tkinter import ttk
 from tkinter import *
+
+from openpyxl.drawing.geometry import StyleMatrixReference
+
 from language_center import *
 from analysis_brain import *
 from button_func import *
@@ -15,7 +18,7 @@ def main():
     splash_root.destroy()
     root = Tk()
     root.title('Universal Data Analyser')
-    root.minsize(1000, 400)
+    root.minsize(1000, 500)
 
     root.columnconfigure(0, minsize=0, weight=1)
     root.columnconfigure(1, minsize=100)
@@ -62,8 +65,8 @@ def main():
     filename_label.grid(column=1, row=0, padx=10, pady=10)
 
 
-    # Advanced
-    select_columns_advanced_btn = Button(advanced_stats_buttons_frame)
+    # Advanced UI elements !!!
+    select_columns_advanced_btn = ttk.Button(advanced_stats_buttons_frame)
 
 
     get_file_button = ttk.Button(home_frame, text=lang_center.translate('LOAD FILE'), command=lambda: load_file_show_filename({
