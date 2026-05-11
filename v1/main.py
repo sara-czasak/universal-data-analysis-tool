@@ -87,6 +87,7 @@ def main():
         'basic_analysis_button': basic_analysis_button,
         'advanced_or_basic_label': advanced_or_basic_label,
         'lang_center': lang_center,
+        'analysis_brain': analysis_brain,
     }))
 
     basic_analysis_button = ttk.Button(home_frame, text=lang_center.translate('GO TO\nBASIC\nANALYSIS'), command=lambda: swap_frames(button_id='basic', context = {
@@ -98,6 +99,7 @@ def main():
         'basic_analysis_button': basic_analysis_button,
         'advanced_or_basic_label': advanced_or_basic_label,
         'lang_center': lang_center,
+        'analysis_brain': analysis_brain,
     }))
 
 
