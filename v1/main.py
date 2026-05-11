@@ -61,6 +61,11 @@ def main():
     filename_label = ttk.Label(home_frame, text='')
     filename_label.grid(column=1, row=0, padx=10, pady=10)
 
+
+    # Advanced
+    select_columns_advanced_btn = Button(advanced_stats_buttons_frame)
+
+
     get_file_button = ttk.Button(home_frame, text=lang_center.translate('LOAD FILE'), command=lambda: load_file_show_filename({
         'analysis_brain': analysis_brain,
         'lang_center': lang_center,
@@ -89,6 +94,7 @@ def main():
         'lang_center': lang_center,
         'analysis_brain': analysis_brain,
         'head_button': head_button,
+        'select_columns_advanced_btn': select_columns_advanced_btn,
         'select_cols_button': select_cols_button,
     }))
 
@@ -104,6 +110,7 @@ def main():
         'analysis_brain': analysis_brain,
         'head_button': head_button,
         'select_cols_button': select_cols_button,
+        'select_columns_advanced_btn': select_columns_advanced_btn,
     }))
 
 

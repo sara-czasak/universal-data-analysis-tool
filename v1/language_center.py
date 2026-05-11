@@ -9,7 +9,7 @@ languages = {
         'CHANGE FILE': 'CHANGE FILE',
         'SHOW TABLE': 'SHOW TABLE',
         'SELECT COLUMN': 'SELECT COLUMN',
-        'HIDE TABLE': 'HIDE ROWS',
+        'HIDE TABLE': 'HIDE TABLE',
         'HIDE COLUMNS': 'HIDE COLUMNS',
         'OK': 'OK',
         'get_highest_value': 'get_highest_value',
@@ -36,6 +36,7 @@ languages = {
         'GO TO\nBASIC\nANALYSIS': 'GO TO\nBASIC\nANALYSIS',
         "Basic Analysis": 'Basic Analysis',
         "Advanced Analysis": 'Advanced Analysis',
+        'SELECT COLUMNS': 'SELECT COLUMNS',
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -70,6 +71,7 @@ languages = {
         'GO TO\nBASIC\nANALYSIS': '___PL___',
         "Basic Analysis": '___PL___',
         "Advanced Analysis": '___PL___',
+        'SELECT COLUMNS': '___PL___',
     },
     'es': {
         'LOAD FILE': '___ES___',
@@ -104,6 +106,7 @@ languages = {
         'GO TO\nBASIC\nANALYSIS': '___ES___',
         "Basic Analysis": '___ES___',
         "Advanced Analysis": '___ES___',
+        'SELECT COLUMNS': '___ES___',
     }
 }
 

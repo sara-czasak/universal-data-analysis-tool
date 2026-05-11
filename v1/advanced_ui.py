@@ -2,20 +2,6 @@ from tkinter import ttk
 from tkinter import *
 
 
-def show_options(advanced_stats_buttons_frame):
-    pass
-
-
-
-def build_advanced_ui(context):
-    advanced_stats_frame = context["advanced_stats_frame"]
-    advanced_stats_buttons_frame = context["advanced_stats_buttons_frame"]
-    analysis_brain = context["analysis_brain"]
-
-    select_cols_button = ttk.Button(advanced_stats_buttons_frame, text="Select Columns", command=lambda: show_options(advanced_stats_buttons_frame))
-    select_cols_button.grid(column=0, row=0, padx=10, pady=10)
-
-
 def swap_frames(button_id, context):
     stats_frame = context['stats_frame']
     stats_buttons_frame = context['stats_buttons_frame']
@@ -27,7 +13,13 @@ def swap_frames(button_id, context):
     lang_center = context['lang_center']
     analysis_brain = context['analysis_brain']
     head_button = context['head_button']
-    select_cols_button = context['select_cols_button']
+    select_columns_advanced_btn = context["select_columns_advanced_btn"]
+    select_cols_button = context["select_cols_button"]
+
+    if analysis_brain.tree and analysis_brain.tree.winfo_exists():
+        analysis_brain.tree.destroy()
+        analysis_brain.tree = None
+
 
     if button_id == 'advanced':
         stats_frame.grid_remove()
@@ -43,13 +35,6 @@ def swap_frames(button_id, context):
 
         basic_analysis_button.grid(column=3, row=0, padx=10, pady=10)
         advanced_analysis_button.grid_remove()
-
-        # build_advanced_ui({
-        #     "advanced_stats_frame": advanced_stats_frame,
-        #     'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
-        #     'analysis_brain': analysis_brain,
-        # })
-
 
     elif button_id == 'basic':
         advanced_stats_frame.grid_remove()
