@@ -4,18 +4,48 @@ from helpers import *
 from stats_trees import *
 
 
-def create_button(operation, home_frame, lang_center, analysis_brain, cols_selected, stats_buttons_frame, stats_frame):
-    button = ttk.Button(stats_frame, text=lang_center.translate(operation), command=lambda: show_stat(button_id=operation, context={
-        'analysis_brain': analysis_brain,
-        'cols_selected': cols_selected,
-        'lang_center': lang_center,
-        'home_frame': home_frame,
-        'button': button,
-        'stats_buttons_frame': stats_buttons_frame,
-        'stats_frame': stats_frame,
-        }))
-    button.id = operation
-    return button
+def create_button(creation_id, context):
+
+    if creation_id == 'basic':
+        operation = context['operation']
+        home_frame = context['home_frame']
+        lang_center = context['lang_center']
+        analysis_brain = context['analysis_brain']
+        cols_selected = context['cols_selected']
+        stats_buttons_frame = context['stats_buttons_frame']
+        stats_frame = context['stats_frame']
+
+        button = ttk.Button(stats_frame, text=lang_center.translate(operation), command=lambda: show_stat(button_id=operation, context={
+            'analysis_brain': analysis_brain,
+            'cols_selected': cols_selected,
+            'lang_center': lang_center,
+            'home_frame': home_frame,
+            'button': button,
+            'stats_buttons_frame': stats_buttons_frame,
+            'stats_frame': stats_frame,
+            }))
+        button.id = operation
+        return button
+
+    elif creation_id == 'advanced':
+        operation = context['operation']
+        lang_center = context['lang_center']
+        analysis_brain = context['analysis_brain']
+        advanced_stats_buttons_frame = context['advanced_stats_buttons_frame']
+        advanced_stats_frame = context['advanced_stats_frame']
+
+        button = ttk.Button(advanced_stats_frame, text=lang_center.translate(operation),
+                            command=lambda: advanced_show_stat(button_id=operation, context={
+                                'analysis_brain': analysis_brain,
+                                'lang_center': lang_center,
+                                'button': button,
+                                'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
+                                'advanced_stats_frame': advanced_stats_frame,
+                                'final_selection_columns': analysis_brain.final_selection_columns,
+                            }))
+        button.id = operation
+
+        return button
 
 
 def clean_ui(stats_frame):
@@ -192,3 +222,13 @@ def show_stat(button_id, context):
 
         else:
             clean_ui(stats_frame)
+
+
+def advanced_show_stat(button_id, context):
+    analysis_brain = context['analysis_brain']
+
+    if button_id == 'sum_row_vals_in_columns':
+        df = analysis_brain.create_df_subsets()
+        new_df = analysis_brain.sum_row_vals_in_columns()
+        print(df)
+        print(new_df)

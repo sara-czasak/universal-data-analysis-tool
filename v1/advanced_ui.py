@@ -1,6 +1,7 @@
 from tkinter import ttk
 from tkinter import *
 from popups import *
+from analysis_buttons import create_button
 
 
 # TODO 1: Make get_selected_columns_advanced return a list of selected columns and print to console else return None and feedback for user (Please select at least 2 columns)
@@ -90,10 +91,38 @@ def get_selected_columns_advanced(context):
     for i in final_selection_index:
         analysis_brain.final_selection_advanced_cols.append(values[i])
 
-    analysis_brain.get_operations_for_multicolumn()
-    create_advanced_buttons({
-        'analysis_brain': analysis_brain,
-    })
+    operations = analysis_brain.get_operations_for_multicolumn()
+    if operations is not None:
+        if len(analysis_brain.advanced_operation_buttons) == 0:
+            analysis_brain.advanced_operation_buttons = []
+            buttons = [
+                create_button(creation_id='advanced', context = {
+                    'operation': operation,
+                    'lang_center': lang_center,
+                    'analysis_brain': analysis_brain,
+                    'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
+                    'advanced_stats_frame': advanced_stats_frame,
+                }) for operation in operations
+            ]
+
+            analysis_brain.advanced_operation_buttons = buttons
+            if buttons is not None:
+                row_index = 0
+                buttons_in_row = 0
+                col_index = 0
+                while buttons_in_row < len(buttons):
+                    for button in buttons:
+                        button.grid(column=col_index, row=row_index, padx=10, pady=10)
+                        buttons_in_row += 1
+                        col_index += 1
+                        if col_index > 2:
+                            col_index = 0
+                            row_index += 1
+
+
+    # create_advanced_buttons({
+    #     'analysis_brain': analysis_brain,
+    # })
 
     multiple_column_selection_advanced.grid_remove()
     select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'))
@@ -291,22 +320,6 @@ def swap_frames(button_id, context):
         advanced_analysis_button.grid(column=3, row=0, padx=10, pady=10)
 
         basic_analysis_button.grid_remove()
-
-
-def create_advanced_buttons(context):
-    analysis_brain = context['analysis_brain']
-    advanced_stats_frame = context['advanced_stats_frame']
-
-    for btn in analysis_brain.advanced_operation_buttons:
-        btn.destroy()
-
-    analysis_brain.advanced_operation_buttons = []
-
-    advanced_stats_frame.grid(column=1, row=2, padx=10, pady=10)
-
-    operations = analysis_brain.advanced_allowed_operations
-    if operations is not None:
-        pass
 
 
 

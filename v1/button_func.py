@@ -153,7 +153,15 @@ def get_selected_cols(context):
 
     operations = analysis_brain.get_available_operations(cols_selected)
     if operations is not None:
-        buttons = [create_button(operation, home_frame, lang_center, analysis_brain, cols_selected, stats_buttons_frame, stats_frame) for operation in operations]
+        buttons = [create_button(creation_id = 'basic', context={
+            'operation': operation,
+            'home_frame': home_frame,
+            'lang_center': lang_center,
+            'analysis_brain': analysis_brain,
+            'cols_selected': cols_selected,
+            'stats_buttons_frame': stats_buttons_frame,
+            'stats_frame': stats_frame,
+        }) for operation in operations]
         analysis_brain.operation_buttons = buttons
         row_index = 0
         buttons_in_row = 0

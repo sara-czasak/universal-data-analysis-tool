@@ -223,24 +223,28 @@ class AnalysisBrain:
             print('Columns: ', self.final_selection_advanced_cols)
             self.advanced_allowed_operations = ['sum_row_vals_in_columns']
             print('Num operations allowed: ', self.advanced_allowed_operations)
-            self.create_df_subsets()
+            return self.advanced_allowed_operations
         else:
             print("String operations allowed")
             print('Columns: ', self.final_selection_advanced_cols)
-            self.create_df_subsets()
-
+            return self.advanced_allowed_operations
 
     def create_df_subsets(self):
         if self.advanced_df is None:
             self.advanced_df = self.df[self.final_selection_advanced_cols]
-            print(self.advanced_df)
+            return self.advanced_df
         else:
             self.advanced_df = None
             self.advanced_df = self.df[self.final_selection_advanced_cols]
-            print(self.advanced_df)
+            return self.advanced_df
 
 
 
     def sum_row_vals_in_columns(self):
-        pass
+        if self.advanced_df is not None:
+            self.advanced_df['sum'] = self.advanced_df.sum(axis=1)
+            return self.advanced_df
+        else:
+            return None
+
 

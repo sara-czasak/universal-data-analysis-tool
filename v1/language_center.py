@@ -38,6 +38,7 @@ languages = {
         "Advanced Analysis": 'Advanced Analysis',
         'SELECT COLUMNS': 'SELECT COLUMNS',
         'PLEASE SELECT AT LEAST TWO COLUMNS': 'PLEASE SELECT AT LEAST TWO COLUMNS',
+        'sum_row_vals_in_columns': 'sum_row_vals_in_columns'
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -74,6 +75,7 @@ languages = {
         "Advanced Analysis": '___PL___',
         'SELECT COLUMNS': '___PL___',
         'PLEASE SELECT AT LEAST TWO COLUMNS': '___PL___',
+        'sum_row_vals_in_columns': '___PL___'
     },
     'es': {
         'LOAD FILE': '___ES___',
@@ -110,6 +112,7 @@ languages = {
         "Advanced Analysis": '___ES___',
         'SELECT COLUMNS': '___ES___',
         'PLEASE SELECT AT LEAST TWO COLUMNS': '___ES___',
+        'sum_row_vals_in_columns': '___ES___'
     }
 }
 
