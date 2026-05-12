@@ -20,6 +20,7 @@ class AnalysisBrain:
         self.final_selection_advanced_cols = []
         self.advanced_df = None
         self.advanced_allowed_operations = None
+        self.advanced_operation_buttons = []
 
         self.operations_per_col = {}
         self.data_types_in_cols = {}
@@ -219,7 +220,6 @@ class AnalysisBrain:
     # METHODS FOR ADVANCED ANALYSIS
     def get_operations_for_multicolumn(self):
         if self.col_set_type == 'num':
-
             print('Columns: ', self.final_selection_advanced_cols)
             self.advanced_allowed_operations = ['sum_row_vals_in_columns']
             print('Num operations allowed: ', self.advanced_allowed_operations)

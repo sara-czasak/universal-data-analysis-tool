@@ -80,6 +80,7 @@ def get_selected_columns_advanced(context):
     get_selected_columns_advanced_btn = context['get_selected_columns_advanced_btn']
     analysis_brain = context['analysis_brain']
     advanced_stats_buttons_frame = context['advanced_stats_buttons_frame']
+    advanced_stats_frame = context['advanced_stats_frame']
 
     # TODO 1: Make a filtering mechanism so only values that can have an operation done on them can be selected. E.g.: select one column -> empty listbox -> redraw listbox with selected col at the top and only columns that can have an operation done on them below.
 
@@ -90,6 +91,9 @@ def get_selected_columns_advanced(context):
         analysis_brain.final_selection_advanced_cols.append(values[i])
 
     analysis_brain.get_operations_for_multicolumn()
+    create_advanced_buttons({
+        'analysis_brain': analysis_brain,
+    })
 
     multiple_column_selection_advanced.grid_remove()
     select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'))
@@ -287,4 +291,23 @@ def swap_frames(button_id, context):
         advanced_analysis_button.grid(column=3, row=0, padx=10, pady=10)
 
         basic_analysis_button.grid_remove()
+
+
+def create_advanced_buttons(context):
+    analysis_brain = context['analysis_brain']
+    advanced_stats_frame = context['advanced_stats_frame']
+
+    for btn in analysis_brain.advanced_operation_buttons:
+        btn.destroy()
+
+    analysis_brain.advanced_operation_buttons = []
+
+    advanced_stats_frame.grid(column=1, row=2, padx=10, pady=10)
+
+    operations = analysis_brain.advanced_allowed_operations
+    if operations is not None:
+        pass
+
+
+
 
