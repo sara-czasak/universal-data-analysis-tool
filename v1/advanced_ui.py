@@ -114,6 +114,8 @@ def populate_list(context, redraw=False):
     select_columns_advanced_btn = context['select_columns_advanced_btn']
     lang_center = context['lang_center']
 
+    # if select_columns_advanced_btn.cget('text') != lang_center.translate('SELECT COLUMNS'):
+    #     return
 
 
     if analysis_brain.columns is not None:
@@ -190,6 +192,35 @@ def populate_list(context, redraw=False):
         return
 
 
+def check_and_decide(context):
+    analysis_brain = context['analysis_brain']
+    advanced_stats_frame = context['advanced_stats_frame']
+    multiple_column_selection_advanced = context['multiple_column_selection_advanced']
+    get_selected_columns_advanced_btn = context['get_selected_columns_advanced_btn']
+    select_columns_advanced_btn = context['select_columns_advanced_btn']
+    lang_center = context['lang_center']
+    advanced_stats_buttons_frame = context['advanced_stats_buttons_frame']
+
+
+    if select_columns_advanced_btn.cget('text') == 'SELECT COLUMNS':
+        analysis_brain.column_selection_advanced = []
+        analysis_brain.col_set_type = None
+        populate_list({
+            'analysis_brain': analysis_brain,
+            'advanced_stats_frame': advanced_stats_frame,
+            'multiple_column_selection_advanced': multiple_column_selection_advanced,
+            'get_selected_columns_advanced_btn': get_selected_columns_advanced_btn,
+            'select_columns_advanced_btn': select_columns_advanced_btn,
+            'lang_center': lang_center,
+            'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
+        })
+    else:
+        for i in advanced_stats_frame.winfo_children():
+            i.grid_remove()
+        for i in advanced_stats_buttons_frame.winfo_children():
+            if isinstance(i, Listbox):
+                i.grid_remove()
+        select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'))
 
 
 
@@ -232,10 +263,7 @@ def swap_frames(button_id, context):
 
         # UI BUILD
         select_columns_advanced_btn.grid(column=1, row=0, padx=10, pady=10)
-        select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'), command=lambda: [
-            setattr(analysis_brain, 'column_selection_advanced', []),
-            setattr(analysis_brain, 'col_set_type', None),
-            populate_list({
+        select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'), command=lambda: check_and_decide({
                 'analysis_brain': analysis_brain,
                 'advanced_stats_frame': advanced_stats_frame,
                 'multiple_column_selection_advanced': multiple_column_selection_advanced,
@@ -243,18 +271,21 @@ def swap_frames(button_id, context):
                 'select_columns_advanced_btn': select_columns_advanced_btn,
                 'lang_center': lang_center,
                 'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
-            })
-        ])
-        # select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'), command=lambda: populate_list({
-        #     'analysis_brain': analysis_brain,
-        #     'advanced_stats_frame': advanced_stats_frame,
-        #     'multiple_column_selection_advanced': multiple_column_selection_advanced,
-        #     'get_selected_columns_advanced_btn': get_selected_columns_advanced_btn,
-        #     'select_columns_advanced_btn': select_columns_advanced_btn,
-        #     'lang_center': lang_center,
-        #     'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
-        # }))
+            }))
 
+        # lambda: [
+        #     setattr(analysis_brain, 'column_selection_advanced', []),
+        #     setattr(analysis_brain, 'col_set_type', None),
+        #     populate_list({
+        #         'analysis_brain': analysis_brain,
+        #         'advanced_stats_frame': advanced_stats_frame,
+        #         'multiple_column_selection_advanced': multiple_column_selection_advanced,
+        #         'get_selected_columns_advanced_btn': get_selected_columns_advanced_btn,
+        #         'select_columns_advanced_btn': select_columns_advanced_btn,
+        #         'lang_center': lang_center,
+        #         'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
+        #     })
+        # ])
 
         basic_analysis_button.grid(column=3, row=0, padx=10, pady=10)
         advanced_analysis_button.grid_remove()
