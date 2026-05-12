@@ -166,7 +166,7 @@ def check_and_decide(context):
     advanced_stats_buttons_frame = context['advanced_stats_buttons_frame']
 
 
-    if select_columns_advanced_btn.cget('text') == 'SELECT COLUMNS':
+    if select_columns_advanced_btn.cget('text') == lang_center.translate('SELECT COLUMNS'):
         analysis_brain.column_selection_advanced = []
         analysis_brain.col_set_type = None
         populate_list({
