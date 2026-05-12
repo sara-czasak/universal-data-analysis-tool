@@ -89,7 +89,7 @@ def get_selected_columns_advanced(context):
     for i in final_selection_index:
         analysis_brain.final_selection_advanced_cols.append(values[i])
 
-    print(analysis_brain.final_selection_advanced_cols)
+    analysis_brain.get_operations_for_multicolumn()
 
     multiple_column_selection_advanced.grid_remove()
     select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'))

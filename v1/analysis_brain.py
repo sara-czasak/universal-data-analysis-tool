@@ -15,7 +15,12 @@ class AnalysisBrain:
         self.tree = None
         self.col_set_type = None
         self.column_selection_advanced = []
+
+        # TODO use this to select available operations for the columns, similar to basic single col functionality
         self.final_selection_advanced_cols = []
+        self.advanced_df = None
+        self.advanced_allowed_operations = None
+
         self.operations_per_col = {}
         self.data_types_in_cols = {}
         self.operation_buttons = []
@@ -209,4 +214,33 @@ class AnalysisBrain:
     def get_rows(self, col_name, value):
         rows = self.df[self.df[col_name] == value]
         return rows
+
+
+    # METHODS FOR ADVANCED ANALYSIS
+    def get_operations_for_multicolumn(self):
+        if self.col_set_type == 'num':
+
+            print('Columns: ', self.final_selection_advanced_cols)
+            self.advanced_allowed_operations = ['sum_row_vals_in_columns']
+            print('Num operations allowed: ', self.advanced_allowed_operations)
+            self.create_df_subsets()
+        else:
+            print("String operations allowed")
+            print('Columns: ', self.final_selection_advanced_cols)
+            self.create_df_subsets()
+
+
+    def create_df_subsets(self):
+        if self.advanced_df is None:
+            self.advanced_df = self.df[self.final_selection_advanced_cols]
+            print(self.advanced_df)
+        else:
+            self.advanced_df = None
+            self.advanced_df = self.df[self.final_selection_advanced_cols]
+            print(self.advanced_df)
+
+
+
+    def sum_row_vals_in_columns(self):
+        pass
 
