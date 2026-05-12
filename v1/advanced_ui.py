@@ -230,6 +230,11 @@ def check_and_decide(context):
         analysis_brain.column_selection_advanced = []
         analysis_brain.col_set_type = None
         analysis_brain.final_selection_advanced_cols = []
+
+        for i in advanced_stats_frame.winfo_children():
+            i.grid_remove()
+        select_columns_advanced_btn.config(text=lang_center.translate('HIDE COLUMNS'))
+
         populate_list({
             'analysis_brain': analysis_brain,
             'advanced_stats_frame': advanced_stats_frame,
