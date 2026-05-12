@@ -4,7 +4,9 @@ from popups import *
 from analysis_buttons import create_button
 
 
-# TODO 1: Make get_selected_columns_advanced return a list of selected columns and print to console else return None and feedback for user (Please select at least 2 columns)
+def cleanup_ui(widgets):
+    for i in widgets:
+        i.grid_remove()
 
 
 def select_columns_advanced(context):
@@ -120,18 +122,8 @@ def get_selected_columns_advanced(context):
                             col_index = 0
                             row_index += 1
 
-
-    # create_advanced_buttons({
-    #     'analysis_brain': analysis_brain,
-    # })
-
-    multiple_column_selection_advanced.grid_remove()
+    cleanup_ui([multiple_column_selection_advanced, get_selected_columns_advanced_btn])
     select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'))
-
-    # TODO if items selected when OK clicked then get the selected items and then remove btn and listbox from screen
-
-    get_selected_columns_advanced_btn.grid_remove()
-
 
 
 def populate_list(context, redraw=False):
@@ -274,8 +266,7 @@ def swap_frames(button_id, context):
     if button_id == 'advanced':
         get_selected_columns_advanced_btn = context["get_selected_columns_advanced_btn"]
 
-        stats_frame.grid_remove()
-        stats_buttons_frame.grid_remove()
+        cleanup_ui([stats_frame,stats_buttons_frame])
 
         for i in stats_frame.winfo_children():
             i.grid_remove()
@@ -301,12 +292,14 @@ def swap_frames(button_id, context):
 
 
         basic_analysis_button.grid(column=3, row=0, padx=10, pady=10)
-        advanced_analysis_button.grid_remove()
+        # advanced_analysis_button.grid_remove()
+        cleanup_ui([advanced_analysis_button])
 
     elif button_id == 'basic':
-        advanced_stats_frame.grid_remove()
-        advanced_analysis_button.grid_remove()
-        advanced_stats_buttons_frame.grid_remove()
+        # advanced_stats_frame.grid_remove()
+        # advanced_analysis_button.grid_remove()
+        # advanced_stats_buttons_frame.grid_remove()
+        cleanup_ui([advanced_stats_frame, advanced_analysis_button, advanced_stats_buttons_frame])
 
         for i in advanced_stats_frame.winfo_children():
             i.grid_remove()
@@ -325,7 +318,8 @@ def swap_frames(button_id, context):
 
         advanced_analysis_button.grid(column=3, row=0, padx=10, pady=10)
 
-        basic_analysis_button.grid_remove()
+        # basic_analysis_button.grid_remove()
+        cleanup_ui([basic_analysis_button])
 
 
 

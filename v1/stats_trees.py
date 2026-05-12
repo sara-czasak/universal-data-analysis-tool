@@ -28,3 +28,22 @@ def grow_tree(canvas, context):
 
     return tree
 
+
+def advanced_tree_grow(frm, context):
+    columns = context['columns']
+    new_df = context['new_df']
+    button = context['button']
+
+    tree = ttk.Treeview(frm, columns=columns, show='headings', height=10)
+
+    for column in columns:
+        tree.heading(column, text=column)
+        tree.column(column, width=60)
+
+    for _, row in new_df.iterrows():
+        tree.insert('', 'end', values=list(row))
+
+    tree.grid(column=0, row=0, padx=10, pady=10, columnspan=3)
+    button.grid_remove()
+
+

@@ -233,18 +233,18 @@ def advanced_show_stat(button_id, context):
         new_df = analysis_brain.sum_row_vals_in_columns()
         columns = list(new_df.columns)
         # Make tree with df subset
-        tree = ttk.Treeview(advanced_stats_frame, columns=columns, show='headings', height=10)
+        tree = advanced_tree_grow(advanced_stats_frame, {
+            'columns': columns,
+            'new_df': new_df,
+            'button': button,
+        })
 
-        for column in columns:
-            tree.heading(column, text=column)
-            tree.column(column, width=50)
-
-        for _, row in new_df.iterrows():
-            tree.insert('', 'end', values=list(row))
-
-        tree.grid(column=0, row=0, padx=10, pady=10, columnspan=3)
-        button.grid_remove()
-
-
-        print(df)
-        print(new_df)
+    if button_id == 'mean_row_vals_in_columns':
+        df = analysis_brain.create_df_subsets()
+        new_df = analysis_brain.mean_row_vals_in_columns()
+        columns = list(new_df.columns)
+        tree = advanced_tree_grow(advanced_stats_frame, {
+            'columns': columns,
+            'new_df': new_df,
+            'button': button,
+        })
