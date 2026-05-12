@@ -1,8 +1,5 @@
 from tkinter import ttk
 from tkinter import *
-
-from pandas.core.sample import process_sampling_size
-
 from popups import *
 
 
@@ -59,36 +56,6 @@ def select_columns_advanced(context):
                 })
 
 
-        # elif analysis_brain.col_set_type == 'num':
-        #     initial_col_selected = analysis_brain.column_selection_advanced
-        #     populate_list({
-        #         'redraw': True,
-        #         'analysis_brain': analysis_brain,
-        #         'multiple_column_selection_advanced': multiple_column_selection_advanced,
-        #         'get_selected_columns_advanced_btn': get_selected_columns_advanced_btn,
-        #         'select_columns_advanced_btn': select_columns_advanced_btn,
-        #         'lang_center': lang_center,
-        #         'type_data': analysis_brain.col_set_type,
-        #         'initial_col_selected': initial_col_selected,
-        #         'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
-        #     })
-        #
-        #
-        # elif analysis_brain.col_set_type == 'str':
-        #     initial_col_selected = analysis_brain.column_selection_advanced
-        #     populate_list({
-        #         'redraw': True,
-        #         'analysis_brain': analysis_brain,
-        #         'multiple_column_selection_advanced': multiple_column_selection_advanced,
-        #         'get_selected_columns_advanced_btn': get_selected_columns_advanced_btn,
-        #         'select_columns_advanced_btn': select_columns_advanced_btn,
-        #         'lang_center': lang_center,
-        #         'type_data': analysis_brain.col_set_type,
-        #         'initial_col_selected': initial_col_selected,
-        #         'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
-        #     })
-
-
 def get_selected_columns_advanced(context):
     multiple_column_selection_advanced = context['multiple_column_selection_advanced']
     select_columns_advanced_btn = context['select_columns_advanced_btn']
@@ -113,9 +80,6 @@ def populate_list(context, redraw=False):
     get_selected_columns_advanced_btn = context['get_selected_columns_advanced_btn']
     select_columns_advanced_btn = context['select_columns_advanced_btn']
     lang_center = context['lang_center']
-
-    # if select_columns_advanced_btn.cget('text') != lang_center.translate('SELECT COLUMNS'):
-    #     return
 
 
     if analysis_brain.columns is not None:
@@ -223,7 +187,6 @@ def check_and_decide(context):
         select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'))
 
 
-
 def swap_frames(button_id, context):
     stats_frame = context['stats_frame']
     stats_buttons_frame = context['stats_buttons_frame']
@@ -273,19 +236,6 @@ def swap_frames(button_id, context):
                 'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
             }))
 
-        # lambda: [
-        #     setattr(analysis_brain, 'column_selection_advanced', []),
-        #     setattr(analysis_brain, 'col_set_type', None),
-        #     populate_list({
-        #         'analysis_brain': analysis_brain,
-        #         'advanced_stats_frame': advanced_stats_frame,
-        #         'multiple_column_selection_advanced': multiple_column_selection_advanced,
-        #         'get_selected_columns_advanced_btn': get_selected_columns_advanced_btn,
-        #         'select_columns_advanced_btn': select_columns_advanced_btn,
-        #         'lang_center': lang_center,
-        #         'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
-        #     })
-        # ])
 
         basic_analysis_button.grid(column=3, row=0, padx=10, pady=10)
         advanced_analysis_button.grid_remove()
