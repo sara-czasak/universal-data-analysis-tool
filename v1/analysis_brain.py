@@ -14,6 +14,7 @@ class AnalysisBrain:
         self.df = None
         self.tree = None
         self.col_set_type = None
+        self.column_selection_advanced = []
         self.operations_per_col = {}
         self.data_types_in_cols = {}
         self.operation_buttons = []
