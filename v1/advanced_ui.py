@@ -55,6 +55,23 @@ def select_columns_advanced(context):
                     'advanced_stats_frame': advanced_stats_frame,
                 })
 
+    else:
+        analysis_brain.column_selection_advanced = []
+        analysis_brain.col_set_type = None
+        initial_col_selected = analysis_brain.column_selection_advanced
+        populate_list({
+            'redraw': False,
+            'analysis_brain': analysis_brain,
+            'multiple_column_selection_advanced': multiple_column_selection_advanced,
+            'get_selected_columns_advanced_btn': get_selected_columns_advanced_btn,
+            'select_columns_advanced_btn': select_columns_advanced_btn,
+            'lang_center': lang_center,
+            'type_data': analysis_brain.col_set_type,
+            'initial_col_selected': initial_col_selected,
+            'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
+            'advanced_stats_frame': advanced_stats_frame,
+        })
+
 
 def get_selected_columns_advanced(context):
     multiple_column_selection_advanced = context['multiple_column_selection_advanced']
@@ -91,6 +108,7 @@ def populate_list(context, redraw=False):
     get_selected_columns_advanced_btn = context['get_selected_columns_advanced_btn']
     select_columns_advanced_btn = context['select_columns_advanced_btn']
     lang_center = context['lang_center']
+
 
 
     if analysis_brain.columns is not None:
