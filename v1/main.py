@@ -65,7 +65,7 @@ def main():
 
     # Advanced UI elements !!!
     select_columns_advanced_btn = ttk.Button(advanced_stats_buttons_frame)
-    multiple_column_selection_advanced = Listbox(advanced_stats_buttons_frame, selectmode=SINGLE)
+    multiple_column_selection_advanced = Listbox(advanced_stats_frame, selectmode=SINGLE)
     get_selected_columns_advanced_btn = ttk.Button(advanced_stats_frame, text='OK')
 
 

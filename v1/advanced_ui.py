@@ -181,9 +181,6 @@ def check_and_decide(context):
     else:
         for i in advanced_stats_frame.winfo_children():
             i.grid_remove()
-        for i in advanced_stats_buttons_frame.winfo_children():
-            if isinstance(i, Listbox):
-                i.grid_remove()
         select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'))
 
 
