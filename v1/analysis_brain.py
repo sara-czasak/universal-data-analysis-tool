@@ -220,13 +220,9 @@ class AnalysisBrain:
     # METHODS FOR ADVANCED ANALYSIS
     def get_operations_for_multicolumn(self):
         if self.col_set_type == 'num':
-            print('Columns: ', self.final_selection_advanced_cols)
             self.advanced_allowed_operations = ['sum_row_vals_in_columns']
-            print('Num operations allowed: ', self.advanced_allowed_operations)
             return self.advanced_allowed_operations
         else:
-            print("String operations allowed")
-            print('Columns: ', self.final_selection_advanced_cols)
             return self.advanced_allowed_operations
 
     def create_df_subsets(self):

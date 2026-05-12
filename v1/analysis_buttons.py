@@ -34,14 +34,13 @@ def create_button(creation_id, context):
         advanced_stats_buttons_frame = context['advanced_stats_buttons_frame']
         advanced_stats_frame = context['advanced_stats_frame']
 
-        button = ttk.Button(advanced_stats_frame, text=lang_center.translate(operation),
+        button = ttk.Button(advanced_stats_buttons_frame, text=lang_center.translate(operation),
                             command=lambda: advanced_show_stat(button_id=operation, context={
                                 'analysis_brain': analysis_brain,
                                 'lang_center': lang_center,
                                 'button': button,
                                 'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
                                 'advanced_stats_frame': advanced_stats_frame,
-                                'final_selection_columns': analysis_brain.final_selection_columns,
                             }))
         button.id = operation
 
@@ -226,9 +225,26 @@ def show_stat(button_id, context):
 
 def advanced_show_stat(button_id, context):
     analysis_brain = context['analysis_brain']
+    advanced_stats_frame = context['advanced_stats_frame']
+    button = context['button']
 
     if button_id == 'sum_row_vals_in_columns':
         df = analysis_brain.create_df_subsets()
         new_df = analysis_brain.sum_row_vals_in_columns()
+        columns = list(new_df.columns)
+        # Make tree with df subset
+        tree = ttk.Treeview(advanced_stats_frame, columns=columns, show='headings', height=10)
+
+        for column in columns:
+            tree.heading(column, text=column)
+            tree.column(column, width=50)
+
+        for _, row in new_df.iterrows():
+            tree.insert('', 'end', values=list(row))
+
+        tree.grid(column=0, row=0, padx=10, pady=10, columnspan=3)
+        button.grid_remove()
+
+
         print(df)
         print(new_df)

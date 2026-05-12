@@ -91,6 +91,7 @@ def get_selected_columns_advanced(context):
     for i in final_selection_index:
         analysis_brain.final_selection_advanced_cols.append(values[i])
 
+
     operations = analysis_brain.get_operations_for_multicolumn()
     if operations is not None:
         if len(analysis_brain.advanced_operation_buttons) == 0:
@@ -107,7 +108,7 @@ def get_selected_columns_advanced(context):
 
             analysis_brain.advanced_operation_buttons = buttons
             if buttons is not None:
-                row_index = 0
+                row_index = 1
                 buttons_in_row = 0
                 col_index = 0
                 while buttons_in_row < len(buttons):
