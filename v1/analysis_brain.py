@@ -15,6 +15,7 @@ class AnalysisBrain:
         self.tree = None
         self.col_set_type = None
         self.column_selection_advanced = []
+        self.final_selection_advanced_cols = []
         self.operations_per_col = {}
         self.data_types_in_cols = {}
         self.operation_buttons = []

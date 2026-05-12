@@ -69,6 +69,7 @@ def main():
     get_selected_columns_advanced_btn = ttk.Button(advanced_stats_frame, text='OK')
 
 
+
     get_file_button = ttk.Button(home_frame, text=lang_center.translate('LOAD FILE'), command=lambda: load_file_show_filename({
         'analysis_brain': analysis_brain,
         'lang_center': lang_center,

@@ -66,10 +66,21 @@ def get_selected_columns_advanced(context):
 
     # TODO 1: Make a filtering mechanism so only values that can have an operation done on them can be selected. E.g.: select one column -> empty listbox -> redraw listbox with selected col at the top and only columns that can have an operation done on them below.
 
+    final_selection_index = multiple_column_selection_advanced.curselection()
+    values = multiple_column_selection_advanced.get(0, END)
+
+    for i in final_selection_index:
+        analysis_brain.final_selection_advanced_cols.append(values[i])
+
+    print(analysis_brain.final_selection_advanced_cols)
 
     multiple_column_selection_advanced.grid_remove()
     select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'))
+
+    # TODO if items selected when OK clicked then get the selected items and then remove btn and listbox from screen
+
     get_selected_columns_advanced_btn.grid_remove()
+
 
 
 def populate_list(context, redraw=False):
@@ -87,8 +98,6 @@ def populate_list(context, redraw=False):
         if len(analysis_brain.column_selection_advanced) > 0:
             initial_col_selected = context['initial_col_selected']
 
-            # TODO find all columns that match the dtype.
-
             items = initial_col_selected
             if analysis_brain.col_set_type == 'num':
                 for i in analysis_brain.data_types_in_cols:
@@ -99,7 +108,6 @@ def populate_list(context, redraw=False):
                     if analysis_brain.data_types_in_cols[i] == 'str' and i not in items:
                         items.append(i)
 
-            print(items)
 
             multiple_column_selection_advanced.delete(0, END)
             if items is not None:
@@ -169,6 +177,7 @@ def check_and_decide(context):
     if select_columns_advanced_btn.cget('text') == lang_center.translate('SELECT COLUMNS'):
         analysis_brain.column_selection_advanced = []
         analysis_brain.col_set_type = None
+        analysis_brain.final_selection_advanced_cols = []
         populate_list({
             'analysis_brain': analysis_brain,
             'advanced_stats_frame': advanced_stats_frame,
