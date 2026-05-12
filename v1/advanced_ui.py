@@ -296,9 +296,7 @@ def swap_frames(button_id, context):
         cleanup_ui([advanced_analysis_button])
 
     elif button_id == 'basic':
-        # advanced_stats_frame.grid_remove()
-        # advanced_analysis_button.grid_remove()
-        # advanced_stats_buttons_frame.grid_remove()
+        analysis_brain.advanced_operation_buttons = []
         cleanup_ui([advanced_stats_frame, advanced_analysis_button, advanced_stats_buttons_frame])
 
         for i in advanced_stats_frame.winfo_children():

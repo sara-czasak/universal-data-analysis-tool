@@ -227,24 +227,27 @@ def advanced_show_stat(button_id, context):
     analysis_brain = context['analysis_brain']
     advanced_stats_frame = context['advanced_stats_frame']
     button = context['button']
+    lang_center = context['lang_center']
 
     if button_id == 'sum_row_vals_in_columns':
-        df = analysis_brain.create_df_subsets()
-        new_df = analysis_brain.sum_row_vals_in_columns()
-        columns = list(new_df.columns)
-        # Make tree with df subset
-        tree = advanced_tree_grow(advanced_stats_frame, {
-            'columns': columns,
-            'new_df': new_df,
-            'button': button,
-        })
+        if reset_button_text(button, lang_center.translate('sum_row_vals_in_columns'), analysis_brain):
+            df = analysis_brain.create_df_subsets()
+            new_df = analysis_brain.sum_row_vals_in_columns()
+            columns = list(new_df.columns)
+            # Make tree with df subset
+            tree = advanced_tree_grow(advanced_stats_frame, {
+                'columns': columns,
+                'new_df': new_df,
+                'button': button,
+            })
 
     if button_id == 'mean_row_vals_in_columns':
-        df = analysis_brain.create_df_subsets()
-        new_df = analysis_brain.mean_row_vals_in_columns()
-        columns = list(new_df.columns)
-        tree = advanced_tree_grow(advanced_stats_frame, {
-            'columns': columns,
-            'new_df': new_df,
-            'button': button,
-        })
+        if reset_button_text(button, lang_center.translate('mean_row_vals_in_columns'), analysis_brain):
+            df = analysis_brain.create_df_subsets()
+            new_df = analysis_brain.mean_row_vals_in_columns()
+            columns = list(new_df.columns)
+            tree = advanced_tree_grow(advanced_stats_frame, {
+                'columns': columns,
+                'new_df': new_df,
+                'button': button,
+            })
