@@ -96,31 +96,32 @@ def get_selected_columns_advanced(context):
 
     operations = analysis_brain.get_operations_for_multicolumn()
     if operations is not None:
-        if len(analysis_brain.advanced_operation_buttons) == 0:
-            analysis_brain.advanced_operation_buttons = []
-            buttons = [
-                create_button(creation_id='advanced', context = {
-                    'operation': operation,
-                    'lang_center': lang_center,
-                    'analysis_brain': analysis_brain,
-                    'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
-                    'advanced_stats_frame': advanced_stats_frame,
-                }) for operation in operations
-            ]
+        for btn in analysis_brain.advanced_operation_buttons:
+            btn.destroy()
+        analysis_brain.advanced_operation_buttons = []
+        buttons = [
+            create_button(creation_id='advanced', context = {
+                'operation': operation,
+                'lang_center': lang_center,
+                'analysis_brain': analysis_brain,
+                'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
+                'advanced_stats_frame': advanced_stats_frame,
+            }) for operation in operations
+        ]
 
-            analysis_brain.advanced_operation_buttons = buttons
-            if buttons is not None:
-                row_index = 1
-                buttons_in_row = 0
-                col_index = 0
-                while buttons_in_row < len(buttons):
-                    for button in buttons:
-                        button.grid(column=col_index, row=row_index, padx=10, pady=10)
-                        buttons_in_row += 1
-                        col_index += 1
-                        if col_index > 2:
-                            col_index = 0
-                            row_index += 1
+        analysis_brain.advanced_operation_buttons = buttons
+        if buttons is not None:
+            row_index = 1
+            buttons_in_row = 0
+            col_index = 0
+            while buttons_in_row < len(buttons):
+                for button in buttons:
+                    button.grid(column=col_index, row=row_index, padx=10, pady=10)
+                    buttons_in_row += 1
+                    col_index += 1
+                    if col_index > 2:
+                        col_index = 0
+                        row_index += 1
 
     cleanup_ui([multiple_column_selection_advanced, get_selected_columns_advanced_btn])
     select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'))
@@ -178,6 +179,10 @@ def populate_list(context, redraw=False):
 
             items = analysis_brain.columns
 
+            if not multiple_column_selection_advanced.winfo_exists():
+                multiple_column_selection_advanced = Listbox(advanced_stats_frame, selectmode=SINGLE)
+                multiple_column_selection_advanced.grid(column=1, row=2, columnspan=3, padx=10, pady=10)
+
             multiple_column_selection_advanced.delete(0, END)
 
             for item in items:
@@ -222,6 +227,10 @@ def check_and_decide(context):
         analysis_brain.column_selection_advanced = []
         analysis_brain.col_set_type = None
         analysis_brain.final_selection_advanced_cols = []
+
+        for btn in analysis_brain.advanced_operation_buttons:
+            btn.destroy()
+        analysis_brain.advanced_operation_buttons = []
 
         for i in advanced_stats_frame.winfo_children():
             i.grid_remove()

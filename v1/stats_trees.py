@@ -34,7 +34,7 @@ def advanced_tree_grow(frm, context):
     new_df = context['new_df']
     button = context['button']
 
-    tree = ttk.Treeview(frm, columns=columns, show='headings', height=10)
+    tree = ttk.Treeview(frm, columns=columns, show='headings', height=5)
 
     for column in columns:
         tree.heading(column, text=column)
