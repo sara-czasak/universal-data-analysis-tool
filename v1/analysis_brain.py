@@ -231,11 +231,11 @@ class AnalysisBrain:
 
     def create_df_subsets(self):
         if self.advanced_df is None:
-            self.advanced_df = self.df[self.final_selection_advanced_cols]
+            self.advanced_df = self.df[self.final_selection_advanced_cols].copy()
             return self.advanced_df
         else:
             self.advanced_df = None
-            self.advanced_df = self.df[self.final_selection_advanced_cols]
+            self.advanced_df = self.df[self.final_selection_advanced_cols].copy()
             return self.advanced_df
 
 
@@ -256,7 +256,7 @@ class AnalysisBrain:
             return None
 
 
-    def median_row_vals_in_columns(self, column):
+    def median_row_vals_in_columns(self):
         if self.advanced_df is not None:
             self.advanced_df['median'] = self.advanced_df.median(axis=1)
             return self.advanced_df
