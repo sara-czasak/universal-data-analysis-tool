@@ -220,7 +220,11 @@ class AnalysisBrain:
     # METHODS FOR ADVANCED ANALYSIS
     def get_operations_for_multicolumn(self):
         if self.col_set_type == 'num':
-            self.advanced_allowed_operations = ['sum_row_vals_in_columns', 'mean_row_vals_in_columns']
+            self.advanced_allowed_operations = [
+                'sum_row_vals_in_columns',
+                'mean_row_vals_in_columns',
+                'median_row_vals_in_columns'
+            ]
             return self.advanced_allowed_operations
         else:
             return self.advanced_allowed_operations
@@ -250,5 +254,16 @@ class AnalysisBrain:
             return self.advanced_df
         else:
             return None
+
+
+    def median_row_vals_in_columns(self, column):
+        if self.advanced_df is not None:
+            self.advanced_df['median'] = self.advanced_df.median(axis=1)
+            return self.advanced_df
+        else:
+            return None
+
+
+
 
 

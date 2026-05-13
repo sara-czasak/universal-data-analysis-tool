@@ -260,3 +260,16 @@ def advanced_show_stat(button_id, context):
 
         else:
             clean_ui(advanced_stats_frame)
+
+    if button_id == 'median_row_vals_in_columns':
+        if reset_button_text(button, lang_center.translate('median_row_vals_in_columns'), analysis_brain, 'advanced'):
+            df = analysis_brain.create_df_subsets()
+            new_df = analysis_brain.mean_row_vals_in_columns()
+            columns = list(new_df.columns)
+            tree = advanced_tree_grow(advanced_stats_frame, {
+                'columns': columns,
+                'new_df': new_df,
+                'button': button,
+            })
+        else:
+            clean_ui(advanced_stats_frame)

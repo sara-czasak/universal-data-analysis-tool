@@ -40,6 +40,7 @@ languages = {
         'PLEASE SELECT AT LEAST TWO COLUMNS': 'PLEASE SELECT AT LEAST TWO COLUMNS',
         'sum_row_vals_in_columns': 'sum_row_vals_in_columns',
         'mean_row_vals_in_columns': 'mean_row_vals_in_columns',
+        'median_row_vals_in_columns': 'median_row_vals_in_columns',
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -78,6 +79,7 @@ languages = {
         'PLEASE SELECT AT LEAST TWO COLUMNS': '___PL___',
         'sum_row_vals_in_columns': '___PL___',
         'mean_row_vals_in_columns': '___PL___',
+        'median_row_vals_in_columns': '___PL___',
     },
     'es': {
         'LOAD FILE': '___ES___',
@@ -116,6 +118,7 @@ languages = {
         'PLEASE SELECT AT LEAST TWO COLUMNS': '___ES___',
         'sum_row_vals_in_columns': '___ES___',
         'mean_row_vals_in_columns': '___ES___',
+        'median_row_vals_in_columns': '___ES___',
     }
 }
 
