@@ -44,6 +44,5 @@ def advanced_tree_grow(frm, context):
         tree.insert('', 'end', values=list(row))
 
     tree.grid(column=0, row=0, padx=10, pady=10, columnspan=3)
-    button.grid_remove()
 
 

@@ -53,8 +53,12 @@ def clean_ui(stats_frame):
             child.destroy()
 
 
-def reset_button_text(button, text, analysis_brain):
-    all_btns = analysis_brain.operation_buttons
+def reset_button_text(button, text, analysis_brain, mode):
+    all_btns = []
+    if mode == 'basic':
+        all_btns = analysis_brain.operation_buttons
+    else:
+        all_btns = analysis_brain.advanced_operation_buttons
     if button.cget('text') != 'HIDE':
         button.config(text='HIDE')
         for btn in all_btns:
@@ -85,7 +89,7 @@ def show_stat(button_id, context):
 
 
     if button_id == 'get_highest_value':
-        if reset_button_text(button, f'{lang_center.translate("get_highest_value")}', analysis_brain):
+        if reset_button_text(button, f'{lang_center.translate("get_highest_value")}', analysis_brain, 'basic'):
 
             for child in stats_buttons_frame.winfo_children():
                 if isinstance(child, ttk.Button):
@@ -102,7 +106,7 @@ def show_stat(button_id, context):
 
 
     elif button_id == 'get_lowest_value':
-        if reset_button_text(button, f'{lang_center.translate("get_lowest_value")}', analysis_brain):
+        if reset_button_text(button, f'{lang_center.translate("get_lowest_value")}', analysis_brain, 'basic'):
 
             lowest = analysis_brain.get_lowest_value(cols_selected)
             label = ttk.Label(stats_frame, text=f"{lang_center.translate('The lowest value in column ')} {cols_selected}: {lowest}")
@@ -116,7 +120,7 @@ def show_stat(button_id, context):
 
 
     elif button_id == 'get_average':
-        if reset_button_text(button, f'{lang_center.translate("get_average")}', analysis_brain):
+        if reset_button_text(button, f'{lang_center.translate("get_average")}', analysis_brain, 'basic'):
             average = analysis_brain.get_average(cols_selected)
             label = ttk.Label(stats_frame, text=f'{lang_center.translate("The average value in column ")} {cols_selected}: {average:.2f}')
 
@@ -129,7 +133,7 @@ def show_stat(button_id, context):
 
 
     elif button_id == 'get_median':
-        if reset_button_text(button, f'{lang_center.translate("get_median")}', analysis_brain):
+        if reset_button_text(button, f'{lang_center.translate("get_median")}', analysis_brain, 'basic'):
             median = analysis_brain.get_median(cols_selected)
             label = ttk.Label(stats_frame, text=f'{lang_center.translate("The median value in column ")} {cols_selected}: {median:.2f}')
 
@@ -141,7 +145,7 @@ def show_stat(button_id, context):
 
 
     elif button_id == 'get_standard_deviation':
-        if reset_button_text(button, f'{lang_center.translate("get_standard_deviation")}', analysis_brain):
+        if reset_button_text(button, f'{lang_center.translate("get_standard_deviation")}', analysis_brain, 'basic'):
             std = analysis_brain.get_standard_deviation(cols_selected)
             label = ttk.Label(stats_frame, text=f'{lang_center.translate("The standard deviation value in column ")} {cols_selected}: {std}')
 
@@ -153,7 +157,7 @@ def show_stat(button_id, context):
 
 
     elif button_id == 'get_variance':
-        if reset_button_text(button, f'{lang_center.translate("get_variance")}', analysis_brain):
+        if reset_button_text(button, f'{lang_center.translate("get_variance")}', analysis_brain, 'basic'):
             var = analysis_brain.get_variance(cols_selected)
             label = ttk.Label(stats_frame, text=f'{lang_center.translate("The variance in column ")} {cols_selected}: {var}')
 
@@ -165,7 +169,7 @@ def show_stat(button_id, context):
 
 
     elif button_id == 'get_percentiles':
-        if reset_button_text(button, f'{lang_center.translate("get_percentiles")}', analysis_brain):
+        if reset_button_text(button, f'{lang_center.translate("get_percentiles")}', analysis_brain, 'basic'):
             percentiles = analysis_brain.get_percentiles(cols_selected)
 
             text = f'''
@@ -184,7 +188,7 @@ def show_stat(button_id, context):
 
 
     elif button_id == 'get_most_frequent':
-        if reset_button_text(button, f'{lang_center.translate("get_most_frequent")}', analysis_brain):
+        if reset_button_text(button, f'{lang_center.translate("get_most_frequent")}', analysis_brain, 'basic'):
             most_frequent = analysis_brain.get_most_frequent(cols_selected)
             label = ttk.Label(stats_frame, text=f'{lang_center.translate("The most frequent value in column ")} {cols_selected}: {most_frequent}')
             row_index = (stats_frame.grid_size()[0]) + 1
@@ -195,7 +199,7 @@ def show_stat(button_id, context):
 
 
     elif button_id == 'unique_values':
-        if reset_button_text(button, f'{lang_center.translate("unique_values")}', analysis_brain):
+        if reset_button_text(button, f'{lang_center.translate("unique_values")}', analysis_brain, 'basic'):
 
             unique = analysis_brain.unique_values(cols_selected)
 
@@ -230,7 +234,7 @@ def advanced_show_stat(button_id, context):
     lang_center = context['lang_center']
 
     if button_id == 'sum_row_vals_in_columns':
-        if reset_button_text(button, lang_center.translate('sum_row_vals_in_columns'), analysis_brain):
+        if reset_button_text(button, lang_center.translate('sum_row_vals_in_columns'), analysis_brain, 'advanced'):
             df = analysis_brain.create_df_subsets()
             new_df = analysis_brain.sum_row_vals_in_columns()
             columns = list(new_df.columns)
@@ -240,9 +244,11 @@ def advanced_show_stat(button_id, context):
                 'new_df': new_df,
                 'button': button,
             })
+        else:
+            clean_ui(advanced_stats_frame)
 
     if button_id == 'mean_row_vals_in_columns':
-        if reset_button_text(button, lang_center.translate('mean_row_vals_in_columns'), analysis_brain):
+        if reset_button_text(button, lang_center.translate('mean_row_vals_in_columns'), analysis_brain, 'advanced'):
             df = analysis_brain.create_df_subsets()
             new_df = analysis_brain.mean_row_vals_in_columns()
             columns = list(new_df.columns)
@@ -251,3 +257,6 @@ def advanced_show_stat(button_id, context):
                 'new_df': new_df,
                 'button': button,
             })
+
+        else:
+            clean_ui(advanced_stats_frame)
