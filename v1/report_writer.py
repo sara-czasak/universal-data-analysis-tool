@@ -129,7 +129,6 @@ class ReportWriter:
         if not subdf.empty:
             data_type_subdf = self.analysis_brain.col_set_type
             self.add_needed_cols(subdf, data_type_subdf)
-            print(subdf)
             self.save_sub_df(subdf)
         else:
             return
@@ -143,11 +142,13 @@ class ReportWriter:
             subdf['mean'] = subdf.mean(axis=1)
             subdf['median'] = subdf.median(axis=1)
         elif data_type_subdf == 'str':
-            pass
+            subdf['concat'] = subdf.apply(
+                lambda row: ' '.join(row.fillna('').astype(str)), axis=1
+            )
 
 
     def save_sub_df(self, subdf):
-        name = simpledialog.askstring("Filename", "Enter filename (without extension):")
+        name = simpledialog.askstring(self.analysis_brain.lang_center.translate("Filename"), self.analysis_brain.lang_center.translate("Enter filename (without extension):"))
         if not name:
             return
         sheet_name = name + '.xlsx'

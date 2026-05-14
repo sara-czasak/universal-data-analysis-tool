@@ -227,7 +227,8 @@ class AnalysisBrain:
                 'median_row_vals_in_columns'
             ]
             return self.advanced_allowed_operations
-        else:
+        elif self.col_set_type == 'str':
+            self.advanced_allowed_operations = ['concat_row_vals_in_columns']
             return self.advanced_allowed_operations
 
     def create_df_subsets(self):
@@ -260,6 +261,15 @@ class AnalysisBrain:
     def median_row_vals_in_columns(self):
         if self.advanced_df is not None:
             self.advanced_df['median'] = self.advanced_df.median(axis=1)
+            return self.advanced_df
+        else:
+            return None
+
+    def concat_row_vals_in_columns(self, separator=' '):
+        if self.advanced_df is not None:
+            self.advanced_df['concat'] = self.advanced_df.apply(
+                lambda row: separator.join(row.fillna('').astype(str)), axis=1
+            )
             return self.advanced_df
         else:
             return None

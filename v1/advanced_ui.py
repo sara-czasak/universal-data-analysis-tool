@@ -92,6 +92,11 @@ def get_selected_columns_advanced(context):
 
 
     final_selection_index = multiple_column_selection_advanced.curselection()
+
+    if len(final_selection_index) < 2:
+        feedback('Please select at least 2 columns', lang_center)
+        return
+
     values = multiple_column_selection_advanced.get(0, END)
 
     for i in final_selection_index:

@@ -42,7 +42,11 @@ languages = {
         'mean_row_vals_in_columns': 'mean_row_vals_in_columns',
         'median_row_vals_in_columns': 'median_row_vals_in_columns',
         'Save': 'Save',
-        'Data saved successfully': 'Data saved successfully'
+        'Data saved successfully': 'Data saved successfully',
+        'Filename': 'Filename',
+        'Enter filename (without extension):': 'Enter filename (without extension):',
+        'concat_row_vals_in_columns': 'concat_row_vals_in_columns',
+        'Please select at least 2 columns': 'Please select at least 2 columns',
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -83,7 +87,11 @@ languages = {
         'mean_row_vals_in_columns': '___PL___',
         'median_row_vals_in_columns': '___PL___',
         'Save': '___PL___',
-        'Data saved successfully': '___PL___'
+        'Data saved successfully': '___PL___',
+        'Filename': '___PL___',
+        'Enter filename (without extension):': '___PL___',
+        'concat_row_vals_in_columns': '___PL___',
+        'Please select at least 2 columns': '___PL___',
 
     },
     'es': {
@@ -125,7 +133,11 @@ languages = {
         'mean_row_vals_in_columns': '___ES___',
         'median_row_vals_in_columns': '___ES___',
         'Save': '___ES___',
-        'Data saved successfully': '___ES___'
+        'Data saved successfully': '___ES___',
+        'Filename': '___ES___',
+        'Enter filename (without extension):': '___ES___',
+        'concat_row_vals_in_columns': '___ES___',
+        'Please select at least 2 columns': '___ES___',
 
     }
 }

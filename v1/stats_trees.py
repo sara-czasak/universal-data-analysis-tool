@@ -37,8 +37,12 @@ def advanced_tree_grow(frm, context):
     tree = ttk.Treeview(frm, columns=columns, show='headings', height=5)
 
     for column in columns:
-        tree.heading(column, text=column)
-        tree.column(column, width=60)
+        if len(columns) > 10:
+            tree.heading(column, text=column)
+            tree.column(column, width=60)
+        else:
+            tree.heading(column, text=column)
+            tree.column(column, width=150)
 
     for _, row in new_df.iterrows():
         tree.insert('', 'end', values=list(row))
