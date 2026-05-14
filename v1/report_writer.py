@@ -24,6 +24,9 @@ class ReportWriter:
             self.set_file_header()
             self.write_report_file()
 
+        elif save_type == 'advanced':
+            self.get_sub_df()
+
 
     def get_report_templates(self):
         with open('report_templates/string.txt', 'r') as f:
@@ -120,7 +123,8 @@ class ReportWriter:
             file.write('\n\n')
 
 
-    def get_sub_df(self, subdf):
+    def get_sub_df(self):
+        subdf = self.analysis_brain.advanced_df
         print(subdf)
 
 

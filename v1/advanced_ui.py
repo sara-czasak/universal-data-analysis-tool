@@ -2,7 +2,6 @@ from tkinter import ttk
 from tkinter import *
 from popups import *
 from analysis_buttons import create_button
-from report_writer import *
 
 
 def cleanup_ui(widgets):
@@ -132,10 +131,6 @@ def get_selected_columns_advanced(context):
     df = analysis_brain.create_df_subsets()
 
     save_sub_df.grid(column=2, row=0)
-    save_sub_df.config(command=lambda: check_if_save({
-        'analysis_brain': analysis_brain,
-        'df': df,
-    }))
 
     cleanup_ui([multiple_column_selection_advanced, get_selected_columns_advanced_btn])
     select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'))

@@ -68,7 +68,7 @@ def main():
     select_columns_advanced_btn = ttk.Button(advanced_stats_buttons_frame)
     multiple_column_selection_advanced = Listbox(advanced_stats_frame, selectmode=SINGLE)
     get_selected_columns_advanced_btn = ttk.Button(advanced_stats_frame, text='OK')
-    save_sub_df = ttk.Button(advanced_stats_buttons_frame, text=lang_center.translate('Save'))
+    save_sub_df = ttk.Button(advanced_stats_buttons_frame, text=lang_center.translate('Save'), command=lambda: report.check_if_path_exists_and_set_up_file('advanced'))
 
 
 
