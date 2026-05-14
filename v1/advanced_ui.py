@@ -240,6 +240,7 @@ def check_and_decide(context):
         analysis_brain.column_selection_advanced = []
         analysis_brain.col_set_type = None
         analysis_brain.final_selection_advanced_cols = []
+        save_sub_df.grid_remove()
 
         for btn in analysis_brain.advanced_operation_buttons:
             btn.destroy()
