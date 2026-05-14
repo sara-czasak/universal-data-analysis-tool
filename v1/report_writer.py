@@ -111,3 +111,11 @@ class ReportWriter:
                     line = line.replace('col_name', col_name)
                     file.write(line)
             file.write('\n\n')
+
+
+    def get_sub_df(self, subdf):
+        pass
+
+
+    def save_sub_df(self):
+        pass

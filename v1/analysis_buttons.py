@@ -33,6 +33,7 @@ def create_button(creation_id, context):
         analysis_brain = context['analysis_brain']
         advanced_stats_buttons_frame = context['advanced_stats_buttons_frame']
         advanced_stats_frame = context['advanced_stats_frame']
+        save_sub_df = context['save_sub_df']
 
         button = ttk.Button(advanced_stats_buttons_frame, text=lang_center.translate(operation),
                             command=lambda: advanced_show_stat(button_id=operation, context={
@@ -41,6 +42,7 @@ def create_button(creation_id, context):
                                 'button': button,
                                 'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
                                 'advanced_stats_frame': advanced_stats_frame,
+                                'save_sub_df': save_sub_df,
                             }))
         button.id = operation
 
@@ -232,6 +234,8 @@ def advanced_show_stat(button_id, context):
     advanced_stats_frame = context['advanced_stats_frame']
     button = context['button']
     lang_center = context['lang_center']
+    save_sub_df = context['save_sub_df']
+
 
     if button_id == 'sum_row_vals_in_columns':
         if reset_button_text(button, lang_center.translate('sum_row_vals_in_columns'), analysis_brain, 'advanced'):
@@ -257,7 +261,6 @@ def advanced_show_stat(button_id, context):
                 'new_df': new_df,
                 'button': button,
             })
-
         else:
             clean_ui(advanced_stats_frame)
 

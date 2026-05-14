@@ -17,6 +17,7 @@ def select_columns_advanced(context):
     analysis_brain = context['analysis_brain']
     advanced_stats_buttons_frame = context['advanced_stats_buttons_frame']
     advanced_stats_frame = context['advanced_stats_frame']
+    save_sub_df = context['save_sub_df']
 
 
     index = multiple_column_selection_advanced.curselection()
@@ -40,6 +41,7 @@ def select_columns_advanced(context):
                     'initial_col_selected': initial_col_selected,
                     'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
                     'advanced_stats_frame': advanced_stats_frame,
+                    'save_sub_df': save_sub_df,
                 })
             else:
                 analysis_brain.col_set_type = 'str'
@@ -56,6 +58,7 @@ def select_columns_advanced(context):
                     'initial_col_selected': initial_col_selected,
                     'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
                     'advanced_stats_frame': advanced_stats_frame,
+                    'save_sub_df': save_sub_df,
                 })
 
     else:
@@ -73,6 +76,7 @@ def select_columns_advanced(context):
             'initial_col_selected': initial_col_selected,
             'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
             'advanced_stats_frame': advanced_stats_frame,
+            'save_sub_df': save_sub_df,
         })
 
 
@@ -84,6 +88,7 @@ def get_selected_columns_advanced(context):
     analysis_brain = context['analysis_brain']
     advanced_stats_buttons_frame = context['advanced_stats_buttons_frame']
     advanced_stats_frame = context['advanced_stats_frame']
+    save_sub_df = context['save_sub_df']
 
     # TODO 1: Make a filtering mechanism so only values that can have an operation done on them can be selected. E.g.: select one column -> empty listbox -> redraw listbox with selected col at the top and only columns that can have an operation done on them below.
 
@@ -106,6 +111,7 @@ def get_selected_columns_advanced(context):
                 'analysis_brain': analysis_brain,
                 'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
                 'advanced_stats_frame': advanced_stats_frame,
+                'save_sub_df': save_sub_df,
             }) for operation in operations
         ]
 
@@ -123,6 +129,8 @@ def get_selected_columns_advanced(context):
                         col_index = 0
                         row_index += 1
 
+    save_sub_df.grid(column=2, row=0)
+
     cleanup_ui([multiple_column_selection_advanced, get_selected_columns_advanced_btn])
     select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'))
 
@@ -135,6 +143,7 @@ def populate_list(context, redraw=False):
     get_selected_columns_advanced_btn = context['get_selected_columns_advanced_btn']
     select_columns_advanced_btn = context['select_columns_advanced_btn']
     lang_center = context['lang_center']
+    save_sub_df = context['save_sub_df']
 
 
 
@@ -172,6 +181,7 @@ def populate_list(context, redraw=False):
                     'analysis_brain': analysis_brain,
                     'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
                     'advanced_stats_frame': advanced_stats_frame,
+                    'save_sub_df': save_sub_df,
                 }))
                 select_columns_advanced_btn.config(text=lang_center.translate('HIDE COLUMNS'))
         else:
@@ -198,6 +208,7 @@ def populate_list(context, redraw=False):
                 'analysis_brain': analysis_brain,
                 'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
                 'advanced_stats_frame': advanced_stats_frame,
+                'save_sub_df': save_sub_df,
             }))
             select_columns_advanced_btn.config(text=lang_center.translate('HIDE COLUMNS'))
             multiple_column_selection_advanced.bind('<<ListboxSelect>>', lambda event: select_columns_advanced({
@@ -208,6 +219,7 @@ def populate_list(context, redraw=False):
                 'analysis_brain': analysis_brain,
                 'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
                 'advanced_stats_frame': advanced_stats_frame,
+                'save_sub_df': save_sub_df,
             }))
     else:
         return
@@ -221,6 +233,7 @@ def check_and_decide(context):
     select_columns_advanced_btn = context['select_columns_advanced_btn']
     lang_center = context['lang_center']
     advanced_stats_buttons_frame = context['advanced_stats_buttons_frame']
+    save_sub_df = context['save_sub_df']
 
 
     if select_columns_advanced_btn.cget('text') == lang_center.translate('SELECT COLUMNS'):
@@ -244,6 +257,7 @@ def check_and_decide(context):
             'select_columns_advanced_btn': select_columns_advanced_btn,
             'lang_center': lang_center,
             'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
+            'save_sub_df': save_sub_df,
         })
     else:
         for i in advanced_stats_frame.winfo_children():
@@ -274,6 +288,7 @@ def swap_frames(button_id, context):
 
     if button_id == 'advanced':
         get_selected_columns_advanced_btn = context["get_selected_columns_advanced_btn"]
+        save_sub_df = context['save_sub_df']
 
         cleanup_ui([stats_frame,stats_buttons_frame])
 
@@ -285,6 +300,7 @@ def swap_frames(button_id, context):
         advanced_stats_buttons_frame.grid(column=1, row=1)
         advanced_stats_frame.grid(column=1, row=2)
         advanced_or_basic_label.config(text=lang_center.translate('Advanced Analysis'))
+        # save_sub_df.grid(column=2, row=0)
 
 
         # UI BUILD
@@ -297,6 +313,7 @@ def swap_frames(button_id, context):
                 'select_columns_advanced_btn': select_columns_advanced_btn,
                 'lang_center': lang_center,
                 'advanced_stats_buttons_frame': advanced_stats_buttons_frame,
+                'save_sub_df': save_sub_df,
             }))
 
 

@@ -41,6 +41,7 @@ languages = {
         'sum_row_vals_in_columns': 'sum_row_vals_in_columns',
         'mean_row_vals_in_columns': 'mean_row_vals_in_columns',
         'median_row_vals_in_columns': 'median_row_vals_in_columns',
+        'Save': 'Save',
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -80,6 +81,7 @@ languages = {
         'sum_row_vals_in_columns': '___PL___',
         'mean_row_vals_in_columns': '___PL___',
         'median_row_vals_in_columns': '___PL___',
+        'Save': '___PL___',
     },
     'es': {
         'LOAD FILE': '___ES___',
@@ -119,6 +121,8 @@ languages = {
         'sum_row_vals_in_columns': '___ES___',
         'mean_row_vals_in_columns': '___ES___',
         'median_row_vals_in_columns': '___ES___',
+        'Save': '___ES___',
+
     }
 }
 
