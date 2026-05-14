@@ -1,5 +1,6 @@
 from tkinter import ttk
 from tkinter import *
+from style_mgr import *
 
 
 languages = {
@@ -158,12 +159,16 @@ class LanguageCenter:
         lang_screen.attributes('-topmost', True)
         lang_screen.title("Choose language")
 
-        eng_button = Button(lang_screen, text="ENG", command=lambda: self.set_lang('eng', root=lang_screen))
-        eng_button.pack()
-        pl_button = Button(lang_screen, text="PL", command=lambda: self.set_lang('pl', root=lang_screen))
-        pl_button.pack()
-        es_button = Button(lang_screen, text="ES", command=lambda: self.set_lang('es', root=lang_screen))
-        es_button.pack()
+        lang_screen.protocol("WM_DELETE_WINDOW", root.destroy)
+
+        my_style = StyleWidgets(lang_screen)
+
+        eng_button = ttk.Button(lang_screen, text="ENG", command=lambda: self.set_lang('eng', root=lang_screen))
+        eng_button.pack(padx=10, pady=10)
+        pl_button = ttk.Button(lang_screen, text="PL", command=lambda: self.set_lang('pl', root=lang_screen))
+        pl_button.pack(padx=10, pady=10)
+        es_button = ttk.Button(lang_screen, text="ES", command=lambda: self.set_lang('es', root=lang_screen))
+        es_button.pack(padx=10, pady=10)
 
         lang_screen.grab_set()
         lang_screen.wait_window()
