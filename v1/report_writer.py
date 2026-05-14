@@ -1,5 +1,6 @@
 import tkinter as tk
-from tkinter import ttk, filedialog
+from tkinter import ttk, filedialog, simpledialog
+from popups import *
 
 
 class ReportWriter:
@@ -125,8 +126,14 @@ class ReportWriter:
 
     def get_sub_df(self):
         subdf = self.analysis_brain.advanced_df
-        print(subdf)
+        if not subdf.empty:
+            print(subdf)
+            self.save_sub_df()
+        else:
+            return
 
 
     def save_sub_df(self):
-        pass
+        name = simpledialog.askstring("Filename", "Enter filename (without extension):")
+        feedback('Data saved successfully', self.analysis_brain.lang_center)
+        print(name)
