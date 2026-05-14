@@ -141,14 +141,6 @@ def get_selected_columns_advanced(context):
     select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'))
 
 
-def check_if_save(context):
-    analysis_brain = context['analysis_brain']
-    df = context['df']
-
-    advanced_report = ReportWriter(analysis_brain)
-    advanced_report.get_sub_df(df)
-
-
 def populate_list(context, redraw=False):
     analysis_brain = context['analysis_brain']
     advanced_stats_frame = context['advanced_stats_frame']
@@ -294,6 +286,7 @@ def swap_frames(button_id, context):
     select_columns_advanced_btn = context["select_columns_advanced_btn"]
     select_cols_button = context["select_cols_button"]
     multiple_column_selection_advanced = context["multiple_column_selection_advanced"]
+    get_report_button = context["get_report_button"]
 
 
     if analysis_brain.tree and analysis_brain.tree.winfo_exists():
@@ -304,6 +297,9 @@ def swap_frames(button_id, context):
     if button_id == 'advanced':
         get_selected_columns_advanced_btn = context["get_selected_columns_advanced_btn"]
         save_sub_df = context['save_sub_df']
+
+        get_report_button.grid_remove()
+
 
         cleanup_ui([stats_frame,stats_buttons_frame])
 
@@ -338,6 +334,8 @@ def swap_frames(button_id, context):
     elif button_id == 'basic':
         analysis_brain.advanced_operation_buttons = []
         cleanup_ui([advanced_stats_frame, advanced_analysis_button, advanced_stats_buttons_frame])
+
+        get_report_button.grid(column=2, row=0, padx=10, pady=10)
 
         for i in advanced_stats_frame.winfo_children():
             i.grid_remove()

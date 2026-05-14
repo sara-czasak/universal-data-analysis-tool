@@ -104,7 +104,8 @@ def main():
         'select_cols_button': select_cols_button,
         'multiple_column_selection_advanced': multiple_column_selection_advanced,
         'get_selected_columns_advanced_btn': get_selected_columns_advanced_btn,
-        'save_sub_df': save_sub_df
+        'save_sub_df': save_sub_df,
+        'get_report_button': get_report_button,
     }))
 
     basic_analysis_button = ttk.Button(home_frame, text=lang_center.translate('GO TO\nBASIC\nANALYSIS'), command=lambda: swap_frames(button_id='basic', context = {
@@ -121,7 +122,8 @@ def main():
         'select_cols_button': select_cols_button,
         'select_columns_advanced_btn': select_columns_advanced_btn,
         'multiple_column_selection_advanced': multiple_column_selection_advanced,
-        'save_sub_df': save_sub_df
+        'save_sub_df': save_sub_df,
+        'get_report_button': get_report_button,
     }))
 
 
