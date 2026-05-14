@@ -12,11 +12,17 @@ class ReportWriter:
         self.name = None
         self.report = None
 
-        self.ask_filename()
-        self.get_report_data()
-        self.get_report_templates()
-        self.set_file_header()
-        self.write_report_file()
+
+    # save_type: basic, advanced
+    def check_if_path_exists_and_set_up_file(self, save_type):
+        if self.save_path is None:
+            self.ask_filename()
+
+        if save_type == 'basic':
+            self.get_report_data()
+            self.get_report_templates()
+            self.set_file_header()
+            self.write_report_file()
 
 
     def get_report_templates(self):
@@ -28,6 +34,7 @@ class ReportWriter:
 
     def ask_filename(self):
         import os
+
         self.save_path = filedialog.asksaveasfilename(defaultextension='.txt', filetypes=(('Text Files', '*.txt'),))
         if not self.save_path:
             return
@@ -114,7 +121,7 @@ class ReportWriter:
 
 
     def get_sub_df(self, subdf):
-        pass
+        print(subdf)
 
 
     def save_sub_df(self):

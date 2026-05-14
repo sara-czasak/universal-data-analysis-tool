@@ -2,6 +2,7 @@ from tkinter import ttk
 from tkinter import *
 from popups import *
 from analysis_buttons import create_button
+from report_writer import *
 
 
 def cleanup_ui(widgets):
@@ -90,7 +91,6 @@ def get_selected_columns_advanced(context):
     advanced_stats_frame = context['advanced_stats_frame']
     save_sub_df = context['save_sub_df']
 
-    # TODO 1: Make a filtering mechanism so only values that can have an operation done on them can be selected. E.g.: select one column -> empty listbox -> redraw listbox with selected col at the top and only columns that can have an operation done on them below.
 
     final_selection_index = multiple_column_selection_advanced.curselection()
     values = multiple_column_selection_advanced.get(0, END)
@@ -129,10 +129,24 @@ def get_selected_columns_advanced(context):
                         col_index = 0
                         row_index += 1
 
+    df = analysis_brain.create_df_subsets()
+
     save_sub_df.grid(column=2, row=0)
+    save_sub_df.config(command=lambda: check_if_save({
+        'analysis_brain': analysis_brain,
+        'df': df,
+    }))
 
     cleanup_ui([multiple_column_selection_advanced, get_selected_columns_advanced_btn])
     select_columns_advanced_btn.config(text=lang_center.translate('SELECT COLUMNS'))
+
+
+def check_if_save(context):
+    analysis_brain = context['analysis_brain']
+    df = context['df']
+
+    advanced_report = ReportWriter(analysis_brain)
+    advanced_report.get_sub_df(df)
 
 
 def populate_list(context, redraw=False):
@@ -301,7 +315,6 @@ def swap_frames(button_id, context):
         advanced_stats_buttons_frame.grid(column=1, row=1)
         advanced_stats_frame.grid(column=1, row=2)
         advanced_or_basic_label.config(text=lang_center.translate('Advanced Analysis'))
-        # save_sub_df.grid(column=2, row=0)
 
 
         # UI BUILD
