@@ -141,6 +141,7 @@ class ReportWriter:
             subdf['sum'] = subdf.sum(axis=1)
             subdf['mean'] = subdf.mean(axis=1)
             subdf['median'] = subdf.median(axis=1)
+            subdf['product'] = subdf.prod(axis=1)
         elif data_type_subdf == 'str':
             subdf['concat'] = subdf.apply(
                 lambda row: ' '.join(row.fillna('').astype(str)), axis=1

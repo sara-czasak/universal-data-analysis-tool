@@ -224,7 +224,8 @@ class AnalysisBrain:
             self.advanced_allowed_operations = [
                 'sum_row_vals_in_columns',
                 'mean_row_vals_in_columns',
-                'median_row_vals_in_columns'
+                'median_row_vals_in_columns',
+                'product_row_vals_in_columns'
             ]
             return self.advanced_allowed_operations
         elif self.col_set_type == 'str':
@@ -270,6 +271,14 @@ class AnalysisBrain:
             self.advanced_df['concat'] = self.advanced_df.apply(
                 lambda row: separator.join(row.fillna('').astype(str)), axis=1
             )
+            return self.advanced_df
+        else:
+            return None
+
+
+    def product_row_vals_in_columns(self):
+        if self.advanced_df is not None:
+            self.advanced_df['product'] = self.advanced_df.prod(axis=1)
             return self.advanced_df
         else:
             return None
