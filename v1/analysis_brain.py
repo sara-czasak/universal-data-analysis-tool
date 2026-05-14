@@ -21,6 +21,7 @@ class AnalysisBrain:
         self.advanced_df = None
         self.advanced_allowed_operations = None
         self.advanced_operation_buttons = []
+        self.advanced_df_type = None
 
         self.operations_per_col = {}
         self.data_types_in_cols = {}

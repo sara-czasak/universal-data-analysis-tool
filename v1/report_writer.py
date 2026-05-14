@@ -129,6 +129,8 @@ class ReportWriter:
         if not subdf.empty:
             print(subdf)
             self.save_sub_df()
+            data_type_subdf = self.analysis_brain.col_set_type
+            self.add_needed_cols(subdf, data_type_subdf)
         else:
             return
 
@@ -137,3 +139,14 @@ class ReportWriter:
         name = simpledialog.askstring("Filename", "Enter filename (without extension):")
         feedback('Data saved successfully', self.analysis_brain.lang_center)
         print(name)
+
+
+    def add_needed_cols(self, subdf, data_type_subdf):
+        if data_type_subdf is None:
+            return
+        elif data_type_subdf == 'num':
+            subdf['sum'] = subdf.sum(axis=1)
+            subdf['mean'] = subdf.mean(axis=1)
+            subdf['median'] = subdf.median(axis=1)
+        elif data_type_subdf == 'str':
+            pass
