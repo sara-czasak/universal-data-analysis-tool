@@ -125,20 +125,14 @@ class ReportWriter:
 
 
     def get_sub_df(self):
-        subdf = self.analysis_brain.advanced_df
+        subdf = self.analysis_brain.advanced_df.copy()
         if not subdf.empty:
-            print(subdf)
-            self.save_sub_df()
             data_type_subdf = self.analysis_brain.col_set_type
             self.add_needed_cols(subdf, data_type_subdf)
+            print(subdf)
+            self.save_sub_df(subdf)
         else:
             return
-
-
-    def save_sub_df(self):
-        name = simpledialog.askstring("Filename", "Enter filename (without extension):")
-        feedback('Data saved successfully', self.analysis_brain.lang_center)
-        print(name)
 
 
     def add_needed_cols(self, subdf, data_type_subdf):
@@ -150,3 +144,14 @@ class ReportWriter:
             subdf['median'] = subdf.median(axis=1)
         elif data_type_subdf == 'str':
             pass
+
+
+    def save_sub_df(self, subdf):
+        name = simpledialog.askstring("Filename", "Enter filename (without extension):")
+        if not name:
+            return
+        sheet_name = name + '.xlsx'
+        sheet_path = '/'.join(self.save_path.split('/')[:-1]) + '/' + sheet_name
+
+        subdf.to_excel(sheet_path, index=False)
+        feedback('Data saved successfully', self.analysis_brain.lang_center)
