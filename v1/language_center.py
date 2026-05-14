@@ -1,5 +1,5 @@
-# HERE GOES DATA FOR LANGUAGES AND LANGUAGE TRANSLATION
-# MAKE IT A CLASS
+from tkinter import ttk
+from tkinter import *
 
 
 languages = {
@@ -12,42 +12,42 @@ languages = {
         'HIDE TABLE': 'HIDE TABLE',
         'HIDE COLUMNS': 'HIDE COLUMNS',
         'OK': 'OK',
-        'get_highest_value': 'get_highest_value',
-        'get_lowest_value': 'get_lowest_value',
-        'get_average': 'get_average',
-        'unique_values': 'unique_values',
+        'get_highest_value': 'highest value',
+        'get_lowest_value': 'lowest value',
+        'get_average': 'average',
+        'unique_values': 'unique values',
         "The highest value in column ": "The highest value in column",
         'The lowest value in column ': 'The lowest value in column ',
         "HIDE": "HIDE",
         'The average value in column ': 'The average value in column ',
         'The median value in column ': 'The median value in column ',
-        'get_median': 'get_median',
-        'get_most_frequent': 'get_most_frequent',
+        'get_median': 'median',
+        'get_most_frequent': 'most frequent',
         'The most frequent value in column ': 'The most frequent value in column ',
         "Error": "Error",
         "An error occurred": "An error occurred",
         'wrong file extension': 'wrong file extension',
-        "get_standard_deviation": "get_standard_deviation",
+        "get_standard_deviation": "standard deviation",
         "The standard deviation value in column ": "The standard deviation value in column ",
-        'get_variance': 'get_variance',
+        'get_variance': 'variance',
         'The variance in column ': 'The variance in column ',
-        'get_percentiles': 'get_percentiles',
+        'get_percentiles': 'percentiles',
         'GO TO\nADVANCED\nANALYSIS': 'GO TO\nADVANCED\nANALYSIS',
         'GO TO\nBASIC\nANALYSIS': 'GO TO\nBASIC\nANALYSIS',
         "Basic Analysis": 'Basic Analysis',
         "Advanced Analysis": 'Advanced Analysis',
         'SELECT COLUMNS': 'SELECT COLUMNS',
         'PLEASE SELECT AT LEAST TWO COLUMNS': 'PLEASE SELECT AT LEAST TWO COLUMNS',
-        'sum_row_vals_in_columns': 'sum_row_vals_in_columns',
-        'mean_row_vals_in_columns': 'mean_row_vals_in_columns',
-        'median_row_vals_in_columns': 'median_row_vals_in_columns',
+        'sum_row_vals_in_columns': 'sum values in columns',
+        'mean_row_vals_in_columns': 'mean values in columns',
+        'median_row_vals_in_columns': 'median values in columns',
         'Save': 'Save',
         'Data saved successfully': 'Data saved successfully',
         'Filename': 'Filename',
         'Enter filename (without extension):': 'Enter filename (without extension):',
-        'concat_row_vals_in_columns': 'concat_row_vals_in_columns',
+        'concat_row_vals_in_columns': 'join values',
         'Please select at least 2 columns': 'Please select at least 2 columns',
-        'product_row_vals_in_columns': 'product_row_vals_in_columns',
+        'product_row_vals_in_columns': 'product of values in columns',
     },
     'pl': {
         'LOAD FILE': '___PL___',
@@ -149,9 +149,34 @@ languages = {
 class LanguageCenter:
     def __init__(self):
         # HARD CODED FOR TESTING
-        self.language = languages['eng']
+        # self.language = languages['eng']
+        self.language = None
+
+
+    def choose_language(self, root):
+        lang_screen = Toplevel(root)
+        lang_screen.attributes('-topmost', True)
+        lang_screen.title("Choose language")
+
+        eng_button = Button(lang_screen, text="ENG", command=lambda: self.set_lang('eng', root=lang_screen))
+        eng_button.pack()
+        pl_button = Button(lang_screen, text="PL", command=lambda: self.set_lang('pl', root=lang_screen))
+        pl_button.pack()
+        es_button = Button(lang_screen, text="ES", command=lambda: self.set_lang('es', root=lang_screen))
+        es_button.pack()
+
+        lang_screen.grab_set()
+        lang_screen.wait_window()
+
+
+    def set_lang(self, lang, root):
+        self.language = languages[lang]
+        root.destroy()
 
 
     def translate(self, word):
-        translated = self.language[word]
-        return translated
+        if self.language is None:
+            return
+        else:
+            translated = self.language[word]
+            return translated

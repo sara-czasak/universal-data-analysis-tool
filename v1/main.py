@@ -9,12 +9,21 @@ from advanced_ui import *
 from report_writer import *
 
 
-splash_root = make_a_splash()
+# splash_root = make_a_splash()
 
 
 def main():
-    splash_root.destroy()
+    # splash_root.destroy()
     root = Tk()
+    root.withdraw()
+
+    splash_root = make_a_splash(root)
+    splash_root.after(500, splash_root.destroy)
+
+    lang_center = LanguageCenter()
+    lang_center.choose_language(root)
+
+    root.deiconify()
     root.title('Universal Data Analyser')
     root.minsize(1000, 500)
 
@@ -49,16 +58,14 @@ def main():
 
     # FRAMES TO HANDLE ADVANCED ANALYSIS
     advanced_stats_buttons_frame = ttk.Frame(root)
-    # advanced_stats_buttons_frame.grid(column=1, row=1)
 
     advanced_stats_frame = ttk.Frame(root)
-    # advanced_stats_frame.grid(column=1, row=2)
 
 
-
-    lang_center = LanguageCenter()
     analysis_brain = AnalysisBrain(lang_center)
     report = ReportWriter(analysis_brain)
+
+
 
     filename_label = ttk.Label(home_frame, text='')
     filename_label.grid(column=1, row=0, padx=10, pady=10)
@@ -162,8 +169,12 @@ def main():
 
     advanced_or_basic_label = ttk.Label(home_frame, text=lang_center.translate("Basic Analysis"))
 
+    root.mainloop()
 
-splash_root.after(500, main)
+
+main()
+
+# splash_root.after(500, main)
 
 
-mainloop()
+# mainloop()

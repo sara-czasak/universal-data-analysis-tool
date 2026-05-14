@@ -4,8 +4,8 @@ from PIL import Image
 from style_mgr import *
 
 
-def make_a_splash():
-    splash_root = Tk()
+def make_a_splash(root):
+    splash_root = Toplevel(root)
     splash_root.title("Hello Splash")
     splash_root.geometry("1000x500")
     splash_root.config(bg="#93ccfa")
