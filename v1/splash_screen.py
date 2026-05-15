@@ -13,7 +13,8 @@ def make_a_splash(root):
     my_style = StyleWidgets(splash_root)
 
     splash_label = ttk.Label(splash_root, text='Thanks for giving my app a try!', background="#93ccfa")
-    splash_label.pack()
+    splash_label.place(x=350, y=250)
+
 
 
 

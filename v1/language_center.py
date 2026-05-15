@@ -119,7 +119,7 @@ languages = {
         'get_most_frequent': 'obtener más frecuente',
         'The most frequent value in column ': 'El valor más frecuente en la columna ',
         "Error": 'Error',
-        "An error occurred": 'An error occurred',
+        "An error occurred": 'Se produjo un error',
         'wrong file extension': 'extensión de archivo incorrecta',
         "get_standard_deviation": 'get desviación estándar',
         "The standard deviation value in column ": 'El valor de la desviación estándar en la columna ',
@@ -132,16 +132,16 @@ languages = {
         "Advanced Analysis": 'Análisis avanzado',
         'SELECT COLUMNS': 'SELECCIONAR COLUMNAS',
         'PLEASE SELECT AT LEAST TWO COLUMNS': 'POR FAVOR SELECCIONE AL MENOS DOS COLUMNAS',
-        'sum_row_vals_in_columns': 'suma valores en columnas',
-        'mean_row_vals_in_columns': '___ES___',
-        'median_row_vals_in_columns': 'mediana en columnas',
+        'sum_row_vals_in_columns': 'suma valores',
+        'mean_row_vals_in_columns': 'valores promedios',
+        'median_row_vals_in_columns': 'mediana',
         'Save': 'Guardar',
         'Data saved successfully': 'Datos guardados exitosamente',
-        'Filename': '___ES___',
+        'Filename': 'Nombre del archivo',
         'Enter filename (without extension):': 'Nombre del archivo (sin extensión)',
-        'concat_row_vals_in_columns': '___ES___',
+        'concat_row_vals_in_columns': 'unir valores',
         'Please select at least 2 columns': 'Por favor seleccione al menos 2 columnas',
-        'product_row_vals_in_columns': '___ES___',
+        'product_row_vals_in_columns': 'valores de productos',
 
     }
 }
@@ -163,10 +163,13 @@ class LanguageCenter:
 
         my_style = StyleWidgets(lang_screen)
 
+        label = ttk.Label(lang_screen, text="Choose Language")
+        label.pack(padx=5, pady=5)
+
         eng_button = ttk.Button(lang_screen, text="ENG", command=lambda: self.set_lang('eng', root=lang_screen))
         eng_button.pack(padx=10, pady=10)
-        pl_button = ttk.Button(lang_screen, text="PL", command=lambda: self.set_lang('pl', root=lang_screen))
-        pl_button.pack(padx=10, pady=10)
+        # pl_button = ttk.Button(lang_screen, text="PL", command=lambda: self.set_lang('pl', root=lang_screen))
+        # pl_button.pack(padx=10, pady=10)
         es_button = ttk.Button(lang_screen, text="ES", command=lambda: self.set_lang('es', root=lang_screen))
         es_button.pack(padx=10, pady=10)
 
